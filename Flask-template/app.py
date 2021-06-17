@@ -12,7 +12,7 @@ app_data = {
     "description":  "A basic Flask app using bootstrap for layout",
     "author":       "Peter Simeth",
     "html_title":   "Peter's Starter Template for a Flask Web App",
-    "project_name": "Starter Template",
+    "project_name": "Tennis",
     "keywords":     "flask, webapp, template, basic"
 }
 
