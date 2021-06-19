@@ -22,20 +22,21 @@ def index():
     return render_template('index.html', app_data=app_data)
 
 
-@app.route('/about')
-def about():
-    return render_template('about.html', app_data=app_data)
+@app.route('/point')
+def point():
+    return render_template('point.html', app_data=app_data)
 
 
-@app.route('/service')
-def service():
-    return render_template('service.html', app_data=app_data)
+@app.route('/register')
+def register():
+    return render_template('register.html', app_data=app_data)
 
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html', app_data=app_data)
+@app.route('/home')
+def home():
+    return render_template('home.html', app_data=app_data)
 
 
 if __name__ == '__main__':
     app.run(debug=DEVELOPMENT_ENV)
+    

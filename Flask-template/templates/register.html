@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="row">
+<div class="col-md-7">
+<br>
+<div class="container d-flex justify-content-center">
+    <h3>Please fill in your details</h3>
+</div>
+<div class="container">
+<form>
+    <div class="form-group">
+        <label for="exampleInputEmail1">First Name</label>
+        <input type="text" class="form-control" id="firstname"  placeholder="Enter first name">
+      </div>
+      <br>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Last Name</label>
+        <input type="text" class="form-control" id="lastname"  placeholder="Enter last name">
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Confirm Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+      </div>
+    <br>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">I agree to having my information stored</label>
+    </div>
+    <br>
+    <div class="container d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary btn-l">Register</button>
+    </div>
+  </form>
+</div>
+</div>
+<div class="col-md-5">
+    <div class="container">
+        Fill this half with relevant photo or logo
+    </div>
+</div>
+
+</div>
+
+{% endblock %}
