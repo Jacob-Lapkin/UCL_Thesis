@@ -1,37 +1,37 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<div class="row">
-<div class="col-md-7">
-<br>
-<div class="container d-flex justify-content-center">
-    <h3>Please fill in your details</h3>
+<div class="container mt-3">
+  <h1 class="text-center">Register</h1>
+  <br>
 </div>
-<div class="container">
-<form>
+<div class="row px-5 mb-3">
+<div class="container home rounded shadow p-2">
+<form action="{{url_for('index')}}" class='col-md-8 mx-auto'>
+  <h3 class="text-center">Please fill in your details</h3>
     <div class="form-group">
         <label for="exampleInputEmail1">First Name</label>
-        <input type="text" class="form-control" id="firstname"  placeholder="Enter first name">
+        <input type="text" class="form-control" name="first" id="firstname"  placeholder="Enter first name">
       </div>
       <br>
     <div class="form-group">
         <label for="exampleInputEmail1">Last Name</label>
-        <input type="text" class="form-control" id="lastname"  placeholder="Enter last name">
+        <input type="text" class="form-control" name="last" id="lastname"  placeholder="Enter last name">
     </div>
     <br>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
     </div>
     <br>
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
     </div>
     <br>
     <div class="form-group">
         <label for="exampleInputPassword1">Confirm Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+        <input type="password" class="form-control" name="repeatpass" id="exampleInputPassword1" placeholder="Confirm Password">
       </div>
     <br>
     <div class="form-group form-check">
@@ -44,13 +44,11 @@
     </div>
   </form>
 </div>
-</div>
-<div class="col-md-5">
-    <div class="container">
-        Fill this half with relevant photo or logo
-    </div>
-</div>
+
 
 </div>
 
 {% endblock %}
+
+
+

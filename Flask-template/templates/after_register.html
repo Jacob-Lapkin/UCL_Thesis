@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="container rounded home shadow mt-2 text-center">
+    <h1>Thank you for registering {{first}} {{last}}</h1>
+    <br>
+    <h3>you registered with the email {{email}}</h3>
+    <br>
+    <a href="{{url_for('index')}}">Return to landing page for login</a>
+</div>
+
+{% endblock %}
+

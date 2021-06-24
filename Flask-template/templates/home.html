@@ -40,7 +40,7 @@
 <br>
 <div class="row">
     <div class="col-md-4">
-        <div class="container rounded home">
+        <div class="container rounded home shadow pt-2">
             <a class="btn btn-primary btn-xl text-uppercase d-flex justify-content-center" href="">Hawkeye</a>
             <br>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis voluptatem deserunt blanditiis soluta et odio quod eum 
@@ -49,7 +49,7 @@
         <br>
     </div>
     <div class="col-md-4">
-        <div class="container rounded home">
+        <div class="container rounded home shadow pt-2">
             <a class="btn btn-primary btn-xl text-uppercase d-flex justify-content-center" href="{{ url_for('point') }}">Point Analysis</a>
             <br>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis voluptatem deserunt blanditiis soluta et odio quod eum 
@@ -58,7 +58,7 @@
         <br>
     </div>
     <div class="col-md-4">
-        <div class="container rounded home">
+        <div class="container rounded home shadow pt-2">
             <a class="btn btn-primary btn-xl text-uppercase d-flex justify-content-center" href="">Stroke Analysis</a>
             <br>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis voluptatem deserunt blanditiis soluta et odio quod eum 
@@ -69,9 +69,9 @@
 </div>
 </div>
 <div class="container-fluid">
- <div class="row">
+ <div class="row mb-4">
    <div class="container col-md-4">
-     <div class="container rounded home">
+     <div class="container rounded shadow home">
     <h4 class="text-center">Shots hit in order:</h4>
       <ol>
       {% for shot in strokes%}
