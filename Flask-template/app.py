@@ -34,7 +34,13 @@ def register():
 
 @app.route('/home')
 def home():
-    return render_template('home.html', app_data=app_data)
+
+    # counting strokes 
+    name = "Jacob"
+    strokes = ["b", "f", "b", "s", "v", "v", "b", "f", "s", "b"]
+    backhand = strokes.count("b")
+
+    return render_template('home.html', name=name ,strokes=strokes, backhand=backhand, app_data=app_data)
 
 
 if __name__ == '__main__':
