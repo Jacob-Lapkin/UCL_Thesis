@@ -2,11 +2,21 @@
 
 {% block body %}
 
+{% for mess in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {{mess}}
+</div>
+{% endfor %}
+
 <div class="container col-md-6 home shadow rounded p-4 mt-4">
     <div class="container text-center">
-        <h1>Register</h1>
+        <legend class='border-bottom mb-4 h1'>Register</legend>
     </div>
-    <form method="POST" action='{{url_for("login")}}'>
+    <form method="POST" action='{{url_for("register")}}'>
       {{form.hidden_tag()}}
 
         <div class="form-group text-center mt-3">
@@ -52,10 +62,17 @@
         </div>
         <br>
         <div class="container d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary btn-l">Login</button>
+            {{form.submit(class="btn btn-primary btn-l")}}
         </div>
       </form>
+      <br>
+      <div class='container text-center'>
+        <small class='text-muted'>
+           Already Have An Account?<a href="{{url_for('login')}}"> Click here to login</a>
+        </small>
+     </div>
     </div> 
+    
 
 
 

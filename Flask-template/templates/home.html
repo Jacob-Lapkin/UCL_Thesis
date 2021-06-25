@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+l{% extends 'layout.html' %}
 
 {% block body %}
 <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
@@ -21,7 +21,7 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
             <div class="container">
-            <a class="btn btn-outline-secondary btn-sm text-uppercase" href=""><i class="fas fa-sign-out-alt fa-lg"></i>Logout</a>
+            <a class="btn btn-outline-secondary btn-sm text-uppercase" href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt fa-lg"></i>Logout</a>
             </div>
         </li>
     </ul>
@@ -30,8 +30,8 @@
 <div class="container-fluid">
 <br>
 <div calss="row">
-    <div class="container">
-        <h2 class="text-center">Welcome {{name}}</h2>
+    <div class="container text-center">
+        <legend class='border-bottom h1'>Welcome {{current_user.first}}</legend>
     </div>
 </div>
 </div>

@@ -2,7 +2,40 @@
 
 {% block body %}
 
-
+<div class="container col-md-6 home shadow rounded p-4 mt-4">
+    <div class="container text-center">
+        <legend class='border-bottom mb-4 h1'>Login</legend>
+    </div>
+    <form method="POST" action='{{url_for("login")}}'>
+      {{form.hidden_tag()}}
+        <div class="form-group text-center mb-4">
+          <div>
+            {{form.email.label}}
+          </div>
+          <div>
+            {{form.email(class="form-control")}}
+          </div>
+        </div>
+        <div class="form-group text-center mb-4">
+          <div>
+            {{form.password.label}}
+          </div>
+          <div>
+            {{form.password(class="form-control")}}
+          </div>
+        </div>
+        <br>
+        <div class="container d-flex justify-content-center">
+            {{form.submit(class="btn btn-primary btn-l")}}
+        </div>
+      </form>
+      <br>
+      <div class='container text-center'>
+        <small class='text-muted'>
+           Forgot Password?<a href="url_for('home')"> Click here to reset password</a>
+        </small>
+     </div>
+    </div>
 {% endblock %}
 
 
