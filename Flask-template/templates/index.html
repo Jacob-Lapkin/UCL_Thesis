@@ -16,7 +16,7 @@
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Developer</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                        <li class="nav-item"><a class="btn btn-secondary btn-l text-uppercase" type="button" data-bs-toggle="modal" data-target="#LoginModal" href="#LoginModal">Login</a></li>
+                        <li class="nav-item"><a class="btn btn-secondary btn-l text-uppercase" type="button" href="{{url_for('login')}}">Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -345,36 +345,7 @@
                 </div>
             </div>
         </footer>
-        <!-- Login modal-->
-        <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h2 class="modal-title" id="exampleModalLongTitle">Login</h2>
-                  <a type="button" data-bs-dismiss="modal"><i class="far fa-window-close fa-2x"></i></a>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <form>
-                            <div class="form-group">
-                              <label for="exampleInputEmail1">Email address</label>
-                              <input type="email" class="form-control" id="LoginEmail" aria-describedby="emailHelp" placeholder="Email">
-                            </div>
-                            <br>
-                            <div class="form-group">
-                              <label for="exampleInputPassword1">Password</label>
-                              <input type="password" class="form-control" id="LoginPassword" placeholder="Password">
-                            </div>
-                            <br>
-                            <div class="container d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary btn-l">Login</button>
-                            </div>
-                          </form>
-                        </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        
 
         <!-- Portfolio Modals-->
         <!-- Portfolio item 1 modal popup-->

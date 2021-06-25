@@ -1,54 +1,65 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<div class="container mt-3">
-  <h1 class="text-center">Register</h1>
-  <br>
-</div>
-<div class="row px-5 mb-3">
-<div class="container home rounded shadow p-2">
-<form action="{{url_for('index')}}" class='col-md-8 mx-auto'>
-  <h3 class="text-center">Please fill in your details</h3>
-    <div class="form-group">
-        <label for="exampleInputEmail1">First Name</label>
-        <input type="text" class="form-control" name="first" id="firstname"  placeholder="Enter first name">
-      </div>
-      <br>
-    <div class="form-group">
-        <label for="exampleInputEmail1">Last Name</label>
-        <input type="text" class="form-control" name="last" id="lastname"  placeholder="Enter last name">
+
+<div class="container col-md-6 home shadow rounded p-4 mt-4">
+    <div class="container text-center">
+        <h1>Register</h1>
     </div>
-    <br>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    </div>
-    <br>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <br>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Confirm Password</label>
-        <input type="password" class="form-control" name="repeatpass" id="exampleInputPassword1" placeholder="Confirm Password">
-      </div>
-    <br>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">I agree to having my information stored</label>
-    </div>
-    <br>
-    <div class="container d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary btn-l">Register</button>
-    </div>
-  </form>
-</div>
+    <form method="POST" action='{{url_for("login")}}'>
+      {{form.hidden_tag()}}
+
+        <div class="form-group text-center mt-3">
+          <div>
+            {{form.first.label}}
+          </div>
+          <div>
+            {{form.first(class="form-control")}}
+          </div>
+        </div>
+        <br>
+        <div class="form-group text-center mb-4">
+          <div>
+            {{form.last.label}}
+          </div>
+          <div>
+            {{form.last(class="form-control")}}
+          </div>
+        </div>
+        <div class="form-group text-center mb-4">
+          <div>
+            {{form.email.label}}
+          </div>
+          <div>
+            {{form.email(class="form-control")}}
+          </div>
+        </div>
+        <div class="form-group text-center mb-4">
+          <div>
+            {{form.password.label}}
+          </div>
+          <div>
+            {{form.password(class="form-control")}}
+          </div>
+        </div>
+        <div class="form-group text-center mb-4">
+          <div>
+            {{form.passconfirm.label}}
+          </div>
+          <div>
+            {{form.passconfirm(class="form-control")}}
+          </div>
+        </div>
+        <br>
+        <div class="container d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary btn-l">Login</button>
+        </div>
+      </form>
+    </div> 
 
 
-</div>
+
 
 {% endblock %}
-
 
 

@@ -32,7 +32,6 @@
 <div calss="row">
     <div class="container">
         <h2 class="text-center">Welcome {{name}}</h2>
-        <h3>Number of backhands: {{backhand}}</h3>
     </div>
 </div>
 </div>
@@ -67,20 +66,6 @@
         <br>
     </div>
 </div>
-</div>
-<div class="container-fluid">
- <div class="row mb-4">
-   <div class="container col-md-4">
-     <div class="container rounded shadow home">
-    <h4 class="text-center">Shots hit in order:</h4>
-      <ol>
-      {% for shot in strokes%}
-      <li>{{shot}}</li>
-      {% endfor %}
-    </ol>
-  </div>
-   </div>
- </div>
 </div>
 
 {% endblock %}

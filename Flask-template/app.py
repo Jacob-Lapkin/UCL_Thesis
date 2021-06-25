@@ -2,19 +2,22 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate 
+#from flask import app, db, bcrypt
 from flask import Flask, render_template, request, session, redirect, url_for, flash
-from flask_wtf import FlaskForm
 from wtforms import (StringField, SubmitField, BooleanField, DateTimeField, 
-                    RadioField, SelectField, TextField, TextAreaField)
-from wtforms.validators import DataRequired
+                    RadioField, SelectField, TextField, TextAreaField, PasswordField)
+from wtforms.validators import DataRequired, Email, Length
+from forms import newform
+
 
 app = Flask(__name__)
+
+
 
 #############a##############
 #####form configuration#####
 ############################
-app.config['SECTRET_KEY'] = 'mykey'
+app.config['SECRET_KEY'] = 'mykey'
 
 
 
@@ -27,22 +30,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
 
 db = SQLAlchemy(app)
 
-Migrate(app, db)
 
 
 
 ##############################################
 ######## Routes, render template, etc ########
 ##############################################
-@app.route('/regwfask', methods=['GET', 'POST'])
-def regwflask(): 
-    form = SimpleForm()
-    if form.validate_on_submit():
-        return redirect(url_for('/'))
-
-    return render_template('regwflask.html', form=form)
-
-
 
 @app.route('/')
 def index():
@@ -53,18 +46,16 @@ def index():
 def point():
     return render_template('point.html')
 
+@app.route('/login', methods=["GET", "POST"])
+def login(): 
+    return render_template('login.html')
 
-@app.route('/register', methods=['GET', 'POST'])
-def register(): 
-    return render_template('register.html')
 
-@app.route('/register/success')
-def success():
-    first = request.args.get('first')
-    last = request.args.get('last')
-    email = request.args.get('email')
-    
-    return render_template('after_register.html')
+@app.route('/register', methods=["GET", "POST"])
+def register():
+    form = newform()
+    return render_template('register.html', form=form)
+
 
 
 @app.route('/home')
