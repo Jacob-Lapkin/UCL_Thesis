@@ -7,11 +7,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm
-from wtforms import Form, StringField, TextField, SubmitField, PasswordField, SubmitField, BooleanField
+from wtforms import (Form, StringField, TextField, SubmitField, PasswordField,
+                     SubmitField, BooleanField, DateField, RadioField, FileField)
 from wtforms.validators import DataRequired, Length, Email, EqualTo 
 from wtforms import ValidationError
 
 
+#####################
+###### CONFIRG ######
+#####################
 
 app = Flask(__name__)
 db = SQLAlchemy((app))
@@ -27,8 +31,9 @@ login_manager.login_view = 'login'
 def user_user(user_id):
     return User.query.get(int(user_id))
 
-
-#########forms#################
+###########################
+######### FORMS #############
+###########################
 class Login(FlaskForm):
     email = StringField("Email Address", validators=[DataRequired(), Email()])
     password = PasswordField("Passsword", validators=[DataRequired()])
@@ -46,9 +51,17 @@ class newform(FlaskForm):
         exisitng_user_email = User.query.filter_by(email=email.data).first()
         if exisitng_user_email:
             raise ValidationError('Email already registered')
+    
+class point(FlaskForm):
+    date = DateField('Date', validators=[DataRequired()])
+    title = StringField('Upload title', validators=[DataRequired()])
+    description = TextField("Description", validators=[DataRequired()])
+    point_type = RadioField('Point Type', validators=[DataRequired()], choices=[('choice1', 'practice'), ('choice2', 'match')])
+    point_upload = FileField('Upload', validators=[DataRequired()])
 
-
-########database#################
+#################################
+######## MODELS #################
+#################################
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first = db.Column(db.String(20), nullable=False)
@@ -58,7 +71,7 @@ class User(db.Model, UserMixin):
 
 
 ##############################################
-######## Routes, render template, etc ########
+######## VIEWS ########
 ##############################################
 
 @app.route('/')
