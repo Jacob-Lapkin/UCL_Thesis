@@ -8,7 +8,6 @@ class poseDetector():
 
     def __init__(self, mode=False, upBody=False, smooth=True,
                  detectionCon=0.5, trackCon=0.5):
-
         self.mode = mode
         self.upBody = upBody
         self.smooth = smooth
@@ -69,11 +68,11 @@ class poseDetector():
             cv2.circle(img, (x3, y3), 5, (0, 0, 255), cv2.FILLED)
             cv2.circle(img, (x3, y3), 10, (0, 255, 0), 2)
             cv2.putText(img, str(int(angle)), (x2 - 50, y2 + 50),
-                        cv2.FONT_HERSHEY_PLAIN, 3, (255, 255, 0), 2)
+                        cv2.FONT_HERSHEY_PLAIN, 2, (255, 255, 0), 2)
         return angle
 
 def main():
-    cap = cv2.VideoCapture('Post.mp4')
+    cap = cv2.VideoCapture('Posp.mp4')
     pTime = 0
     detector = poseDetector()
     while True:
