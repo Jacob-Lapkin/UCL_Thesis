@@ -2,12 +2,13 @@ import cv2
 import mediapipe as mp
 import time
 import math
+import numpy as np
 
 
 class poseDetector():
 
     def __init__(self, mode=False, upBody=False, smooth=True,
-                 detectionCon=0.5, trackCon=0.5):
+                 detectionCon=0.6, trackCon=0.6):
         self.mode = mode
         self.upBody = upBody
         self.smooth = smooth
@@ -48,12 +49,11 @@ class poseDetector():
         x3, y3 = self.lmList[p3][1:]
 
         # Calculate the Angle
-        angle = math.degrees(math.atan2(y3 - y2, x3 - x2) -
-                             math.atan2(y1 - y2, x1 - x2))
-        if angle < 0:
-            angle += 180
-        elif angle > 180:
-            angle = 360 - angle
+        radians = np.arctan2(y3-y2, x3 - x2) - np.arctan2(y1-y2, x1-x2)
+
+        angle = np.abs(radians*180.0/np.pi)
+        if angle > 180.0:
+            angle = 360-angle
         
         # print(angle)
 
@@ -72,7 +72,7 @@ class poseDetector():
         return angle
 
 def main():
-    cap = cv2.VideoCapture('Posp.mp4')
+    cap = cv2.VideoCapture('Kach.mp4')
     pTime = 0
     detector = poseDetector()
     while True:
