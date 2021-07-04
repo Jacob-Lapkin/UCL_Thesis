@@ -25,7 +25,7 @@ predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
 
 for ind, filename in enumerate(os.listdir('Test')):
     if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.jpeg'): 
-        with open(os.path.join (base_image_location, f'fog{ind}.png'), "rb") as image_contents:
+        with open(os.path.join (base_image_location, f'nadal{ind}.png'), "rb") as image_contents:
             results = predictor.classify_image(
                 '4d68f633-1b0f-44b0-987a-a32ea1410c0e', iteration, image_contents.read())
 
