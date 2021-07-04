@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand" href="#" style="margin-left: 2%;">Tennis Sense</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('home') }}"><i class="fas fa-home fa-lg"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link 2</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link 3</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Link 4</a>
+          </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <div class="container">
+            <a class="btn btn-outline-secondary btn-sm text-uppercase" href=""><i class="fas fa-sign-out-alt fa-lg"></i>Logout</a>
+            </div>
+        </li>
+    </ul>
+    </div>
+  </nav>
+  <!-- end of navbar -->
+
+  <div class="container-fluid">
+    <br>
+    <div class="container-fluid text-center">
+      <div class="containter">
+        <legend class='border-bottom h1'>Stroke Analysis</legend>
+      </div>
+      </div>
+</div>
+  <div class="container home shadow rounded p-4 mt-4 text-center">
+    <div class="containter mb-4">
+      <h5>Please upload a video of the desired stroke you wish to analyze</h5>
+      <p>Important Note: Click <a href="">here</a> for instructions on how to crop video before submission.</p>
+   </div>
+        <form method="POST" action='{{url_for("stroke")}}' class="container col-md-8 text-center">
+            {{form.hidden_tag()}}
+            <div class="form-group">
+                <div>
+                    {{form.date.label}}
+                </div>
+                <div>
+                    {{form.date(class="form-control")}}
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div>
+                    {{form.title.label}}
+                </div>
+                <div>
+                    {{form.title(class="form-control")}}
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div>
+                    {{form.stroke_type.label}}
+                </div>
+                <div>
+                    {{form.stroke_type(class="form-control")}}
+                </div>
+              </div>
+              <br>
+              <div class="form-group">
+                <div>
+                    {{form.pro_comparison.label}}
+                </div>
+                <div>
+                    {{form.pro_comparison(class="form-control")}}
+                </div>
+              </div>
+              <br>
+              <div class="form-group">
+                {{form.stroke_upload(class="form-control")}}
+              </div>
+              <br>
+              <div class="container d-flex justify-content-center">
+                {{form.submit(class="btn btn-primary btn-l")}}
+            </div>
+        </form>
+  </div>
+
+{% endblock %}

@@ -8,7 +8,7 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, log
 from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm
 from wtforms import (Form, StringField, TextField, SubmitField, PasswordField,
-                     SubmitField, BooleanField, DateField, RadioField, FileField)
+                     SubmitField, BooleanField, DateField, RadioField, FileField, SelectField)
 from wtforms.validators import DataRequired, Length, Email, EqualTo 
 from wtforms import ValidationError
 
@@ -58,6 +58,15 @@ class point(FlaskForm):
     description = TextField("Description", validators=[DataRequired()])
     point_type = RadioField('Point Type', validators=[DataRequired()], choices=[('choice1', 'practice'), ('choice2', 'match')])
     point_upload = FileField('Upload', validators=[DataRequired()])
+    submit = SubmitField('Register')
+
+class Stroke(FlaskForm):
+    date = DateField('Date', validators=[DataRequired()])
+    title = StringField('Upload title', validators=[DataRequired()])
+    stroke_type = SelectField('Stroke Type', validators=[DataRequired()], choices = [('choice1', 'Serve'), ('choice2', 'Forehand return'), ('choice3', 'backhand return'), ('choice4', 'Volley')])
+    pro_comparison = SelectField('Professional Comparison', choices = [('choice1', 'Novak Djokavic'), ('choice2', 'Roger Federer'), ('choice3', 'Rafael Nadal'), ('choice4', 'Serena Williams')], validators = [DataRequired()])
+    stroke_upload = FileField('Upload', validators=[DataRequired()])
+    submit = SubmitField('Register')
 
 #################################
 ######## MODELS #################
@@ -82,6 +91,7 @@ def index():
 @app.route('/point')
 def point():
     return render_template('point.html')
+
 
 @app.route('/login', methods=["GET", "POST"])
 def login(): 
@@ -122,6 +132,15 @@ def register():
 @login_required
 def home():
     return render_template('home.html')
+
+@app.route('/stroke', methods=["GET", "POST"])
+@login_required
+def stroke():
+    form = Stroke()
+    if form.validate_on_submit():
+        return redirect(url_for('login'))
+    return render_template('stroke.html', form=form)
+
 
 @app.errorhandler(404)
 def page_not_found(e):
