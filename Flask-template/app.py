@@ -12,8 +12,7 @@ from wtforms import (Form, StringField, TextField, SubmitField, PasswordField,
 from wtforms.validators import DataRequired, Length, Email, EqualTo 
 from wtforms import ValidationError
 
-# importing pose data
-from pose.angledata import display_df
+
 
 
 
@@ -146,6 +145,7 @@ def stroke():
     return render_template('stroke.html', form=form)
 
 @app.route('/results')
+@login_required
 def results():
     return render_template('graphs.html')
 
