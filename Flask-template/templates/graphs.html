@@ -1,0 +1,146 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand" href="#" style="margin-left: 2%;">Tennis Sense</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link 2</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('point')}}">Link 3</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{{url_for('stroke')}}">Link 4</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <div class="container">
+            <a class="btn btn-outline-secondary btn-sm text-uppercase" href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt fa-lg"></i>Logout</a>
+            </div>
+        </li>
+    </ul>
+    
+    </div>
+  </nav>
+  <!-- end of navbar -->
+
+<div class="container home shadow rounded p-3 mt-4 text-center">
+    <div class="container-fluid">
+        <div class="container-fluid text-center">
+            <legend class='border-bottom h1'>Results</legend>
+        </div>
+    </div>
+    <div class='row mt-4'>
+        <div class="col-md-6">
+            <canvas id="myChart" max-width="300" max-height="300"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="myChart2" max-width="200" max-height="200"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<div class="container home shadow rounded p-3 mt-4">
+    <div class="container-fluid">
+          <div class="containter text-center">
+            <legend class='border-bottom h1'>Tips/Advise</legend>
+          </div>
+    </div>
+    <div class="container-fluid mt-4">
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam iusto explicabo velit aut 
+            recusandae neque modi, odit commodi perspiciatis ipsum ut dignissimos 
+            laboriosam numquam, qui saepe quia eos voluptate ipsam.</p>
+    </div>
+</div>
+
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['1', '2', '3', '4', '5', '6'],
+        datasets: [{
+            label: 'Left leg angle during extension',
+            data: [130, 140, 160, 170, 175, 170],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+<script>
+    var ctx = document.getElementById('myChart2').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['1', '2', '3', '4', '5', '6'],
+        datasets: [{
+            label: 'Left leg angle during extension',
+            data: [130, 140, 160, 170, 175, 170],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+
+{% endblock %}
+
+
