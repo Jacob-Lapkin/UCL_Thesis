@@ -12,8 +12,10 @@ from wtforms import (Form, StringField, TextField, SubmitField, PasswordField,
 from wtforms.validators import DataRequired, Length, Email, EqualTo 
 from wtforms import ValidationError
 
-
-
+# importing data 
+import sys
+sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
+from angledata import display_df, smoothed_df
 
 
 #####################
@@ -147,8 +149,11 @@ def stroke():
 @app.route('/results')
 @login_required
 def results():
-    labels = ["Africa", "Asia", "Europe", "Latin America", "North America"]
-    data = [5578,5267,734,784,433]
+    data = smoothed_df('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right')
+    empty_label =[]
+    for ind, value in enumerate(range(len(data))):
+        empty_label.append(str(ind))
+    labels = empty_label
     
     return render_template('graphs.html', data=data, labels=labels)
 

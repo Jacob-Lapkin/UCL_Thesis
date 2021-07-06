@@ -80,11 +80,11 @@
 
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
         labels: {{labels|tojson}},
         datasets: [{
-            label: 'Left leg angle during extension',
+            label: 'graph title',
             data: {{data|tojson}},
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -118,11 +118,11 @@ var myChart = new Chart(ctx, {
 <script>
     var ctx = document.getElementById('myChart2').getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
         labels: ['1', '2', '3', '4', '5', '6'],
         datasets: [{
-            label: 'Left leg angle during extension',
+            label: 'title',
             data: [130, 140, 160, 170, 175, 170],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',

@@ -68,5 +68,5 @@ def ShotAngle(path, stroke, angle_type):
         cv2.waitKey(1)
     return angleList
     
-ShotAngle('pose/videos/serve/nadal/nadalserveside.mp4', 'serve', 0)
+ShotAngle('pose/videos/serve/djok/djokserveside.mp4', 'serve', 0)
 

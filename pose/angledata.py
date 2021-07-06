@@ -4,6 +4,8 @@ import seaborn as sns
 import numpy as np
 from scipy import stats
 from matplotlib import pyplot as plt
+import scipy.signal as signal
+
 
 def display_df(path):
     unclean_df = pd.read_csv(path, index_col=0)
@@ -11,41 +13,47 @@ def display_df(path):
     abs_z_scores = np.abs(z_score)   
     filtered_entries = (abs_z_scores < 3). all(axis=1)
     new_df = unclean_df[filtered_entries]
-    return new_df 
+    return new_df
     
-def find_mean(path):
-    dataframe = display_df(path)
-    describe_frame = dataframe.describe()
-    return describe_frame 
+def smoothed_df(path, angle):
+    df = display_df(path)
+    new_df = df[angle]
+    # First, design the Butterworth filter
+    N  = 3    # Filter order
+    Wn = 0.03 # Cutoff frequency
+    B, A = signal.butter(N, Wn, output='ba')
+    smooth_data = signal.filtfilt(B,A, new_df)
+    return list(smooth_data)
+
+def plot_unsmooth_data(path, angle):
+    df = display_df(path)
+    new_df = df[angle]
+    plt.plot(new_df)
+    plt.show()
 
 def plot_angles(path, angle):
-    dataframe = display_df(path)
-    y = dataframe[angle]
-    x = list(range(len(y)))
-    #z = dataframe[angle2]
-    plt.xlabel('Frame')
-    plt.ylabel('Angle in Degrees')
-    plt.plot(x, y)
+    df = smoothed_df(path, angle)
+    plt.plot(df,'b-')
     plt.show()
 
 
 #plot_angles('pose/data/serve_data/fogserve.csv', 'hip2ankle_right')
 #plot_angles('pose/data/serve_data/fritzserve45.csv', 'hip2ankle_right')
 
+#plot_unsmooth_data('pose/data/serve_data/nadalserveside.csv', 'hip2ankle_left')
 # # NADAL 
 # # side angle
 #plot_angles('pose/data/serve_data/nadalserveside.csv', 'hip2ankle_left')
 # # back angle
-# plot_angles('pose/data/serve_data/nadalserveback.csv', 'hip2ankle_left')
+#plot_angles('pose/data/serve_data/nadalserveback.csv', 'hip2ankle_right')
 
 
+plot_unsmooth_data('pose/data/serve_data/djokserveside.csv', 'hip2ankle_right')
 # # DJOKAVIC
 # # side angle
-plot_angles('pose/data/serve_data/djokserveside.csv', 'hip2ankle_left')
+#plot_angles('pose/data/serve_data/djokserveside.csv', 'hip2ankle_left')
 # # back angle 
-plot_angles('pose/data/serve_data/djokserveback.csv', 'hip2ankle_left')
+#plot_angles('pose/data/serve_data/djokserveback.csv', 'hip2ankle_left')
 # # 45 angle
-plot_angles('pose/data/serve_data/djokserve45.csv', 'hip2ankle_left')
-
-
+plot_angles('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right')
 
