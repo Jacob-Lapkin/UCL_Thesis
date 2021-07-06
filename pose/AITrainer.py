@@ -5,14 +5,14 @@ import PoseModule as pm
 
 
 
-def ShotAngle(path, stroke, showall, angle_type):
+def ShotAngle(path, stroke, angle_type):
     cap = cv2.VideoCapture(path)
     detector = pm.poseDetector()
-    #empty = []
+    angleList = []
     while True:
         success, img = cap.read()
         # showall: False shows just points in function while True shows all points on body
-        img = detector.findPose(img, showall)
+        img = detector.findPose(img, False)
         lmList = detector.findPosition(img, False)
         # print(lmList)
         if len(lmList) != 0:
@@ -62,10 +62,11 @@ def ShotAngle(path, stroke, showall, angle_type):
             cv2.putText(img, 'Test', (int(alignX), int(alignY)), cv2.FONT_HERSHEY_PLAIN, 2,
                         (0, 255, 255), 2)    
 
-   
-        #print(angle_right_leg, angle_left_leg)          
+        
+        print(angle_right_leg, angle_left_leg)          
         cv2.imshow("Image", img)
         cv2.waitKey(1)
+    return angleList
     
-ShotAngle('videos/serve/nadal/nadalserveside.mp4', 'serve', False, 0)
+ShotAngle('pose/videos/serve/nadal/nadalserveside.mp4', 'serve', 0)
 

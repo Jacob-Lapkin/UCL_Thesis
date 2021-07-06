@@ -25,7 +25,7 @@ prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": predict
 predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
 
 def StrokeClassifier(name):
-    for ind, filename in enumerate(os.listdir('Test')):
+    for ind, filename in enumerate(os.listdir('pose/Test')):
         if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.jpeg'): 
             with open(os.path.join (base_image_location, (name + f'{ind}.png')), "rb") as image_contents:
                 results = predictor.classify_image(
