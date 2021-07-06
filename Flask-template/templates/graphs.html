@@ -68,19 +68,24 @@
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam iusto explicabo velit aut 
             recusandae neque modi, odit commodi perspiciatis ipsum ut dignissimos 
             laboriosam numquam, qui saepe quia eos voluptate ipsam.</p>
+            <br>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, rem 
+            amet similique cumque porro iure excepturi sequi eum laborum nemo quam optio 
+            explicabo voluptatibus possimus perferendis officiis. Recusandae, quisquam unde.</p>
     </div>
 </div>
 
 
 <script>
+
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
-        labels: ['1', '2', '3', '4', '5', '6'],
+        labels: {{labels|tojson}},
         datasets: [{
             label: 'Left leg angle during extension',
-            data: [130, 140, 160, 170, 175, 170],
+            data: {{data|tojson}},
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -113,7 +118,7 @@ var myChart = new Chart(ctx, {
 <script>
     var ctx = document.getElementById('myChart2').getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
         labels: ['1', '2', '3', '4', '5', '6'],
         datasets: [{

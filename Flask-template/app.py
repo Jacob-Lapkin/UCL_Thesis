@@ -147,7 +147,10 @@ def stroke():
 @app.route('/results')
 @login_required
 def results():
-    return render_template('graphs.html')
+    labels = ["Africa", "Asia", "Europe", "Latin America", "North America"]
+    data = [5578,5267,734,784,433]
+    
+    return render_template('graphs.html', data=data, labels=labels)
 
 
 

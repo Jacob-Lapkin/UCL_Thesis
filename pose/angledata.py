@@ -29,23 +29,23 @@ def plot_angles(path, angle):
     plt.show()
 
 
-# plot_angles('data/serve_data/fogserve.csv', 'hip2ankle_right')
-# plot_angles('data/serve_data/fritzserve45.csv', 'hip2ankle_right')
+#plot_angles('data/serve_data/fogserve.csv', 'hip2ankle_right')
+#plot_angles('data/serve_data/fritzserve45.csv', 'hip2ankle_right')
 
 # # NADAL 
 # # side angle
-# plot_angles('data/serve_data/nadalserveside.csv', 'hip2ankle_left')
+#plot_angles('data/serve_data/nadalserveside.csv', 'hip2ankle_left')
 # # back angle
 # plot_angles('data/serve_data/nadalserveback.csv', 'hip2ankle_left')
 
 
 # # DJOKAVIC
 # # side angle
-# plot_angles('data/serve_data/djokserveside.csv', 'hip2ankle_left')
+plot_angles('data/serve_data/djokserveside.csv', 'hip2ankle_left')
 # # back angle 
-# plot_angles('data/serve_data/djokserveback.csv', 'hip2ankle_left')
+plot_angles('data/serve_data/djokserveback.csv', 'hip2ankle_left')
 # # 45 angle
-# plot_angles('data/serve_data/djokserve45.csv', 'hip2ankle_left')
+plot_angles('data/serve_data/djokserve45.csv', 'hip2ankle_left')
 
 
 
