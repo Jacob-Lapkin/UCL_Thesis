@@ -49,8 +49,8 @@ def plot_angles(path, angle):
 #plot_unsmooth_data('pose/data/serve_data/nadalserveside.csv', 'hip2ankle_right')
 # # NADAL 
 # # side angle
-plot_unsmooth_data('pose/data/serve_data/nadalserveside.csv', 'hip2ankle_left')
-plot_angles('pose/data/serve_data/nadalserveside.csv', 'hip2ankle_left')
+#plot_unsmooth_data('pose/data/serve_data/nadalserveside.csv', 'hip2ankle_left')
+#plot_angles('pose/data/serve_data/nadalserveside.csv', 'hip2ankle_left')
 # # back angle
 #plot_unsmooth_data('pose/data/serve_data/nadalserveback.csv', 'hip2ankle_right')
 #plot_angles('pose/data/serve_data/nadalserveback.csv', 'hip2ankle_right')
