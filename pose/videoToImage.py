@@ -2,8 +2,8 @@ import cv2
 import os, time, uuid
  
 # Opens the Video file
-def convertVideo(path, name):
-    cap= cv2.VideoCapture(path)
+def convertVideo(name):
+    cap= cv2.VideoCapture('pose/videos/serve/djok/djokserve45.mp4')
     i=0
     while(cap.isOpened()):
         ret, frame = cap.read()
@@ -16,4 +16,4 @@ def convertVideo(path, name):
     cap.release()
     cv2.destroyAllWindows()
 
-convertVideo('videos/serve/nadal/nadalserveside.mp4', 'nadal')
+convertVideo('djokovic')
