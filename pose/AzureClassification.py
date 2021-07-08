@@ -27,7 +27,7 @@ predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
 def StrokeClassifier(name):
     for ind, filename in enumerate(os.listdir('pose/Test')):
         if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.jpeg'): 
-            with open(os.path.join (base_image_location, (name + f'{ind}.png')), "rb") as image_contents:
+            with open(os.path.join (base_image_location, (name + f'{ind}.jpg')), "rb") as image_contents:
                 results = predictor.classify_image(
                     project_id, iteration, image_contents.read())
 
@@ -38,4 +38,20 @@ def StrokeClassifier(name):
         else:
             print("you are a failure")
 
-StrokeClassifier('halep')
+def StrokeList(name):
+    for ind, filename in enumerate(os.listdir('pose/Test')):
+        if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.jpeg'): 
+            with open(os.path.join (base_image_location, (name + f'{ind}.jpg')), "rb") as image_contents:
+                results = predictor.classify_image(
+                    project_id, iteration, image_contents.read())
+
+                # Display the results.
+                first = results.predictions[0]
+                firstresult = first.probability
+                firstlabel = first.tag_name
+                print(firstlabel, firstresult)
+        else:
+            print("you are a failure")
+
+
+StrokeClassifier('djok')
