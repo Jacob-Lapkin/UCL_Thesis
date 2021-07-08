@@ -63,10 +63,9 @@ def ShotAngle(path, stroke, angle_type):
                         (0, 255, 255), 2)    
 
         
-        print(angle_right_leg, angle_left_leg)          
+        #print(angle_left_arm)          
         cv2.imshow("Image", img)
         cv2.waitKey(1)
-    return angleList
     
-ShotAngle('pose/videos/serve/djok/djokserveside.mp4', 'serve', 0)
+ShotAngle('pose/videos/serve/nadal/nadalserveside.mp4', 'serve', 0)
 

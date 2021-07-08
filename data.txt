@@ -1,0 +1,10 @@
+PROFESSIONAL DATA STROKES ARE BROKEN DOWN INTO THE FOLLOWING FILES:
+
+Djokovic:
+djokserve45.csv: right leg, left leg
+
+Nadal:
+nadalserveside.csv: right leg, left leg
+
+
+
