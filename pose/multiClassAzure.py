@@ -5,17 +5,17 @@ from msrest.authentication import ApiKeyCredentials
 import os, time, uuid
 
 # Replace with valid values
-ENDPOINT = "https://stroke-prediction.cognitiveservices.azure.com/"
-prediction_key = "a2870f2dd939408386e6b5b8927e8276"
+ENDPOINT = "https://strokevision-prediction.cognitiveservices.azure.com/"
+prediction_key = "d260ad67dc73424a83d249f50631f96c"
 
-prediction_resource_id = "/subscriptions/1a346baa-ff42-4c09-93e5-7801dc9ab2f9/resourceGroups/UCL/providers/Microsoft.CognitiveServices/accounts/Stroke"
+prediction_resource_id = "/subscriptions/59d64684-e7c9-4397-8982-6b775a473b74/resourceGroups/UCL_Jacob_MSc/providers/Microsoft.CognitiveServices/accounts/stroke-vision"
 
 #project id
-project = 'Stoke_classifier'
-project_id = '4d68f633-1b0f-44b0-987a-a32ea1410c0e'
+project = 'Stroke_class'
+project_id = '6faeb988-9af6-4e9a-9b92-4ca37069ec8e'
 
 #iteration name
-iteration = "Iteration9"
+iteration = "Iteration1"
 
 base_image_location = os.path.join (os.path.dirname(__file__), "Test")
 
@@ -53,5 +53,4 @@ def StrokeList(name):
         else:
             print("you are a failure")
 
-
-#StrokeClassifier('djok')
+#StrokeList('djok')
