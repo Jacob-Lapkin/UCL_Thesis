@@ -54,4 +54,4 @@ def StrokeList(name):
             print("NA")
 
 #StrokeList('djok')
-#StrokeClassifier('djok')
+StrokeClassifier('djok')
