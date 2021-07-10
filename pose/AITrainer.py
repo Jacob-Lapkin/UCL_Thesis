@@ -60,10 +60,11 @@ def ShotAngle(path, stroke, angle_type):
             alignY = yShape * 0.05
             
             cv2.putText(img, 'Test', (int(alignX), int(alignY)), cv2.FONT_HERSHEY_PLAIN, 2,
-                        (0, 255, 255), 2)    
+                        (0, 255, 255), 2)  
+              
 
         
-        #print(angle_left_arm)          
+        print(angle_right_leg)          
         cv2.imshow("Image", img)
         cv2.waitKey(1)
     

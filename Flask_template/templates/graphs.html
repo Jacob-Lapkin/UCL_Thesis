@@ -49,6 +49,7 @@
     </div>
     <div class='row mt-4'>
         <div class="col-md-6">
+            <legend class='border-bottom h6'>{{name}} shot breakdown (%)</legend>
             <canvas id="myChart3" max-width="300" max-height="300"></canvas>
         </div>
         <div class="col-md-6">
@@ -160,10 +161,10 @@ var myChart = new Chart(ctx, {
 var myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-        labels: ['1', '2', '3', '4', '5', '6'],
+        labels: ['Start', 'Takeback and Load', 'Extend', 'Finish'],
         datasets: [{
             label: 'Left leg angle during extension',
-            data: [130, 140, 160, 170, 175, 170],
+            data: {{doughnut_data|tojson}},
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

@@ -51,6 +51,7 @@ def StrokeList(name):
                 firstlabel = first.tag_name
                 print(firstlabel, firstresult)
         else:
-            print("you are a failure")
+            print("NA")
 
 #StrokeList('djok')
+#StrokeClassifier('djok')

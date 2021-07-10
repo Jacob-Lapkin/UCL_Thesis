@@ -15,7 +15,8 @@ from wtforms import ValidationError
 # importing data FIX THIS PATH
 import sys
 sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
-from angledata import display_df, smoothed_df
+from angledata import display_df, smoothed_df, phase_divider
+from CanvasData import Player_data
 
 
 #####################
@@ -149,13 +150,23 @@ def stroke():
 @app.route('/results')
 @login_required
 def results():
-    data = smoothed_df('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right')
-    empty_label =[]
-    for ind, value in enumerate(range(len(data))):
-        empty_label.append(str(ind))
-    labels = empty_label
-    
-    return render_template('graphs.html', data=data, labels=labels)
+
+    # creating instance of professional player 
+    player = Player_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right', 'Djokovic')
+
+    # getting data for angle
+    data = player.get_data()
+
+    # getting labels or frames
+    labels = player.labels()
+
+    # getting shot breakdown
+    doughnut_data = player.doughnut()
+
+    # getting name of player
+    player_name = player.name
+
+    return render_template('graphs.html', data=data, labels=labels, doughnut_data=doughnut_data, name=player_name)
 
 
 

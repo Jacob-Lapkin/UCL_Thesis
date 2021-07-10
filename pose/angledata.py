@@ -1,3 +1,4 @@
+from numpy.core.fromnumeric import take
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -26,6 +27,38 @@ def smoothed_df(path, angle):
     B, A = signal.butter(N, Wn, output='ba')
     smooth_data = signal.filtfilt(B,A, new_df)
     return list(smooth_data)
+
+# EXTRACT THE PHASES OUT FROM THE CSV FILE
+def grab_phase(path):
+    phase_df = display_df(path)
+    phase_df = phase_df['phase']
+    return list(phase_df)
+
+# Diving the phases and calulating the breakdown of the phases in the shot
+def phase_divider(path):
+    counting_phases = grab_phase(path)
+    start_count = counting_phases.count(0)
+    take_load_count = counting_phases.count(1)
+    extend_count = counting_phases.count(2)
+    finish_count = counting_phases.count(3)
+    total_count = start_count + take_load_count + extend_count + finish_count 
+    percent_start = round(start_count / total_count * 100)
+    percent_take_load = round(take_load_count / total_count * 100)
+    percent_extend = round(extend_count / total_count * 100)
+    percent_finish = round(finish_count / total_count * 100)
+    final_percentage = [percent_start, percent_take_load, percent_extend, percent_finish]
+    return final_percentage
+
+# grabbing the labels for use in the Players class in CanvasData.py file
+def grab_label(path, angle):
+    data = smoothed_df(path, angle)
+    empty_label =[]
+        # getting labels
+    for ind, value in enumerate(range(len(data))):
+        empty_label.append(str(ind))
+    labels = empty_label
+    return labels
+
 
 
 # PLOTS ORIGINAL DATA
@@ -67,4 +100,8 @@ def plot_angles(path, angle):
 # # 45 angle
 #plot_unsmooth_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_left')
 #plot_angles('pose/data/serve_data/djokserve45.csv', 'hip2ankle_left')
+#plot_unsmooth_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right')
+#plot_angles('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right')
+
+
 
