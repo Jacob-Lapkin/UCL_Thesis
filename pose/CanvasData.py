@@ -23,11 +23,12 @@ class Player_data:
         doughnut_data = phase_divider(self.path)
         return doughnut_data
 
-    #
+    # gettinga all the labels or frames
     def labels(self):
         labels = grab_label(self.path, self.angle)
         return labels
     
+    # getting all the labels or frames by phase
     def splitting_label(self, phase):
         getting_split = split_label(self.path, self.angle, phase)
         labels = []
