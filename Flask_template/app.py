@@ -152,7 +152,7 @@ def stroke():
 def results():
 
     # creating instance of professional player 
-    player = Player_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right', 'Djokovic')
+    player = Player_data('pose/data/serve_data/nadalserveside.csv', 'hip2ankle_right', 'Nadal')
 
     # getting data for angle
     data = player.get_data()
