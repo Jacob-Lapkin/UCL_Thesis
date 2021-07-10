@@ -152,23 +152,27 @@ def stroke():
 def results():
 
     # creating instance of professional player 
-    player = Player_data('pose/data/serve_data/nadalserveside.csv', 'hip2ankle_right', 'Nadal')
+    playerright = Player_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right', 'Djokovic')
+    playerleft = Player_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_left', 'Djokovic')
 
-    # getting data for angle
-    data = player.get_data()
+    # getting data from that player
+    dataright = playerright.get_data()
+    dataleft = playerleft.get_data()
 
-    # getting labels or frames
-    labels = player.labels()
+    # getting labels from that player
+    label = playerright.labels()
 
     # getting shot breakdown
-    doughnut_data = player.doughnut()
+    doughnut_data = playerright.doughnut()
 
     # getting name of player
-    player_name = player.name
+    player_name = playerright.name
 
-    return render_template('graphs.html', data=data, labels=labels, doughnut_data=doughnut_data, name=player_name)
+    # getting the body part that is analyzed
+    if playerright.angle == 'hip2ankle_right':
+        body = 'legs'
 
-
+    return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, doughnut_data=doughnut_data, name=player_name, body=body)
 
 
 @app.errorhandler(404)

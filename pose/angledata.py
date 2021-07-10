@@ -10,12 +10,14 @@ import scipy.signal as signal
 
 # CREATE ORIGINAL DATA FRAME FOR GIVEN PATH
 def display_df(path):
-    unclean_df = pd.read_csv(path, index_col=0)
+    unclean_df = pd.read_csv(path)
     z_score = stats.zscore(unclean_df)
     abs_z_scores = np.abs(z_score)   
     filtered_entries = (abs_z_scores < 3). all(axis=1)
     new_df = unclean_df[filtered_entries]
     return new_df
+
+#print(display_df('pose/data/serve_data/djokserve45.csv'))
 
 # CREATE SMOOTH VERSION OF DATA FRAME FOR GIVEN ANGLE
 def smoothed_df(path, angle):
@@ -49,16 +51,71 @@ def phase_divider(path):
     final_percentage = [percent_start, percent_take_load, percent_extend, percent_finish]
     return final_percentage
 
+
+
+# making a new dataframe connecting phase with angle
+def make_df(path, angle):
+    data = smoothed_df(path, angle)
+    phase = grab_phase(path)
+    get_frame = display_df(path)
+    frame_col = get_frame['frame'].tolist()
+    new_dictionary = {'frame': frame_col,'phase':phase, 'angle':data}
+    df = pd.DataFrame(new_dictionary)
+    return df
+
+# splitting the data into different phases
+def split_data(path, angle, phase):
+    data = make_df(path, angle)
+    split_d = data[(data['phase'] == phase)]
+    angle_d = split_d['angle'].tolist()
+    return angle_d
+
+# splitting labels into different phases
+def split_label(path, angle, phase):
+    data = make_df(path, angle)
+    split_l = data[(data['phase'] == phase)]['frame']
+    label_l = split_l.tolist()
+    return label_l
+
+
+
 # grabbing the labels for use in the Players class in CanvasData.py file
 def grab_label(path, angle):
     data = smoothed_df(path, angle)
-    empty_label =[]
-        # getting labels
-    for ind, value in enumerate(range(len(data))):
-        empty_label.append(str(ind))
-    labels = empty_label
-    return labels
 
+    empty_label =[]
+    # getting labels by finding index 
+    for ind, value in enumerate(range(len(data))): 
+        empty_label.append(ind)
+    # adding each index converted to a percentage to a list 
+    real_labels = []
+    for i in empty_label:
+        real_labels.append(str(round(i / max(empty_label)* 100)))
+    labels = real_labels
+
+    # data = make_df(path, angle)
+
+    # # splitting each phase into different lists 
+    # split_l0 = data[(data['phase'] == 0)]['frame']
+    # label_l0 = split_l0.tolist()
+    # split_l1 = data[(data['phase'] == 1)]['frame']
+    # label_l1 = split_l1.tolist()
+    # split_l2 = data[(data['phase'] == 2)]['frame']
+    # label_l2 = split_l2.tolist()
+    # split_l3 = data[(data['phase'] == 3)]['frame']
+    # label_l3 = split_l3.tolist()
+
+    # # finding the length of each list of phases
+    # length0 = len(label_l0)
+    # length1 = len(label_l1)
+    # length2 = len(label_l2)
+    # length3 = len(label_l3)
+    
+    # # finding the max value and sum of the length of lists
+    # phase_frame_length = [length0, length1, length2, length3]
+    # max_phase = max(phase_frame_length)
+    # labels = [str(i) for i in range(max_phase)]
+    return labels
 
 
 # PLOTS ORIGINAL DATA

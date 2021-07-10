@@ -1,4 +1,5 @@
-from angledata import smoothed_df, phase_divider, grab_label
+from numpy.lib.shape_base import split
+from angledata import smoothed_df, phase_divider, grab_label, split_data, split_label
 
 # class to get data from user or professional 
 class Player_data:
@@ -7,20 +8,41 @@ class Player_data:
         self.angle = angle
         self.name = name
     
+    # getting all the data at once
     def get_data(self):
         data = smoothed_df(self.path, self.angle)
         return data
 
+    # getting only a phase of the data
+    def get_split_data(self, phase):
+        data = split_data(self.path, self.angle, phase)
+        return data
+
+    # getting a breakdown of the phases
     def doughnut(self):
         doughnut_data = phase_divider(self.path)
         return doughnut_data
 
+    #
     def labels(self):
         labels = grab_label(self.path, self.angle)
         return labels
+    
+    def splitting_label(self, phase):
+        getting_split = split_label(self.path, self.angle, phase)
+        labels = []
+        for i in getting_split:
+            labels.append(str(i))
+        return labels
 
 
-#djok = Pro_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right', 'Djokovic')
+#djok = Player_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right', 'Djokovic')
+#print(djok.get_split_data(0))
+#print(djok.splitting_label(0))
+#print(djok.get_data())
+#print(djok.labels())
+
+
 
 
 
