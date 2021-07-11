@@ -1,5 +1,10 @@
 from numpy.lib.shape_base import split
-from angledata import smoothed_df, phase_divider, grab_label, split_data, split_label
+from ProAngleData import smoothed_df, phase_divider, grab_label, split_data, split_label
+
+
+#############################################################################
+########### CREATING CLASSES TO USE FOR PRO AND USER ON DASHBOARD ###########
+#############################################################################
 
 # class to get data from user or professional 
 class Player_data:

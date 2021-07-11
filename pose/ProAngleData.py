@@ -7,6 +7,9 @@ from scipy import stats
 from matplotlib import pyplot as plt
 import scipy.signal as signal
 
+######################################################################
+########### FUNCTIONS TO USE AND MANIPILATE PRO PLAYER DATA###########
+######################################################################
 
 # CREATE ORIGINAL DATA FRAME FOR GIVEN PATH
 def display_df(path):
