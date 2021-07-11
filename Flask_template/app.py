@@ -15,7 +15,6 @@ from wtforms import ValidationError
 # importing data FIX THIS PATH
 import sys
 sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
-from angledata import display_df, smoothed_df, phase_divider
 from CanvasData import Player_data
 
 
