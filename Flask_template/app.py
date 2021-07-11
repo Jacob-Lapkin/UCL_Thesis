@@ -12,6 +12,8 @@ from wtforms import (Form, StringField, TextField, SubmitField, PasswordField,
 from wtforms.validators import DataRequired, Length, Email, EqualTo 
 from wtforms import ValidationError
 
+from datetime import datetime
+
 # importing data FIX THIS PATH
 import sys
 sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
@@ -58,7 +60,7 @@ class newform(FlaskForm):
             raise ValidationError('Email already registered')
     
 class point(FlaskForm):
-    date = DateField('Date', validators=[DataRequired()])
+    date = DateField('Date', format='%Y-%m-%d', default=datetime.now())
     title = StringField('Upload title', validators=[DataRequired()])
     description = TextField("Description", validators=[DataRequired()])
     point_type = RadioField('Point Type', validators=[DataRequired()], choices=[('choice1', 'practice'), ('choice2', 'match')])
@@ -66,7 +68,7 @@ class point(FlaskForm):
     submit = SubmitField('Submit')
 
 class Stroke(FlaskForm):
-    date = DateField('Date', validators=[DataRequired()])
+    date = DateField('Date', format='%Y-%m-%d', default=datetime.now(), validators=[DataRequired()])
     title = StringField('Upload title', validators=[DataRequired()])
     stroke_type = SelectField('Stroke Type', validators=[DataRequired()], choices = [('choice1', 'Serve'), ('choice2', 'Forehand return'), ('choice3', 'backhand return'), ('choice4', 'Volley')])
     pro_comparison = SelectField('Professional Comparison', choices = [('choice1', 'Novak Djokavic'), ('choice2', 'Roger Federer'), ('choice3', 'Rafael Nadal'), ('choice4', 'Serena Williams')], validators = [DataRequired()])
