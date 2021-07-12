@@ -15,7 +15,7 @@ from forms import Login, newform, point, Stroke
 # importing data FIX THIS PATH
 import sys
 sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
-from CanvasData import Player_data
+from CanvasData import Player_data, User_data
 
 
 #####################
@@ -114,28 +114,38 @@ def stroke():
 @login_required
 def results():
 
-    # creating instance of professional player 
+    # CREATING INSTANCE FOR PROFESSIONAL PLAYER
     playerright = Player_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right', 'Djokovic')
     playerleft = Player_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_left', 'Djokovic')
-
     # getting data from that player
     dataright = playerright.get_data()
     dataleft = playerleft.get_data()
-
     # getting labels from that player
     label = playerright.labels()
-
     # getting shot breakdown
     doughnut_data = playerright.doughnut()
-
     # getting name of player
     player_name = playerright.name
-
     # getting the body part that is analyzed
     if playerright.angle == 'hip2ankle_right':
         body = 'legs'
 
-    return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, doughnut_data=doughnut_data, name=player_name, body=body)
+#######################################################################
+    
+    # CREATING INSTANCE FOR USER 
+    user = User_data('pose/videos/serve/nadal/nadalserveside.mp4', 'Jacob')
+    # Getting user data for right and left
+    User_data_r = list(user.get_data('hip2ankle_right'))
+    User_data_l = list(user.get_data('hip2ankle_left'))
+    # Getting user labels 
+    User_label = user.labels()
+    # Getting user's name
+    User_name = user.name
+
+    
+
+    return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, doughnut_data=doughnut_data, name=player_name,
+    user_right=User_data_r, user_left=User_data_l, user_label = User_label, user_name =User_name,  body=body)
 
 
 @app.errorhandler(404)

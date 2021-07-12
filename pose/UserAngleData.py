@@ -6,42 +6,54 @@ import numpy as np
 from scipy import stats
 from matplotlib import pyplot as plt
 import scipy.signal as signal
+from Pose_finder import angle_from_video
 
 ######################################################################
 ########### FUNCTIONS TO USE AND MANIPILATE PRO PLAYER DATA###########
 ######################################################################
 
 # CREATE ORIGINAL DATA FRAME FOR GIVEN PATH
-def display_df(path):
-    unclean_df = pd.read_csv(path)
+def display_user_df(path):
+    unclean_df = angle_from_video(path)
     z_score = stats.zscore(unclean_df)
     abs_z_scores = np.abs(z_score)   
     filtered_entries = (abs_z_scores < 3). all(axis=1)
     new_df = unclean_df[filtered_entries]
     return new_df
 
-#print(display_df('pose/data/serve_data/djokserve45.csv'))
+
+#print(display_user_df('pose/videos/serve/djok/djokserve45.mp4'))
 
 # CREATE SMOOTH VERSION OF DATA FRAME FOR GIVEN ANGLE
-def smoothed_df(path, angle):
-    df = display_df(path)
-    new_df = df[angle]
+def smoothed_user_df(data):
+    df = data
+    frame = df['frame']
+    right_leg = df['hip2ankle_right']
+    left_leg = df['hip2ankle_left']
+
     # First, design the Butterworth filter
     N  = 3    # Filter order
     Wn = 0.03 # Cutoff frequency
     B, A = signal.butter(N, Wn, output='ba')
-    smooth_data = signal.filtfilt(B,A, new_df)
-    return list(smooth_data)
+    smooth_frame = signal.filtfilt(B,A, frame)
+    smooth_right = signal.filtfilt(B,A, right_leg)
+    smooth_left = signal.filtfilt(B,A, left_leg)
+    d = {'frame':list(smooth_frame),'hip2ankle_right':list(smooth_right), 'hip2ankle_left':list(smooth_left)}
+    df = pd.DataFrame(d)
+    return df
+
+#print(smoothed_user_df('pose/videos/serve/djok/djokserve45.mp4'))
+
 
 # EXTRACT THE PHASES OUT FROM THE CSV FILE
-def grab_phase(path):
-    phase_df = display_df(path)
+def grab_user_phase(data):
+    phase_df = data
     phase_df = phase_df['phase']
     return list(phase_df)
 
 # Diving the phases and calulating the breakdown of the phases in the shot
-def phase_divider(path):
-    counting_phases = grab_phase(path)
+def phase_divider(data):
+    counting_phases = grab_user_phase(data)
     start_count = counting_phases.count(0)
     take_load_count = counting_phases.count(1)
     extend_count = counting_phases.count(2)
@@ -55,35 +67,34 @@ def phase_divider(path):
     return final_percentage
 
 # making a new dataframe connecting phase with angle
-def make_df(path, angle):
-    data = smoothed_df(path, angle)
-    phase = grab_phase(path)
-    get_frame = display_df(path)
+def make_user_df(data):
+    data = smoothed_user_df(data)
+    phase = grab_user_phase(data)
+    get_frame = display_user_df(data)
     frame_col = get_frame['frame'].tolist()
-    new_dictionary = {'frame': frame_col,'phase':phase, 'angle':data}
-    df = pd.DataFrame(new_dictionary)
-    return df
+    data['phase'] = phase
+    data['frame'] = frame_col
+    return data
 
 # splitting the data into different phases
-def split_data(path, angle, phase):
-    data = make_df(path, angle)
+def split_user_data(data, phase):
+    data = make_user_df(data)
     split_d = data[(data['phase'] == phase)]
     angle_d = split_d['angle'].tolist()
     return angle_d
 
 # splitting labels into different phases
-def split_label(path, angle, phase):
-    data = make_df(path, angle)
+def split_user_label(data, phase):
+    data = make_user_df(data)
     split_l = data[(data['phase'] == phase)]['frame']
     label_l = split_l.tolist()
     return label_l
 
 
-
 # grabbing the labels for use in the Players class in CanvasData.py file
-def grab_label(path, angle):
-    data = smoothed_df(path, angle)
-
+def grab_user_label(data):
+    df = smoothed_user_df(data)
+    data = df['hip2ankle_right']
     empty_label =[]
     # getting labels by finding index 
     for ind, value in enumerate(range(len(data))): 
@@ -97,46 +108,19 @@ def grab_label(path, angle):
 
 
 # PLOTS ORIGINAL DATA
-def plot_unsmooth_data(path, angle):
-    df = display_df(path)
+def plot_user_unsmooth_data(path, angle):
+    df = display_user_df(path)
     new_df = df[angle]
     plt.plot(new_df)
     plt.show()
 
+#print(plot_user_unsmooth_data('pose/videos/serve/djok/djokserve45.mp4', 'hip2ankle_right'))
+
 
 # PLOTS SMOOTH ANGLES
 def plot_angles(path, angle):
-    df = smoothed_df(path, angle)
+    df = smoothed_user_df(path, angle)
     plt.plot(df,'b-')
     plt.show()
 
-
-#plot_angles('pose/data/serve_data/fogserve.csv', 'hip2ankle_right')
-#plot_angles('pose/data/serve_data/fritzserve45.csv', 'hip2ankle_right')
-
-#plot_unsmooth_data('pose/data/serve_data/nadalserveside.csv', 'hip2ankle_right')
-# # NADAL 
-# # side angle
-#plot_unsmooth_data('pose/data/serve_data/nadalserveside.csv', 'hip2ankle_left')
-#plot_angles('pose/data/serve_data/nadalserveside.csv', 'hip2ankle_left')
-# # back angle
-#plot_unsmooth_data('pose/data/serve_data/nadalserveback.csv', 'hip2ankle_right')
-#plot_angles('pose/data/serve_data/nadalserveback.csv', 'hip2ankle_right')
-
-
-# # DJOKAVIC
-
-# # side angle
-#plot_unsmooth_data('pose/data/serve_data/djokserveside.csv', 'hip2ankle_left')
-#plot_angles('pose/data/serve_data/djokserveside.csv', 'hip2ankle_left')
-# # back angle 
-#plot_unsmooth_data('pose/data/serve_data/djokserveback.csv', 'hip2ankle_left')
-#plot_angles('pose/data/serve_data/djokserveback.csv', 'hip2ankle_left')
-# # 45 angle
-#plot_unsmooth_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_left')
-#plot_angles('pose/data/serve_data/djokserve45.csv', 'hip2ankle_left')
-#plot_unsmooth_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right')
-#plot_angles('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right')
-
-
-
+#print(plot_angles('pose/videos/serve/djok/djokserve45.mp4', 'hip2ankle_right'))

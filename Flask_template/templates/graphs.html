@@ -130,10 +130,10 @@ var myChart = new Chart(ctx, {
     type: 'line',
     data: {
                 
-        labels: {{label|tojson}},
+        labels: {{user_label|tojson}},
         datasets: [{
             label: 'Right Leg',
-            data: {{data|tojson}},
+            data: {{user_right|tojson}},
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
             ],
@@ -144,7 +144,7 @@ var myChart = new Chart(ctx, {
             fill: true,
         }, {
             label: 'Left Leg',
-            data: {{datatwo|tojson}},
+            data: {{user_left|tojson}},
             backgroundColor: [
                 'rgba(0, 99, 132, 0.2)',
             ],

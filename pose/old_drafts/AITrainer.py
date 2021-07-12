@@ -11,6 +11,12 @@ def ShotAngle(path, stroke, angle_type):
     angleList = []
     while True:
         success, img = cap.read()
+
+        bad_frame = True
+        if success:
+            pass
+        else:
+            bad_frame = False
         # showall: False shows just points in function while True shows all points on body
         img = detector.findPose(img, False)
         lmList = detector.findPosition(img, False)
@@ -36,7 +42,7 @@ def ShotAngle(path, stroke, angle_type):
                 angle_right_armpit = detector.findAngle(img, 13, 11, 23)
                 angle_left_armpit = detector.findAngle(img, 14, 12, 24)
 
-            elif angle_type == 0:
+            elif angle_type == 4:
                 # all angles
                 angle_right_leg = detector.findAngle(img, 24, 26, 28)
                 angle_left_leg = detector.findAngle(img, 23, 25, 27)
@@ -62,11 +68,13 @@ def ShotAngle(path, stroke, angle_type):
             cv2.putText(img, 'Test', (int(alignX), int(alignY)), cv2.FONT_HERSHEY_PLAIN, 2,
                         (0, 255, 255), 2)  
               
-
+            if cv2.waitKey(10) & 0xFF == ord('q') or bad_frame == False:
+                #return empty
+                break
         
-        print(angle_right_leg)          
+        #print(angle_right_leg)          
         cv2.imshow("Image", img)
         cv2.waitKey(1)
     
-#ShotAngle('pose/videos/serve/nadal/nadalserveside.mp4', 'serve', 0)
+ShotAngle('pose/videos/serve/nadal/nadalserveside.mp4', 'serve', 4)
 

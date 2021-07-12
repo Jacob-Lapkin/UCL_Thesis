@@ -1,5 +1,6 @@
 from numpy.lib.shape_base import split
-from ProAngleData import smoothed_df, phase_divider, grab_label, split_data, split_label
+from ProAngleData import smoothed_df, phase_divider, grab_label, split_data, split_label, display_df
+from UserAngleData import smoothed_user_df, grab_user_label, display_user_df
 
 
 #############################################################################
@@ -8,11 +9,11 @@ from ProAngleData import smoothed_df, phase_divider, grab_label, split_data, spl
 
 # class to get data from user or professional 
 class Player_data:
+
     def __init__(self, path, angle, name):
         self.path = path
         self.angle = angle
         self.name = name
-    
     # getting all the data at once
     def get_data(self):
         data = smoothed_df(self.path, self.angle)
@@ -50,5 +51,23 @@ class Player_data:
 
 
 
+class User_data():
+    def __init__(self, path, name):
+        self.path = path
+        self.name = name
+        self.df = display_user_df(path)
+
+    def get_data(self, angle):
+        #data = smoothed_user_df(self.path)
+        data = smoothed_user_df(self.df)
+        return data[angle]
+    
+    def labels(self):
+        data = self.df
+        labels = grab_user_label(data)
+        return labels
 
 
+# user = User_data('pose/videos/serve/djok/djokserve45.mp4','Jacob')
+
+# player_data_r = list(user.get_data('hip2ankle_right'))
