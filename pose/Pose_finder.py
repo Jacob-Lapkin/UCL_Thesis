@@ -102,7 +102,7 @@ def angle_from_video(path):
                                     mp_drawing.DrawingSpec(color=(245,66,230), thickness=2, circle_radius=2) 
                                     )                   
 
-            cv2.imshow('Mediapipe Feed', image)
+            #cv2.imshow('Mediapipe Feed', image)
             if cv2.waitKey(10) & 0xFF == ord('q') or bad_frame == False:
                 d = {'frame':frame_count,'hip2ankle_left':empty_left, 'hip2ankle_right':empty_right}
                 df = pd.DataFrame(d)
@@ -113,7 +113,7 @@ def angle_from_video(path):
         cv2.destroyAllWindows()
 
 
-#print(angle_from_video('pose/videos/serve/nadal/nadalserveside.mp4'))
+#print(angle_from_video('pose/videos/serve/jake.mov'))
 
 def user_data(path):
     df = angle_from_video(path)

@@ -9,7 +9,7 @@ def converter(path, name):
         ret, frame = cap.read()
         if ret == False:
             break
-        path = '/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/Test'
+        path = '/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/User_test'
         cv2.imwrite(os.path.join(path, name +str(i)+'.jpg'),frame)
         #cv2.imwrite(name+str(i)+'.jpg',frame)
         i+=1
@@ -17,4 +17,4 @@ def converter(path, name):
     cap.release()
     cv2.destroyAllWindows()
 
-converter('pose/videos/serve/djok/djokserve45.mp4', 'djok')
+#converter('pose/videos/serve/djok/djokserve45.mp4', 'djok')

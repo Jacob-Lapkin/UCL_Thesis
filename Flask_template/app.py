@@ -17,6 +17,8 @@ import sys
 sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
 from CanvasData import Player_data, User_data
 
+from converting import converter
+
 
 #####################
 ###### CONFIRG ######
@@ -131,9 +133,11 @@ def results():
         body = 'legs'
 
 #######################################################################
-    
+    # uncommen the below to convert video
+    # converter('pose/videos/serve/jake.mov', 'Jacob')
+
     # CREATING INSTANCE FOR USER 
-    user = User_data('pose/videos/serve/nadal/nadalserveside.mp4', 'Jacob')
+    user = User_data('pose/videos/serve/jake.mov', 'Jacob')
     # Getting user data for right and left
     User_data_r = list(user.get_data('hip2ankle_right'))
     User_data_l = list(user.get_data('hip2ankle_left'))
@@ -141,6 +145,7 @@ def results():
     User_label = user.labels()
     # Getting user's name
     User_name = user.name
+
 
     
 
