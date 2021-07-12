@@ -114,13 +114,15 @@ def plot_user_unsmooth_data(path, angle):
     plt.plot(new_df)
     plt.show()
 
-#print(plot_user_unsmooth_data('pose/videos/serve/djok/djokserve45.mp4', 'hip2ankle_right'))
+#print(plot_user_unsmooth_data('pose/videos/serve/jake.mov', 'hip2ankle_right'))
 
 
 # PLOTS SMOOTH ANGLES
-def plot_angles(path, angle):
-    df = smoothed_user_df(path, angle)
-    plt.plot(df,'b-')
+def plot_angles(path):
+    df = display_user_df(path)
+    new_df = smoothed_user_df(df)
+    new_df = df['hip2ankle_right']
+    plt.plot(new_df,'b-')
     plt.show()
 
-#print(plot_angles('pose/videos/serve/djok/djokserve45.mp4', 'hip2ankle_right'))
+#print(plot_angles('pose/videos/serve/jake.mov'))
