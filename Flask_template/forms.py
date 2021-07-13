@@ -46,7 +46,7 @@ class point(FlaskForm):
 class Stroke(FlaskForm):
     date = DateField('Date', format='%Y-%m-%d', default=datetime.now(), validators=[DataRequired()])
     title = StringField('Upload title', validators=[DataRequired()])
-    stroke_type = SelectField('Stroke Type', validators=[DataRequired()], choices = [('choice1', 'Serve'), ('choice2', 'Forehand return'), ('choice3', 'backhand return'), ('choice4', 'Volley')])
-    pro_comparison = SelectField('Professional Comparison', choices = [('choice1', 'Novak Djokavic'), ('choice2', 'Roger Federer'), ('choice3', 'Rafael Nadal'), ('choice4', 'Serena Williams')], validators = [DataRequired()])
+    stroke_type = SelectField('Stroke Type', validators=[DataRequired()], choices = [('serve', 'Serve'), ('choice2', 'Forehand return'), ('choice3', 'backhand return'), ('choice4', 'Volley')])
+    pro_comparison = SelectField('Professional Comparison', choices = [('djok', 'Novak Djokavic'), ('choice2', 'Roger Federer'), ('choice3', 'Rafael Nadal'), ('choice4', 'Serena Williams')], validators = [DataRequired()])
     stroke_upload = FileField('Upload', validators=[DataRequired()])
     submit = SubmitField('Submit')

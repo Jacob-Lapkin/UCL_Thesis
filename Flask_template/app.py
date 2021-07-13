@@ -2,7 +2,6 @@
 #from flask import app, db, bcrypt
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 #from myproject.models import User
-from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
@@ -101,29 +100,28 @@ def register():
 
 @app.route('/home')
 @login_required
-def home():
+def home():    
     return render_template('home.html')
 
 @app.route('/stroke', methods=["GET", "POST"])
 @login_required
 def stroke():
-    form = Stroke()
-    if form.validate_on_submit():
+    if request.method == 'POST':
+        session['Stroke'] = request.form['stroke']
+        session['Professional'] = request.form['player']
         return redirect(url_for('results'))
-    return render_template('stroke.html', form=form)
+    return render_template('stroke.html')
 
 @app.route('/results',  methods=["GET", "POST"])
 @login_required
 def results():
-    # form = Stroke()
-    # if form.validate_on_submit():
-    #     stroke = Stroke(stroke_type=form.stroke_type.data)
-    #     professional = Stroke(pro_comparison=form.pro_comparison.data)
-    
+
+    professional = session.get('Professional')
+    stroke = session.get('Stroke')
 #######################################################################         
     # CREATING INSTANCE FOR PROFESSIONAL PLAYER
-    playerright = Player_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right', 'Djokovic')
-    playerleft = Player_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_left', 'Djokovic')
+    playerright = Player_data(f'pose/data/{stroke}_data/{professional}serve45.csv', 'hip2ankle_right', f'{professional}')
+    playerleft = Player_data(f'pose/data/{stroke}_data/{professional}serve45.csv', 'hip2ankle_left', f'{professional}')
     # getting data from that player
     dataright = playerright.get_data()
     dataleft = playerleft.get_data()
@@ -138,7 +136,7 @@ def results():
         body = 'legs'
 #######################################################################
     # uncommen the below to convert video
-    #converter('pose/videos/serve/jake.mov', 'Jacob')
+    # converter('pose/videos/serve/jake.mov', 'Jacob')
 
     # CREATING INSTANCE FOR USER 
     user = User_data('pose/videos/serve/jake.mov', 'Jacob')
