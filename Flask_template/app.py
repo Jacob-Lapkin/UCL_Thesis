@@ -98,7 +98,8 @@ def register():
 
 @app.route('/home')
 @login_required
-def home():    
+def home(): 
+    make_dir(current_user.id)   
     return render_template('home.html')
 
 @app.route('/stroke', methods=["GET", "POST"])
