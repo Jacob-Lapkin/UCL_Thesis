@@ -109,13 +109,18 @@ def home():
 def stroke():
     form = Stroke()
     if form.validate_on_submit():
-        return redirect(url_for('login'))
+        return redirect(url_for('results'))
     return render_template('stroke.html', form=form)
 
 @app.route('/results')
 @login_required
 def results():
-
+    # form = Stroke()
+    # if form.validate_on_submit():
+    #     stroke = Stroke(stroke_type=form.stroke_type.data)
+    #     professional = Stroke(pro_comparison=form.pro_comparison.data)
+    
+#######################################################################         
     # CREATING INSTANCE FOR PROFESSIONAL PLAYER
     playerright = Player_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right', 'Djokovic')
     playerleft = Player_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_left', 'Djokovic')
@@ -131,7 +136,6 @@ def results():
     # getting the body part that is analyzed
     if playerright.angle == 'hip2ankle_right':
         body = 'legs'
-
 #######################################################################
     # uncommen the below to convert video
     #converter('pose/videos/serve/jake.mov', 'Jacob')
@@ -147,7 +151,7 @@ def results():
     User_name = user.name
 
     User_doughnut = User_data.doughnut('Jacob', 'User_test', 'User_test')
-
+#######################################################################
 
 
     return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, doughnut_data=doughnut_data, name=player_name,
