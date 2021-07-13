@@ -135,7 +135,7 @@ def results():
         body = 'legs'
 #######################################################################
     # uncommen the below to convert video
-    converter('pose/videos/serve/jake.mov', 'Jacob', str(current_user.id))
+    #converter('pose/videos/serve/jake.mov', 'Jacob', str(current_user.id))
 
     # CREATING INSTANCE FOR USER 
     user = User_data('pose/videos/serve/jake.mov', 'Jacob')
@@ -147,7 +147,7 @@ def results():
     # Getting user's name
     User_name = user.name
 
-    User_doughnut = User_data.doughnut('Jacob', 'User_test', 'User_test')
+    User_doughnut = User_data.doughnut('Jacob', str(current_user.id), str(current_user.id))
 #######################################################################
 
 
