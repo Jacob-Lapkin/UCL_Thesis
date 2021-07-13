@@ -5,17 +5,42 @@ from flask import Flask, render_template, request, session, redirect, url_for, f
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
-
+from flask_wtf import FlaskForm
+from wtforms import (Form, StringField, TextField, SubmitField, PasswordField,
+                     SubmitField, BooleanField, DateField, RadioField, FileField, SelectField)
+from wtforms.validators import DataRequired, Length, Email, EqualTo 
+from wtforms import ValidationError
 
 from datetime import datetime
 
-from forms import Login, newform, point, Stroke
+from forms import point, Stroke
 
 # importing data FIX THIS PATH
 import sys
 sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
 from canvas_data import Player_data, User_data
 from converting import converter, make_dir
+
+###########################
+######### LOGIN/REGISTER FORMS #############
+###########################
+class Login(FlaskForm):
+    email = StringField("Email Address", validators=[DataRequired(), Email()])
+    password = PasswordField("Passsword", validators=[DataRequired()])
+    submit = SubmitField("Log in")
+
+class newform(FlaskForm):
+    first = StringField("First Name", validators = [DataRequired()])
+    last = StringField("Last Name", validators = [DataRequired()])
+    email = StringField("Email Address", validators = [DataRequired(), Email()])
+    password = PasswordField("Password", validators = [DataRequired()])
+    passconfirm = PasswordField('Confirm Password', validators = [DataRequired(), EqualTo('password', message='Passwords must match')])
+    submit = SubmitField('Register')
+
+    def validate_email(self, email):
+        exisitng_user_email = User.query.filter_by(email=email.data).first()
+        if exisitng_user_email:
+            raise ValidationError('Email already registered')
 
 #####################
 ###### CONFIRG ######

@@ -14,26 +14,7 @@ from wtforms import ValidationError
 
 from datetime import datetime
 
-###########################
-######### FORMS #############
-###########################
-class Login(FlaskForm):
-    email = StringField("Email Address", validators=[DataRequired(), Email()])
-    password = PasswordField("Passsword", validators=[DataRequired()])
-    submit = SubmitField("Log in")
 
-class newform(FlaskForm):
-    first = StringField("First Name", validators = [DataRequired()])
-    last = StringField("Last Name", validators = [DataRequired()])
-    email = StringField("Email Address", validators = [DataRequired(), Email()])
-    password = PasswordField("Password", validators = [DataRequired()])
-    passconfirm = PasswordField('Confirm Password', validators = [DataRequired(), EqualTo('password', message='Passwords must match')])
-    submit = SubmitField('Register')
-
-    def validate_email(self, email):
-        exisitng_user_email = User.query.filter_by(email=email.data).first()
-        if exisitng_user_email:
-            raise ValidationError('Email already registered')
     
 class point(FlaskForm):
     date = DateField('Date', format='%Y-%m-%d', default=datetime.now())
