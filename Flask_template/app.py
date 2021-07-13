@@ -112,7 +112,7 @@ def stroke():
         return redirect(url_for('results'))
     return render_template('stroke.html', form=form)
 
-@app.route('/results')
+@app.route('/results',  methods=["GET", "POST"])
 @login_required
 def results():
     # form = Stroke()
