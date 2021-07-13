@@ -15,7 +15,7 @@ from forms import Login, newform, point, Stroke
 # importing data FIX THIS PATH
 import sys
 sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
-from CanvasData import Player_data, User_data
+from canvas_data import Player_data, User_data
 
 from converting import converter
 
@@ -134,7 +134,7 @@ def results():
 
 #######################################################################
     # uncommen the below to convert video
-    # converter('pose/videos/serve/jake.mov', 'Jacob')
+    #converter('pose/videos/serve/jake.mov', 'Jacob')
 
     # CREATING INSTANCE FOR USER 
     user = User_data('pose/videos/serve/jake.mov', 'Jacob')
@@ -146,11 +146,12 @@ def results():
     # Getting user's name
     User_name = user.name
 
+    User_doughnut = User_data.doughnut('Jacob', 'User_test', 'User_test')
 
-    
+
 
     return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, doughnut_data=doughnut_data, name=player_name,
-    user_right=User_data_r, user_left=User_data_l, user_label = User_label, user_name =User_name,  body=body)
+    user_right=User_data_r, user_left=User_data_l, user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, body=body)
 
 
 @app.errorhandler(404)

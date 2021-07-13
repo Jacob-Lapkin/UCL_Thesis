@@ -1,7 +1,7 @@
 from numpy.lib.shape_base import split
-from ProAngleData import smoothed_df, phase_divider, grab_label, split_data, split_label, display_df
-from UserAngleData import smoothed_user_df, grab_user_label, display_user_df
-
+from pro_angle_data import smoothed_df, phase_divider, grab_label, split_data, split_label, display_df
+from user_angle_data import smoothed_user_df, grab_user_label, display_user_df, phase_user_divider
+from multi_class_azure import StrokeList
 
 #############################################################################
 ########### CREATING CLASSES TO USE FOR PRO AND USER ON DASHBOARD ###########
@@ -66,8 +66,16 @@ class User_data():
         data = self.df
         labels = grab_user_label(data)
         return labels
+    
+    @staticmethod
+    def doughnut(name, base, folder):
+        doughnut_data = phase_user_divider(name, base, folder)
+        return doughnut_data
 
 
-# user = User_data('pose/videos/serve/djok/djokserve45.mp4','Jacob')
+
+#user = User_data('pose/videos/serve/djok/djokserve45.mp4','Jacob')
 
 # player_data_r = list(user.get_data('hip2ankle_right'))
+
+#print(User_data.doughnut('Jacob', 'User_test','User_test'))

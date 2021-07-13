@@ -6,7 +6,8 @@ import numpy as np
 from scipy import stats
 from matplotlib import pyplot as plt
 import scipy.signal as signal
-from Pose_finder import angle_from_video
+from pose_finder import angle_from_video
+from multi_class_azure import StrokeList
 
 ######################################################################
 ########### FUNCTIONS TO USE AND MANIPILATE PRO PLAYER DATA###########
@@ -52,12 +53,13 @@ def grab_user_phase(data):
     return list(phase_df)
 
 # Diving the phases and calulating the breakdown of the phases in the shot
-def phase_divider(data):
-    counting_phases = grab_user_phase(data)
-    start_count = counting_phases.count(0)
-    take_load_count = counting_phases.count(1)
-    extend_count = counting_phases.count(2)
-    finish_count = counting_phases.count(3)
+def phase_user_divider(name, base, folder):
+    df = StrokeList(name, base, folder)
+    counting_phases = df['label'].tolist()
+    start_count = counting_phases.count('start')
+    take_load_count = counting_phases.count('take_load')
+    extend_count = counting_phases.count('extend')
+    finish_count = counting_phases.count('finish')
     total_count = start_count + take_load_count + extend_count + finish_count 
     percent_start = round(start_count / total_count * 100)
     percent_take_load = round(take_load_count / total_count * 100)
@@ -65,6 +67,7 @@ def phase_divider(data):
     percent_finish = round(finish_count / total_count * 100)
     final_percentage = [percent_start, percent_take_load, percent_extend, percent_finish]
     return final_percentage
+#print(phase_user_divider('Jacob', 'User_test', 'User_test'))
 
 # making a new dataframe connecting phase with angle
 def make_user_df(data):
