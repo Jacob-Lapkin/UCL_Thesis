@@ -19,6 +19,7 @@ def converter(path, name, folder):
 
 #converter('pose/videos/serve/djok/djokserve45.mp4', 'djok')
 
+# Creating a directory with the name of id to store frame images
 def make_dir(id):
     path = '/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/User_test'
     dir = os.path.join(path, str(id))

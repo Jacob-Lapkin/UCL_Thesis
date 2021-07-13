@@ -7,7 +7,7 @@ from multi_class_azure import StrokeList
 ########### CREATING CLASSES TO USE FOR PRO AND USER ON DASHBOARD ###########
 #############################################################################
 
-# class to get data from user or professional 
+# class to get data from  professional 
 class Player_data:
 
     def __init__(self, path, angle, name):
@@ -50,7 +50,7 @@ class Player_data:
 #print(djok.labels())
 
 
-
+# class to get data from user 
 class User_data():
     def __init__(self, path, name):
         self.path = path
