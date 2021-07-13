@@ -135,7 +135,7 @@ def results():
         body = 'legs'
 #######################################################################
     # uncommen the below to convert video
-    # converter('pose/videos/serve/jake.mov', 'Jacob')
+    converter('pose/videos/serve/jake.mov', 'Jacob', str(current_user.id))
 
     # CREATING INSTANCE FOR USER 
     user = User_data('pose/videos/serve/jake.mov', 'Jacob')
