@@ -15,9 +15,7 @@ from forms import Login, newform, point, Stroke
 import sys
 sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
 from canvas_data import Player_data, User_data
-
-from converting import converter
-
+from converting import converter, make_dir
 
 #####################
 ###### CONFIRG ######

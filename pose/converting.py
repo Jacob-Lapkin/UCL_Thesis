@@ -18,3 +18,11 @@ def converter(path, name):
     cv2.destroyAllWindows()
 
 #converter('pose/videos/serve/djok/djokserve45.mp4', 'djok')
+
+def make_dir(id):
+    path = '/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/User_test'
+    dir = os.path.join(path, str(id))
+    if not os.path.exists(dir):
+        os.mkdir(dir)
+
+#make_dir(10)
