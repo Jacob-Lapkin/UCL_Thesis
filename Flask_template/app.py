@@ -144,8 +144,8 @@ def results():
     stroke = session.get('Stroke')
 #######################################################################         
     # CREATING INSTANCE FOR PROFESSIONAL PLAYER
-    playerright = Player_data(f'pose/data/{stroke}_data/{professional}serve45.csv', 'hip2ankle_right', f'{professional}')
-    playerleft = Player_data(f'pose/data/{stroke}_data/{professional}serve45.csv', 'hip2ankle_left', f'{professional}')
+    playerright = Player_data(f'pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_right', f'{professional}')
+    playerleft = Player_data(f'pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_left', f'{professional}')
     # getting data from that player
     dataright = playerright.get_data()
     dataleft = playerleft.get_data()
@@ -169,6 +169,7 @@ def results():
     User_data_l = list(user.get_data('hip2ankle_left'))
     User_data_r_arm = list(user.get_data('shoulder2wrist_right'))
     User_data_l_arm = list(user.get_data('shoulder2wrist_left'))
+
 
     # Getting user labels 
     User_label = user.labels()
