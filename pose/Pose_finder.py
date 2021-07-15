@@ -93,7 +93,6 @@ def angle_from_video(path):
                 empty_right_arm.append(angle_right_arm)
 
                 print(angle_left_arm)
-                print(current_frame)
 
                 # Visualize angle
                 cv2.putText(image, str(angle_right_arm), 
@@ -115,7 +114,7 @@ def angle_from_video(path):
                                     mp_drawing.DrawingSpec(color=(245,66,230), thickness=2, circle_radius=2) 
                                     )                   
 
-            cv2.imshow('Mediapipe Feed', image)
+            #cv2.imshow('Mediapipe Feed', image)
             if cv2.waitKey(10) & 0xFF == ord('q') or bad_frame == False:
                 d = {'frame':frame_count,'hip2ankle_left':empty_left_leg, 'hip2ankle_right':empty_right_leg,
                  'shoulder2wrist_left':empty_left_arm, 'shoulder2wrist_right':empty_right_arm}

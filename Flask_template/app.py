@@ -146,11 +146,16 @@ def results():
     # CREATING INSTANCE FOR PROFESSIONAL PLAYER
     playerright = Player_data(f'pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_right', f'{professional}')
     playerleft = Player_data(f'pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_left', f'{professional}')
+    playerright_arm = Player_data(f'pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_right', f'{professional}')
+    playerleft_arm = Player_data(f'pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_left', f'{professional}')
     # getting data from that player
     dataright = playerright.get_data()
     dataleft = playerleft.get_data()
+    dataright_arm = playerright_arm.get_data()
+    dataleft_arm = playerleft_arm.get_data()
     # getting labels from that player
     label = playerright.labels()
+    label_arm = playerright_arm.labels()
     # getting shot breakdown
     doughnut_data = playerright.doughnut()
     # getting name of player
@@ -180,7 +185,7 @@ def results():
 #######################################################################
 
 
-    return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, doughnut_data=doughnut_data, name=player_name,
+    return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, data_r_arm=dataright_arm,data_l_arm=dataleft_arm,label_arm=label_arm,doughnut_data=doughnut_data, name=player_name,
     user_right=User_data_r, user_left=User_data_l, user_left_arm=User_data_l_arm, user_right_arm=User_data_r_arm,
     user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, body=body)
 
