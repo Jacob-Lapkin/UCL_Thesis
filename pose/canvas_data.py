@@ -2,6 +2,7 @@ from numpy.lib.shape_base import split
 from pro_angle_data import smoothed_df, phase_divider, grab_label, split_data, split_label, display_df
 from user_angle_data import smoothed_user_df, grab_user_label, display_user_df, phase_user_divider
 from multi_class_azure import StrokeList
+import matplotlib.pyplot as plt
 
 #############################################################################
 ########### CREATING CLASSES TO USE FOR PRO AND USER ON DASHBOARD ###########
@@ -74,8 +75,24 @@ class User_data():
 
 
 
-#user = User_data('pose/videos/serve/djok/djokserve45.mp4','Jacob')
+#user = Player_data('pose/data/serve_data/djokservearm.csv','shoulder2wrist_right', 'Djok')
 
-# player_data_r = list(user.get_data('hip2ankle_right'))
+#player_data_r = list(user.get_data())
 
+#print(player_data_r)
 #print(User_data.doughnut('Jacob', 'User_test','User_test'))
+
+
+# playerright_arm = Player_data(f'pose/data/serve_data/djokservearm.csv', 'shoulder2wrist_right', 'djok')
+# playerleft_arm = Player_data(f'pose/data/serve_data/djokservearm.csv', 'shoulder2wrist_left', 'djok')
+# # getting data from that player
+
+# dataright_arm = playerright_arm.get_data()
+# dataleft_arm= playerleft_arm.get_data()
+# # getting labels from that player
+# label_arm = playerright_arm.labels()
+
+
+# plt.plot(label_arm, dataright_arm,)
+# plt.plot(label_arm, dataleft_arm,)
+# plt.show()
