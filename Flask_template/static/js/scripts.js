@@ -53,4 +53,19 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
+// hiding stroke content and displaying loading bar
+    $(document).ready(function(){
+      $("#stroke_submit").click(function(){
+        $("#content").hide();
+      });
+      $("#stroke_submit").click(function(){
+        $("#process").show();
+      });
+      $("#stroke_submit").click(function(){
+        $("#loading").show();
+      });
+    });
+
+
+
 

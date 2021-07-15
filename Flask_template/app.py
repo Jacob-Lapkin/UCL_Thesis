@@ -167,6 +167,9 @@ def results():
     # Getting user data for right and left
     User_data_r = list(user.get_data('hip2ankle_right'))
     User_data_l = list(user.get_data('hip2ankle_left'))
+    User_data_r_arm = list(user.get_data('shoulder2wrist_right'))
+    User_data_l_arm = list(user.get_data('shoulder2wrist_left'))
+
     # Getting user labels 
     User_label = user.labels()
     # Getting user's name
@@ -177,7 +180,8 @@ def results():
 
 
     return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, doughnut_data=doughnut_data, name=player_name,
-    user_right=User_data_r, user_left=User_data_l, user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, body=body)
+    user_right=User_data_r, user_left=User_data_l, user_left_arm=User_data_l_arm, user_right_arm=User_data_r_arm,
+    user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, body=body)
 
 
 @app.errorhandler(404)

@@ -47,16 +47,17 @@
         <div class="col-md-6">
             <legend class='border-bottom h6'>Your angles for right and left {{body}}</legend>
             <canvas id="myChart2" max-width="300" max-height="300"></canvas>
+            <canvas id="myChart3" max-width="300" max-height="300"></canvas>
         </div>
     </div>
     <div class='row mt-4'>
         <div class="col-md-6">
             <legend class='border-bottom h6'>{{name}} shot breakdown (%)</legend>
-            <canvas id="myChart3" max-width="300" max-height="300"></canvas>
+            <canvas id="myChart7" max-width="300" max-height="300"></canvas>
         </div>
         <div class="col-md-6">
             <legend class='border-bottom h6'>Your shot breakdown (%)</legend>
-            <canvas id="myChart4" max-width="300" max-height="300"></canvas>
+            <canvas id="myChart8" max-width="300" max-height="300"></canvas>
         </div>
     </div>
 </div>
@@ -81,7 +82,7 @@
 
 
 <script>
-// Plotting graphs
+// Plotting graphs Professional legs
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'line',
@@ -124,7 +125,7 @@ var myChart = new Chart(ctx, {
 </script>
 
 <script>
-// Plotting graphs
+// Plotting graphs User legs
 var ctx = document.getElementById('myChart2').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'line',
@@ -164,11 +165,52 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+
+// Plotting graphs User arms
+var ctx = document.getElementById('myChart3').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+                
+        labels: {{user_label|tojson}},
+        datasets: [{
+            label: 'Right arm',
+            data: {{user_right_arm|tojson}},
+            backgroundColor: [
+                'rgba(255, 99, 0, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 0, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        }, {
+            label: 'Left arm',
+            data: {{user_left_arm|tojson}},
+            backgroundColor: [
+                'rgba(0, 200, 0, 0.2)',
+            ],
+            borderColor: [
+                'rgba(0, 200, 0, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        }
+        ]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 </script>
 
 <script>
-// PLOTTING GRAPH
-    var ctx = document.getElementById('myChart3').getContext('2d');
+// PLOTTING GRAPH pro doughnut
+    var ctx = document.getElementById('myChart7').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
@@ -207,8 +249,8 @@ var myChart = new Chart(ctx, {
 });
 </script>
 <script>
-// PLOTTING GRAPH
-var ctx = document.getElementById('myChart4').getContext('2d');
+// PLOTTING GRAPH user doughnut
+var ctx = document.getElementById('myChart8').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {

@@ -22,8 +22,11 @@ def calculate_angle(a,b,c):
 
 
 def angle_from_video(path):
-    empty_left = []
-    empty_right = []
+    empty_left_leg = []
+    empty_right_leg = []
+    empty_right_arm = []
+    empty_left_arm = []
+
     frame_count = []
     cap = cv2.VideoCapture(path)
     #cap = cv2.VideoCapture(0)
@@ -75,12 +78,19 @@ def angle_from_video(path):
                 right_ankle = [landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value].x,landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value].y]
 
 
-                # Calculate angle
+                # Calculate angle leg 
                 angle_left_leg = calculate_angle(left_hip, left_knee, left_ankle)
                 angle_right_leg = calculate_angle(right_hip, right_knee, right_ankle)
-                empty_left.append(angle_left_leg)
-                empty_right.append(angle_right_leg)
+                empty_left_leg.append(angle_left_leg)
+                empty_right_leg.append(angle_right_leg)
                 print(angle_left_leg)
+
+                # Calculate angle leg 
+                # Calculate angle leg 
+                angle_left_arm = calculate_angle(left_shoulder, right_elbow, left_wrist)
+                angle_right_arm = calculate_angle(right_shoulder, right_elbow, right_wrist)
+                empty_left_arm.append(angle_left_arm)
+                empty_right_arm.append(angle_right_arm)
 
                 # Visualize angle
                 cv2.putText(image, str(angle_left_leg), 
@@ -104,7 +114,8 @@ def angle_from_video(path):
 
             #cv2.imshow('Mediapipe Feed', image)
             if cv2.waitKey(10) & 0xFF == ord('q') or bad_frame == False:
-                d = {'frame':frame_count,'hip2ankle_left':empty_left, 'hip2ankle_right':empty_right}
+                d = {'frame':frame_count,'hip2ankle_left':empty_left_leg, 'hip2ankle_right':empty_right_leg,
+                 'shoulder2wrist_left':empty_left_arm, 'shoulder2wrist_right':empty_right_arm}
                 df = pd.DataFrame(d)
                 return df
                 break 
@@ -119,3 +130,4 @@ def user_data(path):
     df = angle_from_video(path)
     return df
 
+#print(user_data('pose/videos/serve/jake.mov'))
