@@ -2,6 +2,7 @@ from numpy.lib.shape_base import split
 from pro_angle_data import smoothed_df, phase_divider, grab_label, split_data, split_label, display_df
 from user_angle_data import smoothed_user_df, grab_user_label, display_user_df, phase_user_divider
 from multi_class_azure import StrokeList
+from recommendations_data import *
 import matplotlib.pyplot as plt
 
 #############################################################################
@@ -44,19 +45,33 @@ class Player_data:
         return labels
 
 
-#djok = Player_data('pose/data/serve_data/djokserve45.csv', 'hip2ankle_right', 'Djokovic')
+    def get_min_data(self):
+        min_data = grab_min(self.path, self.angle)
+        return min_data
+
+    def get_max_data(self):
+        max_data = grab_max(self.path, self.angle)
+        return max_data
+
+    def get_range_data(self):
+        range_data = grab_range(self.path, self.angle)
+        return range_data
+    
+#djok = Player_data('pose/data/serve_data/djokservelegs.csv', 'hip2ankle_right', 'Djokovic')
 #print(djok.get_split_data(0))
 #print(djok.splitting_label(0))
 #print(djok.get_data())
 #print(djok.labels())
+#print(djok.get_max_data())
 
 
 # class to get data from user 
 class User_data():
-    def __init__(self, path, name):
+    def __init__(self, path, name, base, folder):
         self.path = path
         self.name = name
         self.df = display_user_df(path)
+        self.phase_df = StrokeList(name, base, folder)
 
     def get_data(self, angle):
         #data = smoothed_user_df(self.path)
@@ -68,31 +83,23 @@ class User_data():
         labels = grab_user_label(data)
         return labels
     
-    @staticmethod
-    def doughnut(name, base, folder):
-        doughnut_data = phase_user_divider(name, base, folder)
+    def doughnut(self):
+        data = self.phase_df
+        doughnut_data = phase_user_divider(data)
         return doughnut_data
 
+    def get_full_data(self, angle):
+        df = phase_w_data(self.df, angle, self.phase_df)
+        return df
+    
+    def get_min_data(self, angle):
+        min_data = grab_user_min(self.df, angle, self.phase_df)
+        return min_data
+
+#user = User_data('pose/videos/serve/jake.mov', 'Jacob', str(1), str(1))
+#print(user.get_full_data('hip2ankle_right'))
+#print(user.get_min_data('hip2ankle_right'))
 
 
-#user = Player_data('pose/data/serve_data/djokservearm.csv','shoulder2wrist_right', 'Djok')
-
-#player_data_r = list(user.get_data())
-
-#print(player_data_r)
-#print(User_data.doughnut('Jacob', 'User_test','User_test'))
 
 
-# playerright_arm = Player_data(f'pose/data/serve_data/djokservearm.csv', 'shoulder2wrist_right', 'djok')
-# playerleft_arm = Player_data(f'pose/data/serve_data/djokservearm.csv', 'shoulder2wrist_left', 'djok')
-# # getting data from that player
-
-# dataright_arm = playerright_arm.get_data()
-# dataleft_arm= playerleft_arm.get_data()
-# # getting labels from that player
-# label_arm = playerright_arm.labels()
-
-
-# plt.plot(label_arm, dataright_arm,)
-# plt.plot(label_arm, dataleft_arm,)
-# plt.show()

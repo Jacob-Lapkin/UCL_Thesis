@@ -60,8 +60,18 @@ def StrokeList(name,base, folder):
                     first = results.predictions[0]
                     firstresult = first.probability
                     firstlabel = first.tag_name
+                    if firstlabel == 'start':
+                        final_label = 0
+                    elif firstlabel == 'take_load':
+                        final_label = 1
+                    elif firstlabel ==  'extend':
+                        final_label = 2
+                    elif firstlabel == 'finish':
+                        final_label = 3
+                    else:
+                        final_label == 'NA'
                     result.append(firstresult)
-                    label.append(firstlabel)
+                    label.append(final_label)
                     #print(name,f'{ind}.jpg')
                     print(firstlabel)
                     
@@ -71,6 +81,6 @@ def StrokeList(name,base, folder):
     df = pd.DataFrame(d)
     return df
 
-#print(StrokeList('Jacob', 'User_test','User_test'))
+#print(StrokeList('Jacob', '1','1'))
 
 #StrokeClassifier('djok', 'User_test')

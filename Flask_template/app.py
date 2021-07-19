@@ -144,31 +144,30 @@ def results():
     stroke = session.get('Stroke')
 #######################################################################         
     # CREATING INSTANCE FOR PROFESSIONAL PLAYER
-    playerright = Player_data(f'pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_right', f'{professional}')
-    playerleft = Player_data(f'pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_left', f'{professional}')
+    playerright_leg = Player_data(f'pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_right', f'{professional}')
+    playerleft_leg = Player_data(f'pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_left', f'{professional}')
     playerright_arm = Player_data(f'pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_right', f'{professional}')
     playerleft_arm = Player_data(f'pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_left', f'{professional}')
     # getting data from that player
-    dataright = playerright.get_data()
-    dataleft = playerleft.get_data()
+    dataright = playerright_leg.get_data()
+    dataleft = playerleft_leg.get_data()
     dataright_arm = playerright_arm.get_data()
     dataleft_arm = playerleft_arm.get_data()
     # getting labels from that player
-    label = playerright.labels()
+    label = playerright_leg.labels()
     label_arm = playerright_arm.labels()
     # getting shot breakdown
-    doughnut_data = playerright.doughnut()
+    doughnut_data = playerright_leg.doughnut()
     # getting name of player
-    player_name = playerright.name
+    player_name = playerright_leg.name
     # getting the body part that is analyzed
-    if playerright.angle == 'hip2ankle_right':
-        body = 'legs'
+    body = '{fill body part}'
 #######################################################################
     # uncommen the below to convert video
     #converter('pose/videos/serve/jake.mov', 'Jacob', str(current_user.id))
 
     # CREATING INSTANCE FOR USER 
-    user = User_data('pose/videos/serve/jake.mov', 'Jacob')
+    user = User_data('pose/videos/serve/jake.mov', 'Jacob', str(current_user.id), str(current_user.id))
     # Getting user data for right and left
     User_data_r = list(user.get_data('hip2ankle_right'))
     User_data_l = list(user.get_data('hip2ankle_left'))
@@ -181,8 +180,9 @@ def results():
     # Getting user's name
     User_name = user.name
 
-    User_doughnut = User_data.doughnut('Jacob', str(current_user.id), str(current_user.id))
+    User_doughnut = user.doughnut()
 #######################################################################
+    # SHOWING RECOMMENDATIONS
 
 
     return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, data_r_arm=dataright_arm,data_l_arm=dataleft_arm,label_arm=label_arm,doughnut_data=doughnut_data, name=player_name,
