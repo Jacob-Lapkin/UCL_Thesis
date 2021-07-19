@@ -93,6 +93,7 @@ def angle_from_video(path):
                 empty_right_arm.append(angle_right_arm)
 
                 print(angle_left_arm)
+                print(current_frame)
 
                 # Visualize angle
                 cv2.putText(image, str(angle_right_arm), 
@@ -126,7 +127,7 @@ def angle_from_video(path):
         cv2.destroyAllWindows()
 
 
-#print(angle_from_video('pose/videos/serve/djok/djokserveside.mp4'))
+#print(angle_from_video('pose/videos/serve/jake.mov'))
 
 def user_data(path):
     df = angle_from_video(path)

@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 ########### CREATING CLASSES TO USE FOR PRO AND USER ON DASHBOARD ###########
 #############################################################################
 
-# class to get data from  professional 
+######### class to get data from  professional ############
 class Player_data:
 
     def __init__(self, path, angle, name):
@@ -57,15 +57,9 @@ class Player_data:
         range_data = grab_range(self.path, self.angle)
         return range_data
     
-#djok = Player_data('pose/data/serve_data/djokservelegs.csv', 'hip2ankle_right', 'Djokovic')
-#print(djok.get_split_data(0))
-#print(djok.splitting_label(0))
-#print(djok.get_data())
-#print(djok.labels())
-#print(djok.get_max_data())
 
 
-# class to get data from user 
+########### class to get data from user ###########
 class User_data():
     def __init__(self, path, name, base, folder):
         self.path = path
@@ -95,10 +89,72 @@ class User_data():
     def get_min_data(self, angle):
         min_data = grab_user_min(self.df, angle, self.phase_df)
         return min_data
+    
+    def get_max_data(self, angle):
+        max_data = grab_user_max(self.df, angle, self.phase_df)
+        return max_data
 
-#user = User_data('pose/videos/serve/jake.mov', 'Jacob', str(1), str(1))
+
+playerright_leg = Player_data(f'pose/data/serve_data/djokservelegs.csv', 'hip2ankle_right', 'djok')
+playerleft_leg = Player_data(f'pose/data/serve_data/djokservelegs.csv', 'hip2ankle_left', 'djok')
+playerright_arm = Player_data(f'pose/data/serve_data/djokservearm.csv', 'shoulder2wrist_right', 'djok')
+playerleft_arm = Player_data(f'pose/data/serve_data/djokservearm.csv', 'shoulder2wrist_left', 'djok')
+user = User_data('pose/videos/serve/jake.mov', 'Jacob', str(1), str(1))
 #print(user.get_full_data('hip2ankle_right'))
-#print(user.get_min_data('hip2ankle_right'))
+
+def legs_tips_start():
+    leg_tip_start = None
+    if user.get_max_data('hip2ankle_right')[0] < playerright_leg.get_max_data()[0] and user.get_max_data('hip2ankle_left')[0] < playerleft_leg.get_max_data()[0]:
+        leg_tip_start = 'Try to stand straighter during your ready position.'
+    elif user.get_max_data('hip2ankle_right')[0] > playerright_leg.get_max_data()[0] and user.get_max_data('hip2ankle_left')[0] > playerleft_leg.get_max_data()[0]:
+        leg_tip_start = 'Try to bend your legs more during your ready position'
+    elif user.get_max_data('hip2ankle_right')[0] > playerright_leg.get_max_data()[0] and user.get_max_data('hip2ankle_left')[0] < playerleft_leg.get_max_data()[0]:
+        leg_tip_start = 'Your legs seem to be starting at different angles. Try balancing your legs out more during your ready position'
+    elif user.get_max_data('hip2ankle_right')[0] < playerright_leg.get_max_data()[0] and user.get_max_data('hip2ankle_left')[0] > playerleft_leg.get_max_data()[0]:
+        leg_tip_start = 'Your legs seem to be starting at different angles. Try balancing your legs out more during your ready position'
+    return leg_tip_start
+
+def legs_tips_load():
+    leg_tip_load = None
+    if user.get_min_data('hip2ankle_right')[1] < playerright_leg.get_min_data()[1] and user.get_min_data('hip2ankle_left')[1] < playerleft_leg.get_min_data()[1]:
+        leg_tip_load = 'You are loading your back leg too much, try standing taller during your take back. '
+    elif user.get_min_data('hip2ankle_right')[1] > playerright_leg.get_min_data()[1] and user.get_min_data('hip2ankle_right')[1] > playerright_leg.get_min_data()[1]:
+        leg_tip_load = 'You could increase power in your serve by bending your legs more.'
+    elif user.get_min_data('hip2ankle_right')[1] > playerright_leg.get_min_data()[1] and user.get_min_data('hip2ankle_left')[1] < playerleft_leg.get_min_data()[1]:
+        leg_tip_load = 'Your lower body may be leaning too far forward during you takeback. Try to more equally match the bend in your right and left legs.'
+    elif user.get_min_data('hip2ankle_right')[1] < playerright_leg.get_min_data()[1] and user.get_min_data('hip2ankle_left')[1] > playerleft_leg.get_min_data()[1]:
+        leg_tip_load = 'Your lower body may be leaning too far back during you takeback. Try to more equally match the bend in your right and left legs.'
+    return leg_tip_load
+
+def legs_tips_extend():
+    leg_tip_extend = None
+    if user.get_max_data('hip2ankle_right')[2] < playerright_leg.get_max_data()[2] and user.get_max_data('hip2ankle_left')[2] < playerleft_leg.get_max_data()[2]:
+        leg_tip_extend = 'Your legs are not extended enough. Make sure to drive more with you legs on your extension.'
+    elif user.get_max_data('hip2ankle_right')[2] > playerright_leg.get_max_data()[2] and user.get_max_data('hip2ankle_left')[2] < playerleft_leg.get_max_data()[2]:
+        leg_tip_extend = 'Your back leg should extend more to be closer in line with your front leg during extension.'
+    elif user.get_max_data('hip2ankle_right')[2] < playerright_leg.get_max_data()[2] and user.get_max_data('hip2ankle_left')[2] > playerleft_leg.get_max_data()[2]:
+        leg_tip_extend = 'Your front leg should extend more to be closer in line with your back leg during extension.'
+    return leg_tip_extend
+
+def legs_tips_finish():
+    leg_tip_finish = None
+    if user.get_min_data('hip2ankle_left')[3] < playerleft_leg.get_min_data()[3]:
+        leg_tip_finish = 'You are dipping your front leg too much during the finish. Try landing taller to optimize your recovery.'
+    if user.get_min_data('hip2ankle_left')[3] > playerleft_leg.get_min_data()[3]:
+        leg_tip_finish = 'You are standing too tall during your finish. Try getting lower to absorb your impact with the ground.'
+    return leg_tip_finish
+
+print(legs_tips_start())
+print(legs_tips_load())
+print(legs_tips_extend())
+print(legs_tips_finish())
+
+
+
+
+
+
+
 
 
 

@@ -45,7 +45,7 @@ def phase_w_data(data, angle, phase_data):
     new_data = list(data[angle])
     empty=[]
     for ind, i in enumerate(new_data):
-        n = 20
+        n = 10
         if ind % n == 0:
             empty.append(i)
     phase_data = phase_data['label']
@@ -59,6 +59,15 @@ def grab_user_min(data, angle, phase_data):
     for i in range(4):
         split_d = df[(df['phase'] == i)]
         value = min(split_d['angle'])
+        empty.append(value)
+    return empty
+
+def grab_user_max(data, angle, phase_data):
+    df = phase_w_data(data, angle, phase_data)
+    empty=[]
+    for i in range(4):
+        split_d = df[(df['phase'] == i)]
+        value = max(split_d['angle'])
         empty.append(value)
     return empty
 
