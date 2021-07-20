@@ -49,8 +49,8 @@ def StrokeList(name,base, folder):
     result = []
     label = []
     for ind, filename in enumerate(os.listdir(f'pose/User_test/{folder}')):
-        n = 10
-        if ind % n == 0:
+        n = 5
+        if ind % n == 0 and ind != 0:
             if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.jpeg'): 
                 with open(os.path.join (base_location(f'User_test/{base}'), (name + f'{ind}.jpg')), "rb") as image_contents:
                     results = predictor.classify_image(
@@ -69,12 +69,13 @@ def StrokeList(name,base, folder):
                     elif firstlabel == 'finish':
                         final_label = 3
                     else:
-                        final_label == 'NA'
+                        final_label = 'NA'
                     result.append(firstresult)
                     label.append(final_label)
                     #print(name,f'{ind}.jpg')
                     print(firstlabel)
-                    
+                    print(ind)
+                        
             else:
                 print("NA")
     d = {'label': label, 'probability':result}

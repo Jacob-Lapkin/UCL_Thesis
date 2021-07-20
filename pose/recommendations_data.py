@@ -1,4 +1,3 @@
-#from pose.user_angle_data import grab_user_phase, smoothed_user_df
 from scipy.signal.ltisys import dfreqresp
 from pro_angle_data import smoothed_df, make_df
 from user_angle_data import make_user_df, grab_user_phase, smoothed_user_df
@@ -45,13 +44,14 @@ def phase_w_data(data, angle, phase_data):
     new_data = list(data[angle])
     empty=[]
     for ind, i in enumerate(new_data):
-        n = 10
+        n = 5
         if ind % n == 0:
             empty.append(i)
     phase_data = phase_data['label']
     dic = {'angle':empty, 'phase':phase_data}
     df = pd.DataFrame(dic)
     return df
+
 
 def grab_user_min(data, angle, phase_data):
     df = phase_w_data(data, angle, phase_data)

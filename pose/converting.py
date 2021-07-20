@@ -4,7 +4,7 @@ import os, time, uuid
 # Opens the Video file
 def converter(path, name, user):
     cap= cv2.VideoCapture(path)
-    i=0
+    i=1
     while(cap.isOpened()):
         ret, frame = cap.read()
         if ret == False:

@@ -18,7 +18,8 @@ from forms import point, Stroke
 # importing data FIX THIS PATH
 import sys
 sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
-from canvas_data import Player_data, User_data, legs_tips_start, legs_tips_load, legs_tips_extend, legs_tips_finish
+from canvas_data import (Player_data, User_data, legs_tips_start, legs_tips_load, legs_tips_extend, legs_tips_finish,
+                            leg_tip_summary)
 from converting import converter, make_dir
 
 ###########################
@@ -164,10 +165,10 @@ def results():
     body = '{fill body part}'
 #######################################################################
     # uncommen the below to convert video
-    #converter('pose/videos/serve/jake.mov', 'Jacob', str(current_user.id))
+    #converter('pose/videos/serve/jake.mp4', 'Jacob', str(current_user.id))
 
     # CREATING INSTANCE FOR USER 
-    user = User_data('pose/videos/serve/jake.mov', 'Jacob', str(current_user.id), str(current_user.id))
+    user = User_data('pose/videos/serve/jake.mp4', 'Jacob', str(current_user.id), str(current_user.id))
     # Getting user data for right and left
     User_data_r = list(user.get_data('hip2ankle_right'))
     User_data_l = list(user.get_data('hip2ankle_left'))
@@ -182,16 +183,12 @@ def results():
     User_doughnut = user.doughnut()
 #######################################################################
     # SHOWING RECOMMENDATIONS
-    tips_legs_start= legs_tips_start(user, playerright_leg, playerleft_leg)
-    tips_legs_load = legs_tips_load(user, playerright_leg, playerleft_leg)
-    tips_legs_extend = legs_tips_extend(user, playerright_leg, playerleft_leg)
-    tips_legs_finish = legs_tips_finish(user, playerleft_leg)
+    leg_tips = leg_tip_summary(user, playerright_leg, playerleft_leg)
     
     return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, data_r_arm=dataright_arm,data_l_arm=dataleft_arm,label_arm=label_arm,doughnut_data=doughnut_data, name=player_name,
     user_right=User_data_r, user_left=User_data_l, user_left_arm=User_data_l_arm, user_right_arm=User_data_r_arm,
     user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, body=body, 
-    tips_legs_start=tips_legs_start, tips_legs_load=tips_legs_load, tips_legs_extend=tips_legs_extend,
-    tips_legs_finish=tips_legs_finish)
+    leg_tips = leg_tips)
 
 
 @app.errorhandler(404)

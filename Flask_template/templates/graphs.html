@@ -95,10 +95,9 @@
     <div>
         <h5>Legs:</h5>
         <ol>
-            <li>{{tips_legs_start}}</li>
-            <li>{{tips_legs_load}}</li>
-            <li>{{tips_legs_extend}}</li>
-            <li>{{tips_legs_finish}}</li>
+            {% for tip in leg_tips %}
+                <li>{{tip}}</li>
+            {% endfor %}
         </ol>
     </div>
 </div>

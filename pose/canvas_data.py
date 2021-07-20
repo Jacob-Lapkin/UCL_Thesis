@@ -100,7 +100,7 @@ class User_data():
 # playerright_arm = Player_data(f'pose/data/serve_data/djokservearm.csv', 'shoulder2wrist_right', 'djok')
 # playerleft_arm = Player_data(f'pose/data/serve_data/djokservearm.csv', 'shoulder2wrist_left', 'djok')
 # user = User_data('pose/videos/serve/jake.mov', 'Jacob', str(1), str(1))
-#print(user.get_full_data('hip2ankle_right'))
+# print(user.get_full_data('hip2ankle_right'))
 
 
 ####### IF STATEMENTS FOR RECOMMENDATIONS #######
@@ -113,9 +113,9 @@ def legs_tips_start(user, playerright_leg, playerleft_leg):
     elif user.get_max_data('hip2ankle_right')[0] > playerright_leg.get_max_data()[0] and user.get_max_data('hip2ankle_left')[0] > playerleft_leg.get_max_data()[0]:
         leg_tip_start = 'Try to bend your legs more during your ready position.'
     elif user.get_max_data('hip2ankle_right')[0] > playerright_leg.get_max_data()[0] and user.get_max_data('hip2ankle_left')[0] < playerleft_leg.get_max_data()[0]:
-        leg_tip_start = 'Your legs seem to be starting at very contrasting angles. Try balancing your legs out more during your ready position.'
+        leg_tip_start = 'Your legs seem to be starting at very contrasting angles. Try copying your leg positions more during your ready position to increase balance.'
     elif user.get_max_data('hip2ankle_right')[0] < playerright_leg.get_max_data()[0] and user.get_max_data('hip2ankle_left')[0] > playerleft_leg.get_max_data()[0]:
-        leg_tip_start = 'Your legs seem to be starting at very contrasting angles. Try balancing your legs out more during your ready position.'
+        leg_tip_start = 'Your legs seem to be starting at very contrasting angles. Try copying your leg positions more during your ready position to increase balance.'
     return leg_tip_start
 
 def legs_tips_load(user, playerright_leg, playerleft_leg):
@@ -152,6 +152,14 @@ def legs_tips_finish(user, playerleft_leg):
 # print(legs_tips_load())
 # print(legs_tips_extend())
 #print(legs_tips_finish())
+def leg_tip_summary(user, playerright_leg, playerleft_leg):
+    leg_start = legs_tips_start(user, playerright_leg, playerleft_leg)
+    leg_load = legs_tips_load(user, playerright_leg, playerleft_leg)
+    leg_extend = legs_tips_extend(user, playerright_leg, playerleft_leg)
+    leg_finish = legs_tips_finish(user, playerright_leg)
+    leg_tip_list = [leg_start, leg_load, leg_extend, leg_finish]
+    return leg_tip_list
+
 
 
 
