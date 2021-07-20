@@ -67,5 +67,45 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 
+// hiding graph content and displaying other graph
+$(document).ready(function(){
+    $("#Arms").click(function(){
+      $("#content_legs").hide();
+    });
+    $("#Arms").click(function(){
+      $("#content_arms").show();
+    });
+    $("#Legs").click(function(){
+        $("#content_arms").hide();
+      });
+      $("#Legs").click(function(){
+        $("#content_legs").show();
+      });
+  });
+
+  $(document).ready(function(){
+    $("#Arms_user").click(function(){
+      $("#content_legs_user").hide();
+    });
+    $("#Arms_user").click(function(){
+      $("#content_arms_user").show();
+    });
+    $("#Legs_user").click(function(){
+        $("#content_arms_user").hide();
+      });
+      $("#Legs_user").click(function(){
+        $("#content_legs_user").show();
+      });
+  });
+
+  
+
+
+
+    
+
+
+
+
 
 

@@ -18,7 +18,7 @@ from forms import point, Stroke
 # importing data FIX THIS PATH
 import sys
 sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
-from canvas_data import Player_data, User_data
+from canvas_data import Player_data, User_data, legs_tips_start, legs_tips_load, legs_tips_extend, legs_tips_finish
 from converting import converter, make_dir
 
 ###########################
@@ -174,7 +174,6 @@ def results():
     User_data_r_arm = list(user.get_data('shoulder2wrist_right'))
     User_data_l_arm = list(user.get_data('shoulder2wrist_left'))
 
-
     # Getting user labels 
     User_label = user.labels()
     # Getting user's name
@@ -183,11 +182,16 @@ def results():
     User_doughnut = user.doughnut()
 #######################################################################
     # SHOWING RECOMMENDATIONS
-
-
+    tips_legs_start= legs_tips_start(user, playerright_leg, playerleft_leg)
+    tips_legs_load = legs_tips_load(user, playerright_leg, playerleft_leg)
+    tips_legs_extend = legs_tips_extend(user, playerright_leg, playerleft_leg)
+    tips_legs_finish = legs_tips_finish(user, playerleft_leg)
+    
     return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, data_r_arm=dataright_arm,data_l_arm=dataleft_arm,label_arm=label_arm,doughnut_data=doughnut_data, name=player_name,
     user_right=User_data_r, user_left=User_data_l, user_left_arm=User_data_l_arm, user_right_arm=User_data_r_arm,
-    user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, body=body)
+    user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, body=body, 
+    tips_legs_start=tips_legs_start, tips_legs_load=tips_legs_load, tips_legs_extend=tips_legs_extend,
+    tips_legs_finish=tips_legs_finish)
 
 
 @app.errorhandler(404)

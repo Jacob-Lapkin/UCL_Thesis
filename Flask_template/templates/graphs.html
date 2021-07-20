@@ -40,16 +40,37 @@
         </div>
     </div>
     <div class='row mt-4'>
+        <div class='col-md-3 text-center'>
+            <button type="submit" class="btn btn-outline-primary btn-sm float-right" id="Legs" onclick="content_legs();">Legs</button>
+        </div>
+        <div class='col-md-3 text-center'>
+            <button class="btn btn-outline-primary btn-sm float-left" id="Arms" onclick="content_arms();">Arms</button>
+        </div>
+        <div class='col-md-3 text-center'>
+            <button type="submit" class="btn btn-outline-primary btn-sm float-right" id="Legs_user" onclick="content_legs_user();">Legs</button>
+        </div>
+        <div class='col-md-3 text-center'>
+            <button class="btn btn-outline-primary btn-sm float-left" id="Arms_user" onclick="content_arms_user();">Arms</button>
+        </div>
+    </div>
+    <div class='row mt-4'>
         <div class="col-md-6">
             <legend class='border-bottom h6'>{{name}} angles for right and left {{body}}</legend>
-            <canvas id="myChart" max-width="300" max-height="300"></canvas>
-            <canvas id="myChart2" max-width="300" max-height="300"></canvas>
-
+            <div class="container" id="content_legs">
+                <canvas id="myChart" max-width="300" max-height="300"></canvas>
+            </div>
+            <div class="container" id="content_arms" style="display:none">
+                <canvas id="myChart2" max-width="300" max-height="300"></canvas>
+            </div>
         </div>
         <div class="col-md-6">
             <legend class='border-bottom h6'>Your angles for right and left {{body}}</legend>
-            <canvas id="myChart4" max-width="300" max-height="300"></canvas>
-            <canvas id="myChart5" max-width="300" max-height="300"></canvas>
+            <div class="container" id="content_legs_user">
+                <canvas id="myChart4" max-width="300" max-height="300"></canvas>
+            </div>
+            <div class="container" id="content_arms_user" style="display:none">
+                <canvas id="myChart5" max-width="300" max-height="300"></canvas>
+            </div>
         </div>
     </div>
     <div class='row mt-4'>
@@ -67,18 +88,18 @@
 
 <div class="container home shadow rounded p-3 mt-4">
     <div class="container-fluid">
-          <div class="containter text-center">
-            <legend class='border-bottom h1'>Tips/Advise</legend>
-          </div>
+        <div class="container-fluid text-center">
+            <legend class='border-bottom h1'>Tips</legend>
+        </div>
     </div>
-    <div class="container-fluid mt-4">
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam iusto explicabo velit aut 
-            recusandae neque modi, odit commodi perspiciatis ipsum ut dignissimos 
-            laboriosam numquam, qui saepe quia eos voluptate ipsam.</p>
-            <br>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, rem 
-            amet similique cumque porro iure excepturi sequi eum laborum nemo quam optio 
-            explicabo voluptatibus possimus perferendis officiis. Recusandae, quisquam unde.</p>
+    <div>
+        <h5>Legs:</h5>
+        <ol>
+            <li>{{tips_legs_start}}</li>
+            <li>{{tips_legs_load}}</li>
+            <li>{{tips_legs_extend}}</li>
+            <li>{{tips_legs_finish}}</li>
+        </ol>
     </div>
 </div>
 
