@@ -34,7 +34,16 @@ def grab_range(path, angle):
         empty.append(value)
     return empty
 
-#print(grab_range('pose/data/serve_data/djokservelegs.csv', 'hip2ankle_right'))
+def grab_average(path, angle):
+    df = make_df(path, angle)
+    empty = []
+    for i in range(4):
+        split_d = df[(df['phase'] == i)]
+        value = sum(split_d['angle']) / len(split_d['angle'])
+        empty.append(value)
+    return empty
+
+#print(grab_average('pose/data/serve_data/djokservelegs.csv', 'hip2ankle_right'))
 
 
 ##### GETTING USER DATAFRAME THAT COMBINES PHASE WITH ANGLE DATA #######
@@ -71,6 +80,23 @@ def grab_user_max(data, angle, phase_data):
         empty.append(value)
     return empty
 
+def grab_user_range(data, angle, phase_data):
+    df = phase_w_data(data, angle, phase_data)
+    empty=[]
+    for i in range(4):
+        split_d = df[(df['phase'] == i)]
+        value = max(split_d['angle']) - min(split_d['angle'])
+        empty.append(value)
+    return empty
+
+def grab_user_average(data, angle, phase_data):
+    df = phase_w_data(data, angle, phase_data)
+    empty=[]
+    for i in range(4):
+        split_d = df[(df['phase'] == i)]
+        value = sum(split_d['angle']) / len(split_d['angle'])
+        empty.append(value)
+    return empty
 
 
 

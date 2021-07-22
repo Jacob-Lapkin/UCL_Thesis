@@ -57,6 +57,12 @@ class Player_data:
         range_data = grab_range(self.path, self.angle)
         return range_data
     
+    def get_average_data(self):
+        average_data = grab_average(self.path, self.angle)
+        return average_data
+    
+
+    
 
 
 ########### class to get data from user ###########
@@ -94,6 +100,14 @@ class User_data():
         max_data = grab_user_max(self.df, angle, self.phase_df)
         return max_data
 
+    def get_range_data(self, angle):
+        range_data = grab_user_range(self.df, angle, self.phase_df)
+        return range_data
+
+    def get_average_data(self, angle):
+        range_data = grab_user_average(self.df, angle, self.phase_df)
+        return range_data
+    
 
 # playerright_leg = Player_data(f'pose/data/serve_data/djokservelegs.csv', 'hip2ankle_right', 'djok')
 # playerleft_leg = Player_data(f'pose/data/serve_data/djokservelegs.csv', 'hip2ankle_left', 'djok')
@@ -116,6 +130,8 @@ def legs_tips_start(user, playerright_leg, playerleft_leg):
         leg_tip_start = 'Your legs seem to be starting at very contrasting angles. Try copying your leg positions more during your ready position to increase balance.'
     elif user.get_max_data('hip2ankle_right')[0] < playerright_leg.get_max_data()[0] and user.get_max_data('hip2ankle_left')[0] > playerleft_leg.get_max_data()[0]:
         leg_tip_start = 'Your legs seem to be starting at very contrasting angles. Try copying your leg positions more during your ready position to increase balance.'
+    else:
+        leg_tip_start = 'Your legs are placed well, and your lower body posture looks good!'
     return leg_tip_start
 
 def legs_tips_load(user, playerright_leg, playerleft_leg):
@@ -162,56 +178,68 @@ def leg_tip_summary(user, playerright_leg, playerleft_leg):
 def arms_tips_start(user, playerright_arm, playerleft_arm):
     arm_tip_start_right = None
     arm_tip_start_both = None
-    if user.get_max_data('shoulder2wrist_right')[0] > playerright_arm.get_max_data()[0]:
-        arm_tip_start_right = 'Right arm is extended out too much during the starting position.  Tuck your arm in more to slightly minimize the time it takes to start the takeback'
-    elif user.get_max_data('shoulder2wrist_right')[0] < playerright_arm.get_max_data()[0]:
+    if user.get_average_data('shoulder2wrist_right')[0] > playerright_arm.get_average_data()[0]:
+        arm_tip_start_right = 'Right arm is extended out too much during the starting position.  Tuck your arm in more to slightly minimize the time it takes to start the takeback.'
+    elif user.get_average_data('shoulder2wrist_right')[0] < playerright_arm.get_average_data()[0]:
         arm_tip_start_right = 'Right arm is tucked in too much during the starting position.  Extend your arm out more to to increase momentum going into the takeback.'
-    if user.get_max_data('shoulder2wrist_left')[0] > playerleft_arm.get_max_data()[0] and user.get_max_data('shoulder2wrist_right')[0] < playerright_arm.get_max_data()[0]:
-        arm_tip_start_both = 'Arms are not aligned enough during starting position.  Your arms should mirror each other more closely.'
-    elif user.get_max_data('shoulder2wrist_left')[0] < playerleft_arm.get_max_data()[0] and user.get_max_data('shoulder2wrist_right')[0] > playerright_arm.get_max_data()[0]:
-        arm_tip_start_both = 'Arms are not aligned enough during starting position.  Your arms should mirror each other more closely.'
+    else:
+        arm_tip_start_right = 'Great works, your racquet seems to be starting in the right spot based on your right arm position'
+    if user.get_average_data('shoulder2wrist_left')[0] > playerleft_arm.get_average_data()[0] and user.get_average_data('shoulder2wrist_right')[0] < playerright_arm.get_average_data()[0]:
+        arm_tip_start_both = 'Arms are not aligned enough during starting position.  Your arms should mirror each other more closely by bending your left and/or retracting your right.'
+    elif user.get_average_data('shoulder2wrist_left')[0] < playerleft_arm.get_average_data()[0] and user.get_average_data('shoulder2wrist_right')[0] > playerright_arm.get_average_data()[0]:
+        arm_tip_start_both = 'Arms are not aligned enough during starting position.  Your arms should mirror each other more closely by bending your right arm and/or retracting your left arm.'
+    else:
+        arm_tip_start_both = 'Overall, arms are aligned well during the starting position!'
     arm_tips_start = [arm_tip_start_right, arm_tip_start_both]
     return arm_tips_start
 
 def arms_tips_load(user, playerright_arm, playerleft_arm):
-    arm_tip_load = None
-    if user.get_min_data('shoulder2wrist_right')[1] < playerright_arm.get_min_data()[1] and user.get_min_data('shoulder2wrist_left')[1] < playerleft_arm.get_min_data()[1]:
-        arm_tip_load = 'You are loading your back leg too much, try standing taller during your take back. '
-    elif user.get_min_data('shoulder2wrist_right')[1] > playerright_arm.get_min_data()[1] and user.get_min_data('shoulder2wrist_left')[1] > playerleft_arm.get_min_data()[1]:
-        arm_tip_load = 'You could increase power in your serve by bending your legs more.'
-    elif user.get_min_data('shoulder2wrist_right')[1] > playerright_arm.get_min_data()[1] and user.get_min_data('shoulder2wrist_left')[1] < playerleft_arm.get_min_data()[1]:
-        arm_tip_load = 'Your lower body may be leaning too far forward during you takeback. Try to more equally match the bend in your right and left legs.'
-    elif user.get_min_data('shoulder2wrist_right')[1] < playerright_arm.get_min_data()[1] and user.get_min_data('shoulder2wrist_left')[1] > playerleft_arm.get_min_data()[1]:
-        arm_tip_load = 'Your lower body may be leaning too far back during you takeback. Try to more equally match the bend in your right and left legs.'
-    return arm_tip_load
+    arm_tip_load_right = None
+    arm_tip_load_left = None
+    if user.get_min_data('shoulder2wrist_right')[1] < playerright_arm.get_min_data()[1]:
+        arm_tip_load_right = 'You are bending your right arm too much on the loadup.  Extend your arm a bit to a comfortable position for more power.'
+    elif user.get_min_data('shoulder2wrist_right')[1] > playerright_arm.get_min_data()[1]:
+        arm_tip_load_right = 'You are not bending your right arm enough on the loadup.  Bend your arm a bit to a comfortable position for more power.'
+    else: 
+        arm_tip_load_right = 'great work, your right arm is optimzed for power in the loadup!'
+    if user.get_average_data('shoulder2wrist_left')[1] < playerleft_arm.get_average_data()[1]:
+        arm_tip_load_left = 'Left arm is not consistently extended thoroughout the toss.  Try to keep your left arm straighter on the takeback and load.'
+    else:
+        arm_tip_load_left = 'Your tossing arm looks very fluid and consistent!'
+    arm_tips_load = [arm_tip_load_right, arm_tip_load_left]
+    return arm_tips_load
 
-def arms_tips_extend(user, playerright_arm, playerleft_arm):
-    arm_tip_extend = None
-    if user.get_max_data('shoulder2wrist_right')[2] < playerright_arm.get_max_data()[2] and user.get_max_data('shoulder2wrist_left')[2] < playerleft_arm.get_max_data()[2]:
-        arm_tip_extend = 'Your legs are not extending enough during contact. Make sure to drive more with you legs on your extension.'
-    elif user.get_max_data('shoulder2wrist_right')[2] > playerright_arm.get_max_data()[2] and user.get_max_data('shoulder2wrist_left')[2] < playerleft_arm.get_max_data()[2]:
-        arm_tip_extend = 'Your back leg should extend more to be closer in line with your front leg during extension and contact.'
-    elif user.get_max_data('shoulder2wrist_right')[2] < playerright_arm.get_max_data()[2] and user.get_max_data('shoulder2wrist_left')[2] > playerleft_arm.get_max_data()[2]:
-        arm_tip_extend = 'Your front leg should extend more to be closer in line with your back leg during extension and contact.'
-    return arm_tip_extend
+
+def arms_tips_extend(user, playerright_arm):
+    arm_tip_extend_right = None
+    if user.get_max_data('shoulder2wrist_right')[2] < playerright_arm.get_max_data()[2]:
+        arm_tip_extend_right = 'Right arm is not extending enough during contact. Make sure to either toss the ball higher and/or make contact at its apex.'
+    else:
+        arm_tip_extend_right = 'Good job, your arm is optimally extended on contact!'
+    arm_tips_extend = [arm_tip_extend_right]
+    return arm_tips_extend
 
 def arms_tips_finish(user, playerleft_arm):
-    arm_tip_finish = None
-    if user.get_min_data('shoulder2wrist_left')[3] < playerleft_arm.get_min_data()[3]:
-        arm_tip_finish = 'You are dipping your front leg too much during the finish. Try landing taller to optimize your recovery.'
+    arm_tip_finish_left = None
     if user.get_min_data('shoulder2wrist_left')[3] > playerleft_arm.get_min_data()[3]:
-        arm_tip_finish = 'You are standing too tall during your finish. Try getting lower to absorb your impact with the ground.'
-    return arm_tip_finish
+        arm_tip_finish_left = 'Your left arm should be closer to your body in preparation for an easier recovery of the racquet.'
+    else:
+        arm_tip_finish_left = 'Nice, your arms seem to be positioned correctly on the finish!  Racquet recovery is much easier with optimal arm placement.'
+    arm_tips_finish = [arm_tip_finish_left]
+    return arm_tips_finish
 
 
-def arms_tip_summary(user, playerright_arm, playerleft_arm):
+def arm_tip_summary(user, playerright_arm, playerleft_arm):
+    full_arm_list = []
     arm_start = arms_tips_start(user, playerright_arm, playerleft_arm)
     arm_load = arms_tips_load(user, playerright_arm, playerleft_arm)
-    arm_extend = arms_tips_extend(user, playerright_arm, playerleft_arm)
-    arm_finish = arms_tips_finish(user, playerright_arm)
-    arm_tip_list = [arm_start, arm_load, arm_extend, arm_finish]
-    return arm_tip_list
-
+    arm_extend = arms_tips_extend(user, playerright_arm)
+    arm_finish = arms_tips_finish(user, playerleft_arm)
+    arm_tip_list = (arm_start, arm_load, arm_extend, arm_finish)
+    for i in arm_tip_list:
+        for j in i:
+            full_arm_list.append(j)
+    return full_arm_list
 
 
 

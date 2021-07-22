@@ -92,13 +92,33 @@
             <legend class='border-bottom h1'>Tips</legend>
         </div>
     </div>
+    <div class="container">
+        <p><i class="fas fa-check-circle" style="color: green;"></i> = Looks good</p>
+        <p><i class="fas fa-times-circle" style="color: red;"></i> = Needs improvement</p>
+    </div>
     <div>
         <h5>Legs:</h5>
-        <ol>
+        <ul>
             {% for tip in leg_tips %}
-                <li>{{tip}}</li>
+            {% if '!' in tip  %}
+            <li class=mt-2 style="color: green;"><i class="fas fa-check-circle"></i> {{tip}}</li>
+            {% elif '!' not in tip  %}
+            <li class=mt-2 style="color: red;"><i class="fas fa-times-circle"></i> {{tip}}</li>
+            {% endif %}
             {% endfor %}
-        </ol>
+        </ul>
+    </div>
+    <div>
+        <h5>Arms:</h5>
+        <ul>
+            {% for tip in arm_tips %}
+            {% if '!' in tip  %}
+            <li class=mt-2 style="color: green;"><i class="fas fa-check-circle"></i> {{tip}}</li>
+            {% elif '!' not in tip  %}
+            <li class=mt-2 style="color: red;"><i class="fas fa-times-circle"></i> {{tip}}</li>
+            {% endif %}
+            {% endfor %}
+        </ul>
     </div>
 </div>
 
