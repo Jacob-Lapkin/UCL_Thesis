@@ -36,25 +36,27 @@
 <div class="container home shadow rounded p-3 mt-4 text-center">
     <div class="container-fluid">
         <div class="container-fluid text-center">
-            <legend class='border-bottom h1'>Results</legend>
+            <legend class='border-bottom h1'>Statistics</legend>
         </div>
     </div>
-    <div class='row mt-4'>
-        <div class='col-md-3 text-center'>
-            <button type="submit" class="btn btn-outline-primary btn-sm float-right" id="Legs" onclick="content_legs();">Legs</button>
+
+    <!-- angle statistics-->
+    <div class='row'>
+        <div class="container-fluid text-center p-2">
+            <button type="submit" class="btn btn-secondary btn-sm rounded" id="angle_skteches" data-toggle="modal" data-target="#exampleModal2" >Angle Diagrams</button>
         </div>
-        <div class='col-md-3 text-center'>
-            <button class="btn btn-outline-primary btn-sm float-left" id="Arms" onclick="content_arms();">Arms</button>
-        </div>
-        <div class='col-md-3 text-center'>
-            <button type="submit" class="btn btn-outline-primary btn-sm float-right" id="Legs_user" onclick="content_legs_user();">Legs</button>
-        </div>
-        <div class='col-md-3 text-center'>
-            <button class="btn btn-outline-primary btn-sm float-left" id="Arms_user" onclick="content_arms_user();">Arms</button>
-        </div>
-    </div>
-    <div class='row mt-4'>
         <div class="col-md-6">
+            <div class='row border m-3 rounded'>
+                <div class='col-md-4 text-center p-2'>
+                    <button type="submit" class="btn btn-outline-primary btn-sm" id="Legs" onclick="content_legs();">Legs</button>
+                </div>
+                <div class='col-md-4 text-center p-2'>
+                    <button class="btn btn-outline-primary btn-sm" id="Arms" onclick="content_arms();">Arms</button>
+                </div>
+                <div class='col-md-4 text-center p-2'>
+                    <button class="btn btn-outline-primary btn-sm" id="Body" onclick="content_body();">Body</button>
+                </div>
+            </div>
             <legend class='border-bottom h6'>{{name}} angles for right and left {{body}}</legend>
             <div class="container" id="content_legs">
                 <canvas id="myChart" max-width="300" max-height="300"></canvas>
@@ -62,8 +64,22 @@
             <div class="container" id="content_arms" style="display:none">
                 <canvas id="myChart2" max-width="300" max-height="300"></canvas>
             </div>
+            <div class="container" id="content_body" style="display:none">
+                <canvas id="myChart3" max-width="300" max-height="300"></canvas>
+            </div>
         </div>
         <div class="col-md-6">
+            <div class='row border m-3 rounded'>
+                <div class='col-md-4 text-center p-2'>
+                    <button type="submit" class="btn btn-outline-primary btn-sm" id="Legs_user" onclick="content_legs_user();">Legs</button>
+                </div>
+                <div class='col-md-4 text-center p-2'>
+                    <button class="btn btn-outline-primary btn-sm" id="Arms_user" onclick="content_arms_user();">Arms</button>
+                </div>
+                <div class='col-md-4 text-center p-2'>
+                    <button class="btn btn-outline-primary btn-sm" id="Body_user" onclick="content_body_user();">Body</button>
+                </div>
+            </div>
             <legend class='border-bottom h6'>Your angles for right and left {{body}}</legend>
             <div class="container" id="content_legs_user">
                 <canvas id="myChart4" max-width="300" max-height="300"></canvas>
@@ -71,9 +87,18 @@
             <div class="container" id="content_arms_user" style="display:none">
                 <canvas id="myChart5" max-width="300" max-height="300"></canvas>
             </div>
+            <div class="container" id="content_body_user" style="display:none">
+                <canvas id="myChart6" max-width="300" max-height="300"></canvas>
+            </div>
         </div>
     </div>
+
+    <!--phase statistics-->
     <div class='row mt-4'>
+        <div class="container-fluid text-center p-2">
+            <!-- Button trigger modal for phases-->
+            <button type="submit" class="btn btn-secondary btn-sm rounded" id="phase_skteches" data-toggle="modal" data-target="#exampleModal">Phase Diagrams</button>
+        </div>
         <div class="col-md-6">
             <legend class='border-bottom h6'>{{name}} shot breakdown (%)</legend>
             <canvas id="myChart7" max-width="300" max-height="300"></canvas>
@@ -85,45 +110,158 @@
     </div>
 </div>
 
-
+<!-- results and score -->
 <div class="container home shadow rounded p-3 mt-4">
     <div class="container-fluid">
         <div class="container-fluid text-center">
-            <legend class='border-bottom h1'>Tips</legend>
+            <legend class='border-bottom h1'>Results and Recommendations</legend>
         </div>
     </div>
-    <div class="container">
-        <p><i class="fas fa-check-circle" style="color: green;"></i> = Looks good</p>
-        <p><i class="fas fa-times-circle" style="color: red;"></i> = Needs improvement</p>
+
+    <div class="row">
+        <div class="col-md-12 pr-5 pl-5">
+            <div class='container-fluid text-center mt-3 border rounded'>
+                <h1>{{score}}/100</h1>
+                <p>Score</p>
+            </div>
+        </div>
     </div>
-    <div>
-        <h5>Legs:</h5>
-        <ul>
-            {% for tip in leg_tips %}
-            {% if '!' in tip  %}
-            <li class=mt-2 style="color: green;"><i class="fas fa-check-circle"></i> {{tip}}</li>
-            {% elif '!' not in tip  %}
-            <li class=mt-2 style="color: red;"><i class="fas fa-times-circle"></i> {{tip}}</li>
-            {% endif %}
-            {% endfor %}
-        </ul>
-    </div>
-    <div>
-        <h5>Arms:</h5>
-        <ul>
-            {% for tip in arm_tips %}
-            {% if '!' in tip  %}
-            <li class=mt-2 style="color: green;"><i class="fas fa-check-circle"></i> {{tip}}</li>
-            {% elif '!' not in tip  %}
-            <li class=mt-2 style="color: red;"><i class="fas fa-times-circle"></i> {{tip}}</li>
-            {% endif %}
-            {% endfor %}
-        </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container-fluid text-center p-2">
+                <button type="submit" class="btn btn-secondary btn-sm rounded" id="scoring_criteria" data-toggle="modal" data-target="#exampleModal3" >Scoring Criteria</button>
+            </div>
+            <div class='container mt-3'> 
+                <div>
+                    <h5>Legs:</h5>
+                    <ul>
+                        {% for tip in leg_tips %}
+                        {% if '!' in tip  %}
+                        <li class=mt-2 style="color: green;"><i class="fas fa-check-circle"></i> {{tip}}</li>
+                        {% elif '!' not in tip  %}
+                        <li class=mt-2 style="color: red;"><i class="fas fa-times-circle"></i> {{tip}}</li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div>
+                    <h5>Arms:</h5>
+                    <ul>
+                        {% for tip in arm_tips %}
+                        {% if '!' in tip  %}
+                        <li class=mt-2 style="color: green;"><i class="fas fa-check-circle"></i> {{tip}}</li>
+                        {% elif '!' not in tip  %}
+                        <li class=mt-2 style="color: red;"><i class="fas fa-times-circle"></i> {{tip}}</li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div>
+                    <h5>Body:</h5>
+                    <ul>
+                        
+                    </ul>
+                </div>
+                </div> 
+        </div>
+   
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class='container'>
+            <p><i class="fas fa-check-circle" style="color: green;"></i> = Looks good</p>
+            <p><i class="fas fa-times-circle" style="color: red;"></i> = Needs improvement</p>
+        </div>
     </div>
 </div>
 
+</div>
+<!-- Modal for angle -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Angle Breakdown</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <div class=container>
+            <p><span style="color: red;">Red</span><span> = Arms (angle from the wrist to the elbow to the shoulder)</span></p>
+            <p><span style="color: blue;">Blue</span><span> = Legs (angle from the hip to the knee to the ankle)</span></p>
+            <p><span style="color: green;">Green</span><span> = Body (angle from the elbow to the shoulder to the hip)</span></p>
+        </div>
+        <div class='container mt-4 border'>
+            <img src="../static/assets/img/angles/angles.jpg" class="img-fluid" alt="Responsive image" id='start_phase'>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+<!-- Modal for phases -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Phase Breakdown</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <div class='container mt-4 border'>
+            <label class='mt-2'>1. Starting Position</label>
+            <img src="../static/assets/img/phases/start.jpg" class="img-fluid" alt="Responsive image" id='start_phase'>
+            <p>the starting position phase is defined in this analytics tool as the time between when the player initially 
+                finishes bouncing the ball and when the player starts the upwards motion of the toss</p>
+        </div>
+        <div class='container mt-4 border'>
+            <label class='mt-2'>2. Takeback and Load</label>
+            <img src="../static/assets/img/phases/load.jpg" class="img-fluid" alt="Responsive image">
+            <p>the takeback and load phase is defined in this analytics tool as the time between when the player has started taking the 
+                racquet back and when the player is at the bottom of their loading position.  </p>
+        </div>
+        <div class='container mt-4 border'>
+            <label class='mt-2'>3. Extending</label>
+            <img src="../static/assets/img/phases/extend.jpg" class="img-fluid" alt="Responsive image">
+            <p>the extend phase is defined in this analytics tool as the time between when the player has started moving updwards towards the ball 
+                and when the player has started to follow through after making contact.  </p>
+        </div>
+        <div class='container mt-4 border'>
+            <label class='mt-2'>4. Finish</label>
+            <img src="../static/assets/img/phases/finish.jpg" class="img-fluid" alt="Responsive image">
+            <p>the finish phase is defined in this analytics tool as the time between when the player has finished following through  
+                and when the player has absorbed the force on the landing leg. </p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for scoring -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">How you are scored:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
 <script>
+
 // Plotting graphs Professional legs
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
@@ -191,6 +329,49 @@ var myChart = new Chart(ctx, {
             ],
             borderColor: [
                 'rgba(0, 200, 0, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        }
+        ]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+<script>
+// Plotting graphs Professional body
+var ctx = document.getElementById('myChart3').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+                
+        labels: {{label_body|tojson}},
+        datasets: [{
+            label: 'Right arm',
+            data: {{dataright_body|tojson}},
+            backgroundColor: [
+                'rgba(3, 244, 252, .2)',
+            ],
+            borderColor: [
+                'rgba(3, 244, 252, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        }, {
+            label: 'Left body',
+            data: {{dataleft_body|tojson}},
+            backgroundColor: [
+                'rgba(220, 227, 18, .2)',
+            ],
+            borderColor: [
+                'rgba(220, 227, 18, 1)',
             ],
             borderWidth: 1, 
             fill: true,
@@ -289,6 +470,47 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+
+// Plotting graphs User body
+var ctx = document.getElementById('myChart6').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+                
+        labels: {{user_label|tojson}},
+        datasets: [{
+            label: 'Right body',
+            data: {{User_data_r_body|tojson}},
+            backgroundColor: [
+                'rgba(3, 244, 252, .2)',
+            ],
+            borderColor: [
+                'rgba(3, 244, 252, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        }, {
+            label: 'Left body',
+            data: {{User_data_l_body|tojson}},
+            backgroundColor: [
+                'rgba(220, 227, 18, .2)',
+            ],
+            borderColor: [
+                'rgba(220, 227, 18, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        }
+        ]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 </script>
 
 <script>
@@ -371,6 +593,8 @@ var myChart = new Chart(ctx, {
     }
 });
 </script>
+
+
 
 
 {% endblock %}

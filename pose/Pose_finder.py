@@ -26,6 +26,9 @@ def angle_from_video(path):
     empty_right_leg = []
     empty_right_arm = []
     empty_left_arm = []
+    empty_right_body = []
+    empty_left_body = []
+
 
     frame_count = []
     cap = cv2.VideoCapture(path)
@@ -77,6 +80,11 @@ def angle_from_video(path):
                 right_knee = [landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].x,landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].y]
                 right_ankle = [landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value].x,landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value].y]
 
+                # for left elbow to left hip
+                left_shoulder = [landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].x,landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].y]
+                # for right elbow to right hip
+                right_shoulder = [landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value].x,landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value].y]
+
 
                 # Calculate angle leg 
                 angle_left_leg = calculate_angle(left_hip, left_knee, left_ankle)
@@ -85,14 +93,19 @@ def angle_from_video(path):
                 empty_right_leg.append(angle_right_leg)
                 
 
-                # Calculate angle leg 
-                # Calculate angle leg 
+                # Calculate angle arm
                 angle_left_arm = calculate_angle(left_shoulder, left_elbow, left_wrist)
                 angle_right_arm = calculate_angle(right_shoulder, right_elbow, right_wrist)
                 empty_left_arm.append(angle_left_arm)
                 empty_right_arm.append(angle_right_arm)
 
-                print(angle_left_arm)
+                # Calculate angle body
+                angle_left_body = calculate_angle(left_elbow, left_shoulder, left_hip)
+                angle_right_body = calculate_angle(right_elbow, right_shoulder, right_hip)
+                empty_left_body.append(angle_left_body)
+                empty_right_body.append(angle_right_body)
+
+                print(angle_right_body, angle_left_body)
                 print(current_frame)
 
                 # Visualize angle
@@ -118,7 +131,7 @@ def angle_from_video(path):
             #cv2.imshow('Mediapipe Feed', image)
             if cv2.waitKey(10) & 0xFF == ord('q') or bad_frame == False:
                 d = {'frame':frame_count,'hip2ankle_left':empty_left_leg, 'hip2ankle_right':empty_right_leg,
-                 'shoulder2wrist_left':empty_left_arm, 'shoulder2wrist_right':empty_right_arm}
+                 'shoulder2wrist_left':empty_left_arm, 'shoulder2wrist_right':empty_right_arm, 'elbow2hip_left': empty_left_body, 'elbow2hip_right': empty_right_body}
                 df = pd.DataFrame(d)
                 return df
                 break 
@@ -127,7 +140,7 @@ def angle_from_video(path):
         cv2.destroyAllWindows()
 
 
-#print(angle_from_video('pose/videos/serve/jake.mov'))
+#print(angle_from_video('pose/videos/serve/djok/djokserveside.mp4'))
 
 def user_data(path):
     df = angle_from_video(path)

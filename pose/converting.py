@@ -11,7 +11,7 @@ def converter(path, name, user):
             break
         path = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/User_test/{user}'
         cv2.imwrite(os.path.join(path, name +str(i)+'.jpg'),frame)
-        #cv2.imwrite(name+str(i)+'.jpg',frame)
+        #cv2.imwrite(name+str(i)+'.jpg',frame) 
         i+=1
     
     cap.release()

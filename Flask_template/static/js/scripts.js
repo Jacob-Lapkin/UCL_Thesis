@@ -73,17 +73,32 @@ $(document).ready(function(){
       $("#content_legs").hide();
     });
     $("#Arms").click(function(){
+      $("#content_body").hide();
+    });
+    $("#Arms").click(function(){
       $("#content_arms").show();
     });
     $("#Legs").click(function(){
         $("#content_arms").hide();
       });
       $("#Legs").click(function(){
+        $("#content_body").hide();
+      });
+      $("#Legs").click(function(){
         $("#content_legs").show();
+      });
+      $("#Body").click(function(){
+        $("#content_arms").hide();
+      });
+      $("#Body").click(function(){
+        $("#content_legs").hide();
+      });
+      $("#Body").click(function(){
+        $("#content_body").show();
       });
   });
 
-  $(document).ready(function(){
+  /* $(document).ready(function(){
     $("#Arms_user").click(function(){
       $("#content_legs_user").hide();
     });
@@ -96,7 +111,38 @@ $(document).ready(function(){
       $("#Legs_user").click(function(){
         $("#content_legs_user").show();
       });
+  }); */
+
+  // hiding graph content and displaying other graph
+$(document).ready(function(){
+  $("#Arms_user").click(function(){
+    $("#content_legs_user").hide();
   });
+  $("#Arms_user").click(function(){
+    $("#content_body_user").hide();
+  });
+  $("#Arms_user").click(function(){
+    $("#content_arms_user").show();
+  });
+  $("#Legs_user").click(function(){
+      $("#content_arms_user").hide();
+    });
+    $("#Legs_user").click(function(){
+      $("#content_body_user").hide();
+    });
+    $("#Legs_user").click(function(){
+      $("#content_legs_user").show();
+    });
+    $("#Body_user").click(function(){
+      $("#content_arms_user").hide();
+    });
+    $("#Body_user").click(function(){
+      $("#content_legs_user").hide();
+    });
+    $("#Body_user").click(function(){
+      $("#content_body_user").show();
+    });
+});
 
   
 

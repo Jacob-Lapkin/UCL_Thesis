@@ -33,6 +33,8 @@ def smoothed_user_df(data):
     left_leg = df['hip2ankle_left']
     right_arm = df['shoulder2wrist_right']
     left_arm = df['shoulder2wrist_left']
+    right_body = df['elbow2hip_right']
+    left_body = df['elbow2hip_left']
 
     # First, design the Butterworth filter
     N  = 3    # Filter order
@@ -43,8 +45,11 @@ def smoothed_user_df(data):
     smooth_left = signal.filtfilt(B,A, left_leg)
     smooth_right_arm = signal.filtfilt(B,A, right_arm)
     smooth_left_arm = signal.filtfilt(B,A, left_arm)
+    smooth_right_body = signal.filtfilt(B,A, right_body)
+    smooth_left_body = signal.filtfilt(B,A, left_body)
     d = {'frame':list(smooth_frame),'hip2ankle_right':list(smooth_right), 'hip2ankle_left':list(smooth_left),
-            'shoulder2wrist_right':list(smooth_right_arm), 'shoulder2wrist_left':list(smooth_left_arm) }
+            'shoulder2wrist_right':list(smooth_right_arm), 'shoulder2wrist_left':list(smooth_left_arm),
+            'elbow2hip_right':list(smooth_right_body), 'elbow2hip_left':list(smooth_left_body) }
     df = pd.DataFrame(d)
     return df
 

@@ -19,7 +19,7 @@ from forms import point, Stroke
 import sys
 sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
 from canvas_data import (Player_data, User_data, legs_tips_start, legs_tips_load, legs_tips_extend, legs_tips_finish,
-                            leg_tip_summary, arm_tip_summary)
+                            arm_tip_summary, leg_score, total_score)
 from converting import converter, make_dir
 
 ###########################
@@ -149,14 +149,20 @@ def results():
     playerleft_leg = Player_data(f'pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_left', f'{professional}')
     playerright_arm = Player_data(f'pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_right', f'{professional}')
     playerleft_arm = Player_data(f'pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_left', f'{professional}')
+    playerright_body = Player_data(f'pose/data/{stroke}_data/{professional}servebody.csv', 'elbow2hip_right', f'{professional}')
+    playerleft_body = Player_data(f'pose/data/{stroke}_data/{professional}servebody.csv', 'elbow2hip_left', f'{professional}')
     # getting data from that player
     dataright = playerright_leg.get_data()
     dataleft = playerleft_leg.get_data()
     dataright_arm = playerright_arm.get_data()
     dataleft_arm = playerleft_arm.get_data()
+    dataright_body = playerright_body.get_data()
+    dataleft_body = playerleft_body.get_data()
+
     # getting labels from that player
     label = playerright_leg.labels()
     label_arm = playerright_arm.labels()
+    label_body = playerright_body.labels()
     # getting shot breakdown
     doughnut_data = playerright_leg.doughnut()
     # getting name of player
@@ -174,6 +180,8 @@ def results():
     User_data_l = list(user.get_data('hip2ankle_left'))
     User_data_r_arm = list(user.get_data('shoulder2wrist_right'))
     User_data_l_arm = list(user.get_data('shoulder2wrist_left'))
+    User_data_r_body = list(user.get_data('elbow2hip_right'))
+    User_data_l_body = list(user.get_data('elbow2hip_left'))
 
     # Getting user labels 
     User_label = user.labels()
@@ -183,13 +191,17 @@ def results():
     User_doughnut = user.doughnut()
 #######################################################################
     # SHOWING RECOMMENDATIONS
-    leg_tips = leg_tip_summary(user, playerright_leg, playerleft_leg)
+    leg_tips = leg_score(user, playerright_arm, playerleft_arm)
     arm_tips = arm_tip_summary(user, playerright_arm, playerleft_arm)
+
+    score = total_score(user, playerright_leg, playerleft_leg, playerright_arm, playerleft_arm)
+
     
-    return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, data_r_arm=dataright_arm,data_l_arm=dataleft_arm,label_arm=label_arm,doughnut_data=doughnut_data, name=player_name,
+    return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, data_r_arm=dataright_arm,data_l_arm=dataleft_arm,label_arm=label_arm,
+    dataright_body=dataright_body, dataleft_body=dataleft_body, label_body=label_body, doughnut_data=doughnut_data, name=player_name,
     user_right=User_data_r, user_left=User_data_l, user_left_arm=User_data_l_arm, user_right_arm=User_data_r_arm,
-    user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, body=body, 
-    leg_tips = leg_tips, arm_tips=arm_tips)
+    User_data_r_body=User_data_r_body, User_data_l_body=User_data_l_body, user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, body=body, 
+    arm_tips=arm_tips, leg_tips=leg_tips, score=score)
 
 
 @app.errorhandler(404)

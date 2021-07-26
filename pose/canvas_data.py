@@ -122,110 +122,289 @@ class User_data():
 # Legs
 def legs_tips_start(user, playerright_leg, playerleft_leg):
     leg_tip_start = None
-    if user.get_max_data('hip2ankle_right')[0] < playerright_leg.get_max_data()[0] and user.get_max_data('hip2ankle_left')[0] < playerleft_leg.get_max_data()[0]:
-        leg_tip_start = 'Try to stand straighter during your ready position.'
-    elif user.get_max_data('hip2ankle_right')[0] > playerright_leg.get_max_data()[0] and user.get_max_data('hip2ankle_left')[0] > playerleft_leg.get_max_data()[0]:
+    score_lost = 0
+
+    # less than the pro angles
+    if user.get_max_data('hip2ankle_right')[0] < (playerright_leg.get_max_data()[0] * 0.80) and user.get_max_data('hip2ankle_left')[0] < (playerleft_leg.get_max_data()[0] * 0.80):
+        leg_tip_start = 'Try to standup a lot more during your ready position.'
+        score_lost += 10
+    elif user.get_max_data('hip2ankle_right')[0] < (playerright_leg.get_max_data()[0] * 0.90) and user.get_max_data('hip2ankle_left')[0] < (playerleft_leg.get_max_data()[0] * 0.90):
+        leg_tip_start = 'Try to standup more during your ready position.'
+        score_lost += 5
+    elif user.get_max_data('hip2ankle_right')[0] < (playerright_leg.get_max_data()[0] * 0.95) and user.get_max_data('hip2ankle_left')[0] < (playerleft_leg.get_max_data()[0] * 0.95):
+        leg_tip_start = 'Try to standup slightly more during your ready position.'
+        score_lost += 3
+    # grater than the pro angles
+    elif user.get_max_data('hip2ankle_right')[0] > (playerright_leg.get_max_data()[0] * 1.20) and user.get_max_data('hip2ankle_left')[0] > (playerleft_leg.get_max_data()[0] * 1.20):
+        leg_tip_start = 'Try to bend your legs a lot more during your ready position.'
+        score_lost += 10
+    elif user.get_max_data('hip2ankle_right')[0] > (playerright_leg.get_max_data()[0] * 1.10) and user.get_max_data('hip2ankle_left')[0] > (playerleft_leg.get_max_data()[0] * 1.10):
         leg_tip_start = 'Try to bend your legs more during your ready position.'
-    elif user.get_max_data('hip2ankle_right')[0] > playerright_leg.get_max_data()[0] and user.get_max_data('hip2ankle_left')[0] < playerleft_leg.get_max_data()[0]:
+        score_lost += 5
+    elif user.get_max_data('hip2ankle_right')[0] > (playerright_leg.get_max_data()[0] * 1.05) and user.get_max_data('hip2ankle_left')[0] > (playerleft_leg.get_max_data()[0] * 1.05):
+        leg_tip_start = 'Try to bend your legs slightly more during your ready position.'
+        score_lost += 3
+    # greater than one angle and less than the other
+    elif user.get_max_data('hip2ankle_right')[0] > (playerright_leg.get_max_data()[0] * 1.20) and user.get_max_data('hip2ankle_left')[0] < (playerleft_leg.get_max_data()[0] * 1.20):
         leg_tip_start = 'Your legs seem to be starting at very contrasting angles. Try copying your leg positions more during your ready position to increase balance.'
-    elif user.get_max_data('hip2ankle_right')[0] < playerright_leg.get_max_data()[0] and user.get_max_data('hip2ankle_left')[0] > playerleft_leg.get_max_data()[0]:
-        leg_tip_start = 'Your legs seem to be starting at very contrasting angles. Try copying your leg positions more during your ready position to increase balance.'
+        score_lost += 10
+    elif user.get_max_data('hip2ankle_right')[0] < (playerright_leg.get_max_data()[0] * 1.10) and user.get_max_data('hip2ankle_left')[0] > (playerleft_leg.get_max_data()[0] * 1.10):
+        leg_tip_start = 'Your legs seem to be starting at contrasting angles. Try copying your leg positions more during your ready position to increase balance.'
+        score_lost += 5
+    elif user.get_max_data('hip2ankle_right')[0] < (playerright_leg.get_max_data()[0] * 1.05) and user.get_max_data('hip2ankle_left')[0] > (playerleft_leg.get_max_data()[0] * 1.05):
+        leg_tip_start = 'Your legs seem to be starting at slighty contrasting angles. Try copying your leg positions more during your ready position to increase balance.'
+        score_lost += 3
     else:
         leg_tip_start = 'Your legs are placed well, and your lower body posture looks good!'
-    return leg_tip_start
+    return [leg_tip_start, score_lost]
 
 def legs_tips_load(user, playerright_leg, playerleft_leg):
+    score_lost = 0
     leg_tip_load = None
-    if user.get_min_data('hip2ankle_right')[1] < playerright_leg.get_min_data()[1] and user.get_min_data('hip2ankle_left')[1] < playerleft_leg.get_min_data()[1]:
-        leg_tip_load = 'You are loading your back leg too much, try standing taller during your take back. '
-    elif user.get_min_data('hip2ankle_right')[1] > playerright_leg.get_min_data()[1] and user.get_min_data('hip2ankle_right')[1] > playerright_leg.get_min_data()[1]:
-        leg_tip_load = 'You could increase power in your serve by bending your legs more.'
-    elif user.get_min_data('hip2ankle_right')[1] > playerright_leg.get_min_data()[1] and user.get_min_data('hip2ankle_left')[1] < playerleft_leg.get_min_data()[1]:
+    # bending legs too much during load
+    if user.get_min_data('hip2ankle_right')[1] < (playerright_leg.get_min_data()[1] * 0.80) and user.get_min_data('hip2ankle_left')[1] < (playerleft_leg.get_min_data()[1] * 0.80):
+        leg_tip_load = 'You are loading your back leg too extremely. try standing much taller during your take back.'
+        score_lost += 10
+    elif user.get_min_data('hip2ankle_right')[1] < (playerright_leg.get_min_data()[1] * 0.90) and user.get_min_data('hip2ankle_left')[1] < (playerleft_leg.get_min_data()[1] * 0.90):
+        leg_tip_load = 'You are loading your back legs too much, try standing taller during your take back.'
+        score_lost += 5
+    elif user.get_min_data('hip2ankle_right')[1] < (playerright_leg.get_min_data()[1] * 0.95) and user.get_min_data('hip2ankle_left')[1] < (playerleft_leg.get_min_data()[1] * 0.95):
+        leg_tip_load = 'You are loading your back legs a bit too much, try standing slightly taller during your take back.'
+        score_lost += 3
+    # not bedning legs enough during laod
+    elif user.get_min_data('hip2ankle_right')[1] > (playerright_leg.get_min_data()[1] * 1.20) and user.get_min_data('hip2ankle_left')[1] > (playerleft_leg.get_min_data()[1] * 1.20):
+        leg_tip_load = 'You can significatly increase power in your serve by bending your legs a convincing amount.'
+        score_lost += 10
+    elif user.get_min_data('hip2ankle_right')[1] > (playerright_leg.get_min_data()[1] * 1.10) and user.get_min_data('hip2ankle_left')[1] > (playerleft_leg.get_min_data()[1] * 1.10):
+        leg_tip_load = 'You can increase power in your serve by bending your legs more.'    
+        score_lost += 5
+    elif user.get_min_data('hip2ankle_right')[1] > (playerright_leg.get_min_data()[1] * 1.05) and user.get_min_data('hip2ankle_left')[1] > (playerleft_leg.get_min_data()[1] * 1.05):
+        leg_tip_load = 'You can slightly increase power in your serve by bending your legs a small amount.' 
+        score_lost += 3
+   # leaning forward during takeback
+    elif user.get_min_data('hip2ankle_right')[1] > (playerright_leg.get_min_data()[1] * 1.20) and user.get_min_data('hip2ankle_left')[1] < (playerleft_leg.get_min_data()[1] * 0.80):
+        leg_tip_load = 'Your lower body is leaning significantly too far forward during you takeback. Try to more equally match the bend in your right and left legs.'
+        score_lost += 10
+    elif user.get_min_data('hip2ankle_right')[1] > (playerright_leg.get_min_data()[1] * 1.10) and user.get_min_data('hip2ankle_left')[1] < (playerleft_leg.get_min_data()[1] * 0.90):
         leg_tip_load = 'Your lower body may be leaning too far forward during you takeback. Try to more equally match the bend in your right and left legs.'
-    elif user.get_min_data('hip2ankle_right')[1] < playerright_leg.get_min_data()[1] and user.get_min_data('hip2ankle_left')[1] > playerleft_leg.get_min_data()[1]:
-        leg_tip_load = 'Your lower body may be leaning too far back during you takeback. Try to more equally match the bend in your right and left legs.'
-    return leg_tip_load
+        score_lost += 5
+    elif user.get_min_data('hip2ankle_right')[1] > (playerright_leg.get_min_data()[1] * 1.05) and user.get_min_data('hip2ankle_left')[1] < (playerleft_leg.get_min_data()[1] * 0.95):
+        leg_tip_load = 'Your lower body may be leaning slightly forward during you takeback. Try to more equally match the bend in your right and left legs.'
+        score_lost += 3
+    # leaning backward during takeback
+    elif user.get_min_data('hip2ankle_right')[1] < (playerright_leg.get_min_data()[1] * 0.80) and user.get_min_data('hip2ankle_left')[1] > (playerleft_leg.get_min_data()[1] * 1.20):
+        leg_tip_load = 'Your lower is leaning significantly too far back during you takeback. Try to more equally match the bend in your right and left legs.'
+        score_lost += 10
+    elif user.get_min_data('hip2ankle_right')[1] < (playerright_leg.get_min_data()[1] * 0.90) and user.get_min_data('hip2ankle_left')[1] > (playerleft_leg.get_min_data()[1] * 1.10):
+        leg_tip_load = 'Your lower body is leaning too far back during you takeback. Try to more equally match the bend in your right and left legs.'
+        score_lost += 7
+    elif user.get_min_data('hip2ankle_right')[1] < (playerright_leg.get_min_data()[1] * 0.95) and user.get_min_data('hip2ankle_left')[1] > (playerleft_leg.get_min_data()[1] * 1.05):
+        leg_tip_load = 'Your lower body is leaning slightly too far back during you takeback. Try to more equally match the bend in your right and left legs.'
+        score_lost += 5
+    else:
+        leg_tip_load = 'Your legs are well balanced during your takeback, and your legs are loading very well!'
+    return [leg_tip_load, score_lost]
 
 def legs_tips_extend(user, playerright_leg, playerleft_leg):
+    score_lost = 0
     leg_tip_extend = None
-    if user.get_max_data('hip2ankle_right')[2] < playerright_leg.get_max_data()[2] and user.get_max_data('hip2ankle_left')[2] < playerleft_leg.get_max_data()[2]:
-        leg_tip_extend = 'Your legs are not extending enough during contact. Make sure to drive more with you legs on your extension.'
-    elif user.get_max_data('hip2ankle_right')[2] > playerright_leg.get_max_data()[2] and user.get_max_data('hip2ankle_left')[2] < playerleft_leg.get_max_data()[2]:
+    # not extending enough during contact
+    if user.get_max_data('hip2ankle_right')[2] < (playerright_leg.get_max_data()[2] * 0.80) and user.get_max_data('hip2ankle_left')[2] < (playerleft_leg.get_max_data()[2] * 0.80):
+        leg_tip_extend = 'Your legs are significantly under extending during contact. Make sure to immensely increase drive with you legs on your extension.'
+        score_lost += 10
+    elif user.get_max_data('hip2ankle_right')[2] < (playerright_leg.get_max_data()[2] * 0.90) and user.get_max_data('hip2ankle_left')[2] < (playerleft_leg.get_max_data()[2] * 0.90):
+        leg_tip_extend = 'Your legs are under extending during contact. Make sure to drive more with you legs on your extension.'
+        score_lost += 5
+    elif user.get_max_data('hip2ankle_right')[2] < (playerright_leg.get_max_data()[2] * 0.95) and user.get_max_data('hip2ankle_left')[2] < (playerleft_leg.get_max_data()[2] * 0.95):
+        leg_tip_extend = 'Your legs are slightly under extending  during contact. Make sure to drive slightly more with you legs on your extension.'
+        score_lost += 3
+    # mirroring extension with the legs
+    elif user.get_max_data('hip2ankle_right')[2] > (playerright_leg.get_max_data()[2] * 1.10) and user.get_max_data('hip2ankle_left')[2] < (playerleft_leg.get_max_data()[2] * 0.90):
         leg_tip_extend = 'Your back leg should extend more to be closer in line with your front leg during extension and contact.'
-    elif user.get_max_data('hip2ankle_right')[2] < playerright_leg.get_max_data()[2] and user.get_max_data('hip2ankle_left')[2] > playerleft_leg.get_max_data()[2]:
+        score_lost += 5
+    elif user.get_max_data('hip2ankle_right')[2] < (playerright_leg.get_max_data()[2] * 0.90) and user.get_max_data('hip2ankle_left')[2] > (playerleft_leg.get_max_data()[2] * 1.10):
         leg_tip_extend = 'Your front leg should extend more to be closer in line with your back leg during extension and contact.'
-    return leg_tip_extend
+        score_lost += 5
+    else:
+        leg_tip_extend = 'Good job! Your legs are optimally extending on contact and consistently mirroring eachother.'
+    return [leg_tip_extend, score_lost]
 
 def legs_tips_finish(user, playerleft_leg):
+    score_lost = 0
     leg_tip_finish = None
-    if user.get_min_data('hip2ankle_left')[3] < playerleft_leg.get_min_data()[3]:
-        leg_tip_finish = 'You are dipping your front leg too much during the finish. Try landing taller to optimize your recovery.'
-    if user.get_min_data('hip2ankle_left')[3] > playerleft_leg.get_min_data()[3]:
-        leg_tip_finish = 'You are standing too tall during your finish. Try getting lower to absorb your impact with the ground.'
-    return leg_tip_finish
+
+    if user.get_min_data('hip2ankle_left')[3] < (playerleft_leg.get_min_data()[3] * 0.80):
+        leg_tip_finish = 'You are dipping your front leg significantly too much during the finish. Try landing a lot taller in the legs to optimize your recovery.'
+        score_lost += 10
+    elif user.get_min_data('hip2ankle_left')[3] < (playerleft_leg.get_min_data()[3] * 0.90):
+        leg_tip_finish = 'You are dipping your front leg too much during the finish. Try landing taller in the legs to optimize your recovery.'
+        score_lost += 5
+    elif user.get_min_data('hip2ankle_left')[3] < (playerleft_leg.get_min_data()[3] * 0.95):
+        leg_tip_finish = 'You are dipping your front leg slightly too much during the finish. Try landing a bit taller in the legs to optimize your recovery.'
+        score_lost += 3
+    elif user.get_min_data('hip2ankle_left')[3] > (playerleft_leg.get_min_data()[3] * 1.20):
+        leg_tip_finish = 'You are standing significantly too tall during your finish. Try getting a lot lower in the legs to absorb your impact with the ground.'
+        score_lost += 10
+    elif user.get_min_data('hip2ankle_left')[3] > (playerleft_leg.get_min_data()[3] * 1.10):
+        leg_tip_finish = 'You are standing too tall during your finish. Try getting lower in the legs to absorb your impact with the ground.'
+        score_lost += 10
+    elif user.get_min_data('hip2ankle_left')[3] > (playerleft_leg.get_min_data()[3] * 1.05):
+        leg_tip_finish = 'You are standing slightly too tall during your finish. Try getting a bit lower in the legs to absorb your impact with the ground.'
+        score_lost += 10
+    else:
+        leg_tip_finish = 'You are landing in a great position that is optimal for balance and recovery!'
+    return [leg_tip_finish, score_lost]
 
 
-def leg_tip_summary(user, playerright_leg, playerleft_leg):
+def leg_score(user, playerright_leg, playerleft_leg):
     leg_start = legs_tips_start(user, playerright_leg, playerleft_leg)
     leg_load = legs_tips_load(user, playerright_leg, playerleft_leg)
     leg_extend = legs_tips_extend(user, playerright_leg, playerleft_leg)
     leg_finish = legs_tips_finish(user, playerright_leg)
     leg_tip_list = [leg_start, leg_load, leg_extend, leg_finish]
-    return leg_tip_list
+    score = []
+    for i in leg_tip_list:
+        score.append(i[0])
+    return score
 
+def leg_score_quant(user, playerright_leg, playerleft_leg):
+    leg_start = legs_tips_start(user, playerright_leg, playerleft_leg)
+    leg_load = legs_tips_load(user, playerright_leg, playerleft_leg)
+    leg_extend = legs_tips_extend(user, playerright_leg, playerleft_leg)
+    leg_finish = legs_tips_finish(user, playerright_leg)
+    leg_tip_list = [leg_start, leg_load, leg_extend, leg_finish]
+    score = []
+    for i in leg_tip_list:
+        score.append(i[-1])
+    return score
 
 # Arms
 def arms_tips_start(user, playerright_arm, playerleft_arm):
     arm_tip_start_right = None
     arm_tip_start_both = None
-    if user.get_average_data('shoulder2wrist_right')[0] > playerright_arm.get_average_data()[0]:
-        arm_tip_start_right = 'Right arm is extended out too much during the starting position.  Tuck your arm in more to slightly minimize the time it takes to start the takeback.'
-    elif user.get_average_data('shoulder2wrist_right')[0] < playerright_arm.get_average_data()[0]:
+    score = 0
+    # right arm extended out too much
+    if user.get_average_data('shoulder2wrist_right')[0] > (playerright_arm.get_average_data()[0] * 1.20):
+        arm_tip_start_right = 'Right arm is extended out significantly too much during the starting position.  Tuck your arm in a large amount to minimize the time it takes to start the takeback.'
+        score += 10
+    elif user.get_average_data('shoulder2wrist_right')[0] > (playerright_arm.get_average_data()[0] * 1.10):
+        arm_tip_start_right = 'Right arm is extended out too much during the starting position.  Tuck your arm in more to minimize the time it takes to start the takeback.'
+        score += 5
+    elif user.get_average_data('shoulder2wrist_right')[0] > (playerright_arm.get_average_data()[0] * 1.05):
+        arm_tip_start_right = 'Right arm is extended out slightly too much during the starting position.  Tuck your arm in a bit more to slightly minimize the time it takes to start the takeback.'
+        score += 3
+    # right arm tucked in too much
+    elif user.get_average_data('shoulder2wrist_right')[0] < (playerright_arm.get_average_data()[0] * 0.80):
+        arm_tip_start_right = 'Right arm is tucked in significantly too much during the starting position.  Extend your arm out a large amout to to increase momentum going into the takeback.'
+        score += 10
+    elif user.get_average_data('shoulder2wrist_right')[0] < (playerright_arm.get_average_data()[0] * 0.90):
         arm_tip_start_right = 'Right arm is tucked in too much during the starting position.  Extend your arm out more to to increase momentum going into the takeback.'
+        score += 5
+    elif user.get_average_data('shoulder2wrist_right')[0] < (playerright_arm.get_average_data()[0] * 0.95):
+        arm_tip_start_right = 'Right arm is tucked in slightly too much during the starting position.  Extend your arm out a bit more to to increase momentum going into the takeback.'
+        score += 3
     else:
-        arm_tip_start_right = 'Great works, your racquet seems to be starting in the right spot based on your right arm position'
-    if user.get_average_data('shoulder2wrist_left')[0] > playerleft_arm.get_average_data()[0] and user.get_average_data('shoulder2wrist_right')[0] < playerright_arm.get_average_data()[0]:
+        arm_tip_start_right = 'Great works, your racquet seems to be starting in the right spot based on your right arm position!'
+    
+    # arms not aligned 
+    if user.get_average_data('shoulder2wrist_left')[0] > (playerleft_arm.get_average_data()[0] * 1.20) and user.get_average_data('shoulder2wrist_right')[0] < (playerright_arm.get_average_data()[0] * 0.80):
+        arm_tip_start_both = 'Arms are significantly not aligned enough during starting position.  Your arms should mirror each other more closely by bending your left and/or retracting your right.'
+        score += 10
+    elif user.get_average_data('shoulder2wrist_left')[0] > (playerleft_arm.get_average_data()[0] * 1.10) and user.get_average_data('shoulder2wrist_right')[0] < (playerright_arm.get_average_data()[0] * 0.90):
         arm_tip_start_both = 'Arms are not aligned enough during starting position.  Your arms should mirror each other more closely by bending your left and/or retracting your right.'
-    elif user.get_average_data('shoulder2wrist_left')[0] < playerleft_arm.get_average_data()[0] and user.get_average_data('shoulder2wrist_right')[0] > playerright_arm.get_average_data()[0]:
+        score += 5
+    elif user.get_average_data('shoulder2wrist_left')[0] > (playerleft_arm.get_average_data()[0] * 1.05) and user.get_average_data('shoulder2wrist_right')[0] < (playerright_arm.get_average_data()[0] * 0.95):
+        arm_tip_start_both = 'Arms are slightly not aligned enough during starting position.  Your arms should mirror each other more closely by bending your left and/or retracting your right.'
+        score += 3
+    elif user.get_average_data('shoulder2wrist_left')[0] < (playerleft_arm.get_average_data()[0] * 0.80) and user.get_average_data('shoulder2wrist_right')[0] > (playerright_arm.get_average_data()[0] * 1.20):
+        arm_tip_start_both = 'Arms are significantly not aligned enough during starting position.  Your arms should mirror each other more closely by bending your right arm and/or retracting your left arm.'
+        score += 10
+    elif user.get_average_data('shoulder2wrist_left')[0] < (playerleft_arm.get_average_data()[0] * 0.90) and user.get_average_data('shoulder2wrist_right')[0] > (playerright_arm.get_average_data()[0] * 1.10):
         arm_tip_start_both = 'Arms are not aligned enough during starting position.  Your arms should mirror each other more closely by bending your right arm and/or retracting your left arm.'
+        score += 5
+    elif user.get_average_data('shoulder2wrist_left')[0] < (playerleft_arm.get_average_data()[0] * 0.95) and user.get_average_data('shoulder2wrist_right')[0] > (playerright_arm.get_average_data()[0] * 1.05):
+        arm_tip_start_both = 'Arms are slightly not aligned enough during starting position.  Your arms should mirror each other more closely by bending your right arm and/or retracting your left arm.'
+        score += 3
     else:
         arm_tip_start_both = 'Overall, arms are aligned well during the starting position!'
-    arm_tips_start = [arm_tip_start_right, arm_tip_start_both]
+    arm_tips_start = [arm_tip_start_right, arm_tip_start_both, score]
     return arm_tips_start
 
 def arms_tips_load(user, playerright_arm, playerleft_arm):
     arm_tip_load_right = None
     arm_tip_load_left = None
-    if user.get_min_data('shoulder2wrist_right')[1] < playerright_arm.get_min_data()[1]:
-        arm_tip_load_right = 'You are bending your right arm too much on the loadup.  Extend your arm a bit to a comfortable position for more power.'
-    elif user.get_min_data('shoulder2wrist_right')[1] > playerright_arm.get_min_data()[1]:
-        arm_tip_load_right = 'You are not bending your right arm enough on the loadup.  Bend your arm a bit to a comfortable position for more power.'
+    score = 0
+    # bending arm too much 
+    if user.get_min_data('shoulder2wrist_right')[1] < (playerright_arm.get_min_data()[1] * 0.80):
+        arm_tip_load_right = 'You are bending your right arm significantly too much on the loadup.  Extend your arm a lot more for more power.'
+        score += 10
+    elif user.get_min_data('shoulder2wrist_right')[1] < (playerright_arm.get_min_data()[1] * 0.90):
+        arm_tip_load_right = 'You are bending your right arm too much on the loadup.  Extend your arm to a comfortable position for more power.'
+        score += 5
+    elif user.get_min_data('shoulder2wrist_right')[1] < (playerright_arm.get_min_data()[1] * 0.95):
+        arm_tip_load_right = 'You are bending your right arm slightyl too much on the loadup.  Extend your arm a bit to a comfortable position for more power.'
+        score += 3
+    # not enough arm bend
+    elif user.get_min_data('shoulder2wrist_right')[1] > (playerright_arm.get_min_data()[1] * 1.20):
+        arm_tip_load_right = 'You are significantly under retracting your right arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
+        score += 10
+    elif user.get_min_data('shoulder2wrist_right')[1] > (playerright_arm.get_min_data()[1] * 1.10):
+        arm_tip_load_right = 'You are not bending your right arm enough on the loadup.  Bend your arm to a comfortable position for more power.'
+        score += 5
+    elif user.get_min_data('shoulder2wrist_right')[1] > (playerright_arm.get_min_data()[1] * 1.05):
+        arm_tip_load_right = 'You are not bending your right arm slightly enough on the loadup.  Bend your arm a bit to a comfortable position for more power.'
+        score += 3
     else: 
         arm_tip_load_right = 'great work, your right arm is optimzed for power in the loadup!'
-    if user.get_average_data('shoulder2wrist_left')[1] < playerleft_arm.get_average_data()[1]:
-        arm_tip_load_left = 'Left arm is not consistently extended thoroughout the toss.  Try to keep your left arm straighter on the takeback and load.'
+    
+    # arm extension during toss
+    if user.get_average_data('shoulder2wrist_left')[1] < (playerleft_arm.get_average_data()[1] * 0.80):
+        arm_tip_load_left = 'Left arm extention thoroughout the toss is significantly inconsistent.  Try to keep your left arm a lot straighter on the takeback and load.'
+        score += 10
+    elif user.get_average_data('shoulder2wrist_left')[1] < (playerleft_arm.get_average_data()[1] * 0.90):
+        arm_tip_load_left = 'Left arm extention thoroughout the toss is inconsistent.  Try to keep your left arm straighter on the takeback and load.'
+        score += 5
+    elif user.get_average_data('shoulder2wrist_left')[1] < (playerleft_arm.get_average_data()[1] * 0.95):
+        arm_tip_load_left = 'Left arm extention thoroughout the toss is slightly inconsistent.  Try to keep your left arm a bit straighter on the takeback and load.'
+        score += 3
     else:
         arm_tip_load_left = 'Your tossing arm looks very fluid and consistent!'
-    arm_tips_load = [arm_tip_load_right, arm_tip_load_left]
+    arm_tips_load = [arm_tip_load_right, arm_tip_load_left, score]
     return arm_tips_load
 
 
 def arms_tips_extend(user, playerright_arm):
     arm_tip_extend_right = None
-    if user.get_max_data('shoulder2wrist_right')[2] < playerright_arm.get_max_data()[2]:
+    score = 0
+    if user.get_max_data('shoulder2wrist_right')[2] < (playerright_arm.get_max_data()[2] * 0.80):
+        arm_tip_extend_right = 'Right arm is significantly not extending enough during contact. Make sure to either toss the ball a lot higher and/or make contact at its apex.'
+        score += 10
+    elif user.get_max_data('shoulder2wrist_right')[2] < (playerright_arm.get_max_data()[2] * 0.90):
         arm_tip_extend_right = 'Right arm is not extending enough during contact. Make sure to either toss the ball higher and/or make contact at its apex.'
+        score += 5
+    elif user.get_max_data('shoulder2wrist_right')[2] < (playerright_arm.get_max_data()[2] * 0.95):
+        arm_tip_extend_right = 'Right arm is slightly not extending enough during contact. Make sure to either toss the ball a bit higher and/or make contact at its apex.'
+        score += 3
     else:
         arm_tip_extend_right = 'Good job, your arm is optimally extended on contact!'
-    arm_tips_extend = [arm_tip_extend_right]
+    arm_tips_extend = [arm_tip_extend_right, score]
     return arm_tips_extend
 
 def arms_tips_finish(user, playerleft_arm):
     arm_tip_finish_left = None
-    if user.get_min_data('shoulder2wrist_left')[3] > playerleft_arm.get_min_data()[3]:
+    score = 0
+    if user.get_min_data('shoulder2wrist_left')[3] > (playerleft_arm.get_min_data()[3] * 1.20):
+        arm_tip_finish_left = 'Your left arm should be significantly closer to your body in preparation for an easier recovery of the racquet.'
+        score += 10
+    elif user.get_min_data('shoulder2wrist_left')[3] > (playerleft_arm.get_min_data()[3] * 1.10):
         arm_tip_finish_left = 'Your left arm should be closer to your body in preparation for an easier recovery of the racquet.'
+        score += 5
+    elif user.get_min_data('shoulder2wrist_left')[3] > (playerleft_arm.get_min_data()[3] * 1.05):
+        arm_tip_finish_left = 'Your left arm should be slightly closer to your body in preparation for an easier recovery of the racquet.'
+        score += 3
     else:
         arm_tip_finish_left = 'Nice, your arms seem to be positioned correctly on the finish!  Racquet recovery is much easier with optimal arm placement.'
-    arm_tips_finish = [arm_tip_finish_left]
+    arm_tips_finish = [arm_tip_finish_left, score]
     return arm_tips_finish
 
 
@@ -235,12 +414,32 @@ def arm_tip_summary(user, playerright_arm, playerleft_arm):
     arm_load = arms_tips_load(user, playerright_arm, playerleft_arm)
     arm_extend = arms_tips_extend(user, playerright_arm)
     arm_finish = arms_tips_finish(user, playerleft_arm)
-    arm_tip_list = (arm_start, arm_load, arm_extend, arm_finish)
+    arm_tip_list = [arm_start, arm_load, arm_extend, arm_finish]
     for i in arm_tip_list:
         for j in i:
-            full_arm_list.append(j)
+            if type(j) != int:
+                full_arm_list.append(j)
     return full_arm_list
 
+def arm_score_quant(user, playerright_arm, playerleft_arm):
+    arm_start = arms_tips_start(user, playerright_arm, playerleft_arm)
+    arm_load = arms_tips_load(user, playerright_arm, playerleft_arm)
+    arm_extend = arms_tips_extend(user, playerright_arm)
+    arm_finish = arms_tips_finish(user, playerleft_arm)
+    arm_tip_list = [arm_start, arm_load, arm_extend, arm_finish]
+    score = []
+    for i in arm_tip_list:
+        score.append(i[-1])
+        
+    return score
+
+def total_score(user, playerright_leg, playerleft_leg, playerright_arm, playerleft_arm):
+    legs = sum(leg_score_quant(user, playerright_leg, playerleft_leg))
+    arms = sum(arm_score_quant(user, playerright_arm, playerleft_arm))
+    score = 100 - (arms + legs)
+    if score < 0:
+        score = 0
+    return score
 
 
 
