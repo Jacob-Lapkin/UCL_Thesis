@@ -20,7 +20,7 @@ import sys
 sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
 from canvas_data import (Player_data, User_data, legs_tips_start, legs_tips_load, legs_tips_extend, legs_tips_finish,
                             arm_tip_summary, leg_score, total_score)
-from converting import converter, make_dir
+from converting import converter, make_dir, delete_frames
 
 ###########################
 ######### LOGIN/REGISTER FORMS #############
@@ -171,10 +171,10 @@ def results():
     body = '{fill body part}'
 #######################################################################
     # uncommen the below to convert video
-    #converter('pose/videos/serve/jacob.mp4', 'Jacob', str(current_user.id))
+    converter('pose/videos/serve/jacob.mp4', 'Jacob', str(current_user.id))
 
     # CREATING INSTANCE FOR USER 
-    user = User_data('pose/videos/serve/jake.mp4', 'Jacob', str(current_user.id), str(current_user.id))
+    user = User_data('pose/videos/serve/jacob.mp4', 'Jacob', str(current_user.id), str(current_user.id))
     # Getting user data for right and left
     User_data_r = list(user.get_data('hip2ankle_right'))
     User_data_l = list(user.get_data('hip2ankle_left'))
@@ -196,6 +196,9 @@ def results():
 
     score = total_score(user, playerright_leg, playerleft_leg, playerright_arm, playerleft_arm)
 
+########################################################################
+    #Delete frames from folder
+    delete_frames(str(current_user.id))
     
     return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, data_r_arm=dataright_arm,data_l_arm=dataleft_arm,label_arm=label_arm,
     dataright_body=dataright_body, dataleft_body=dataleft_body, label_body=label_body, doughnut_data=doughnut_data, name=player_name,

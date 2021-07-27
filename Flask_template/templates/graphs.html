@@ -354,7 +354,7 @@ var myChart = new Chart(ctx, {
                 
         labels: {{label_body|tojson}},
         datasets: [{
-            label: 'Right arm',
+            label: 'Right side of body',
             data: {{dataright_body|tojson}},
             backgroundColor: [
                 'rgba(3, 244, 252, .2)',
@@ -365,7 +365,7 @@ var myChart = new Chart(ctx, {
             borderWidth: 1, 
             fill: true,
         }, {
-            label: 'Left body',
+            label: 'Left side of body',
             data: {{dataleft_body|tojson}},
             backgroundColor: [
                 'rgba(220, 227, 18, .2)',

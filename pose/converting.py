@@ -1,5 +1,5 @@
 import cv2
-import os, time, uuid
+import os, time, uuid, shutil
 
 # Opens the Video file
 def converter(path, name, user):
@@ -27,3 +27,17 @@ def make_dir(id):
         os.mkdir(dir)
 
 #make_dir(10)
+
+def delete_frames(user):
+    folder = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/User_test/{user}'
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+#delete_frames('1')
