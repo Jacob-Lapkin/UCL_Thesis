@@ -170,10 +170,10 @@ def results():
     # getting the body part that is analyzed
 #######################################################################
     # uncommen the below to convert video
-    converter('pose/videos/serve/fritz.mp4', 'Jacob', str(current_user.id))
+    converter('pose/videos/serve/jake.mp4', 'Jacob', str(current_user.id))
 
     # CREATING INSTANCE FOR USER 
-    user = User_data('pose/videos/serve/fritz.mp4', 'Jacob', str(current_user.id), str(current_user.id))
+    user = User_data('pose/videos/serve/jake.mp4', 'Jacob', str(current_user.id), str(current_user.id))
     # Getting user data for right and left
     User_data_r = list(user.get_data('hip2ankle_right'))
     User_data_l = list(user.get_data('hip2ankle_left'))
