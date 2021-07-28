@@ -41,7 +41,7 @@
 <br>
 <div class='container-fluid home shadow rounded p-2 mb-3 text-center'>
   <div class="container text-center">
-    <h3>Average Score: <strong>66</strong></h3>
+    <h3>Average Score: <strong>{{average}}</strong></h3>
   </div>
   <br>
   <br>
@@ -53,15 +53,15 @@
       
       </div>
       <div class="col-md-2">
-        <p>Date: <strong>07/07/2021</strong></p>
+        <p>Date: <br><strong>{{recent}}</strong></p>
   
       </div>
       <div class="col-md-2">
-        <p>Professional Comparison: <strong>Djokovic</strong></p>
+        <p>Professional: <br><strong>{{name}}</strong></p>
   
       </div>
       <div class="col-md-2">
-        <p>Score: <strong>77</strong></p>
+        <p>Score: <br><strong>{{score}}</strong></p>
   
       </div>
       <div class="col-md-3">
@@ -72,16 +72,18 @@
   </div>
 </div>
 <div class="row">
-    <div class="col-md-3">
-        <div class="container rounded home shadow pt-2">
+
+    <div class="col-md-2">
+      
+        <!-- <div class="container rounded home shadow pt-2">
             <a class="btn btn-primary btn-xl text-uppercase d-flex justify-content-center" href="">Hawkeye</a>
             <br>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis voluptatem deserunt blanditiis soluta et odio quod eum 
               inventore ad atque pariatur nam, repellendus fuga ducimus debitis necessitatibus nulla perferendis ipsa.</p>
         </div>
-        <br>
+        <br> -->
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="container rounded home shadow pt-2">
             <a class="btn btn-primary btn-xl text-uppercase d-flex justify-content-center" href="{{ url_for('stroke') }}">Stroke Analysis</a>
 
@@ -91,13 +93,13 @@
         </div>
         <br>
     </div>
-    <div class="col-md-3">
-        <div class="container rounded home shadow pt-2">
+    <div class="col-md-2">
+        <!-- <div class="container rounded home shadow pt-2">
           <a class="btn btn-primary btn-xl text-uppercase d-flex justify-content-center" href="{{ url_for('point') }}">Point Analysis</a>
           <br>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis voluptatem deserunt blanditiis soluta et odio quod eum 
               inventore ad atque pariatur nam, repellendus fuga ducimus debitis necessitatibus nulla perferendis ipsa.</p>
-        </div>
+        </div> -->
         <br>
     </div>
 </div>

@@ -1,11 +1,15 @@
 
+import time
+from datetime import datetime
 #from flask import app, db, bcrypt
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 #from myproject.models import User
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql.expression import func
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm
+from werkzeug import datastructures
 from wtforms import (Form, StringField, TextField, SubmitField, PasswordField,
                      SubmitField, BooleanField, DateField, RadioField, FileField, SelectField)
 from wtforms.validators import DataRequired, Length, Email, EqualTo 
@@ -49,6 +53,7 @@ class newform(FlaskForm):
 
 app = Flask(__name__)
 db = SQLAlchemy((app))
+
 bcrypt = Bcrypt(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'mykey'
@@ -71,6 +76,15 @@ class User(db.Model, UserMixin):
     last = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(), nullable=False)
     password = db.Column(db.String(80), nullable=False)
+    scores = db.relationship('Score', backref='player')
+
+class Score(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    score = db.Column(db.Integer)
+    player_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    pro_compare = db.Column(db.String(), nullable=False)
+    date = db.Column(db.Integer, nullable=False)
+
 
 
 ##############################################
@@ -125,8 +139,35 @@ def register():
 @app.route('/home')
 @login_required
 def home(): 
-    make_dir(current_user.id)   
-    return render_template('home.html')
+    make_dir(current_user.id)  
+    
+    # finding the most recent and getting data from the scores
+    scores_query = Score.query.filter_by(player_id = current_user.id).all()
+    all_data = []
+    min_date = []
+    average_score = []
+    recent = None
+    score = None
+    name = None
+    for i in scores_query:
+        adding = [i.score, i.date, i.pro_compare]
+        date_data = i.date
+        scores = i.score
+        all_data.append(adding)
+        min_date.append(date_data)
+        average_score.append(scores)
+    for i in all_data:
+        if i[1] == max(min_date):
+            score = i[0]
+            recent = i[1]
+            name = i[2]
+
+    # converting date from unix to yy//mm//dd
+    arranged_date = datetime.utcfromtimestamp(recent).strftime('%Y-%m-%d %H:%M')
+
+    # finding the average score for a user
+    average = int(round(sum(average_score) / len(average_score)))
+    return render_template('home.html', recent=arranged_date, name=name, score=score, average=average)
 
 @app.route('/stroke', methods=["GET", "POST"])
 @login_required
@@ -170,10 +211,10 @@ def results():
     # getting the body part that is analyzed
 #######################################################################
     # uncommen the below to convert video
-    converter('pose/videos/serve/jake.mp4', 'Jacob', str(current_user.id))
+    converter('pose/videos/serve/jacob.mp4', 'Jacob', str(current_user.id))
 
     # CREATING INSTANCE FOR USER 
-    user = User_data('pose/videos/serve/jake.mp4', 'Jacob', str(current_user.id), str(current_user.id))
+    user = User_data('pose/videos/serve/jacob.mp4', 'Jacob', str(current_user.id), str(current_user.id))
     # Getting user data for right and left
     User_data_r = list(user.get_data('hip2ankle_right'))
     User_data_l = list(user.get_data('hip2ankle_left'))
@@ -198,6 +239,21 @@ def results():
 ########################################################################
     #Delete frames from folder
     delete_frames(str(current_user.id))
+
+    # getting current unix timestamp
+    current_time = time.time()
+
+    # assigning pro name
+    name = None
+    if player_name == 'djok':
+        name = 'Djokovic'
+    # adding the score to the database
+    insert_score = Score(score = score,
+                         player_id= current_user.id,
+                         pro_compare = name,
+                         date = current_time)
+    db.session.add(insert_score)
+    db.session.commit()
     
     return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, data_r_arm=dataright_arm,data_l_arm=dataleft_arm,label_arm=label_arm,
     dataright_body=dataright_body, dataleft_body=dataleft_body, label_body=label_body, doughnut_data=doughnut_data, name=player_name,
