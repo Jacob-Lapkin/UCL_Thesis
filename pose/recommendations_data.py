@@ -57,6 +57,10 @@ def phase_w_data(data, angle, phase_data):
         if ind % n == 0:
             empty.append(i)
     phase_data = phase_data['label']
+    if len(empty) != len(phase_data):
+        adding = len(phase_data) - len(empty)
+        for i in range(adding):
+            empty.append(empty[-1])
     dic = {'angle':empty, 'phase':phase_data}
     df = pd.DataFrame(dic)
     return df

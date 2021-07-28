@@ -19,7 +19,7 @@ from forms import point, Stroke
 import sys
 sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
 from canvas_data import (Player_data, User_data, legs_tips_start, legs_tips_load, legs_tips_extend, legs_tips_finish,
-                            arm_tip_summary, leg_score, total_score)
+                            arm_tip_summary, leg_score, body_score, total_score)
 from converting import converter, make_dir, delete_frames
 
 ###########################
@@ -168,13 +168,12 @@ def results():
     # getting name of player
     player_name = playerright_leg.name
     # getting the body part that is analyzed
-    body = '{fill body part}'
 #######################################################################
     # uncommen the below to convert video
-    converter('pose/videos/serve/jacob.mp4', 'Jacob', str(current_user.id))
+    converter('pose/videos/serve/fritz.mp4', 'Jacob', str(current_user.id))
 
     # CREATING INSTANCE FOR USER 
-    user = User_data('pose/videos/serve/jacob.mp4', 'Jacob', str(current_user.id), str(current_user.id))
+    user = User_data('pose/videos/serve/fritz.mp4', 'Jacob', str(current_user.id), str(current_user.id))
     # Getting user data for right and left
     User_data_r = list(user.get_data('hip2ankle_right'))
     User_data_l = list(user.get_data('hip2ankle_left'))
@@ -193,8 +192,8 @@ def results():
     # SHOWING RECOMMENDATIONS
     leg_tips = leg_score(user, playerright_arm, playerleft_arm)
     arm_tips = arm_tip_summary(user, playerright_arm, playerleft_arm)
-
-    score = total_score(user, playerright_leg, playerleft_leg, playerright_arm, playerleft_arm)
+    body_tips = body_score(user, playerright_body, playerleft_body)
+    score = total_score(user, playerright_leg, playerleft_leg, playerright_arm, playerleft_arm, playerright_body, playerleft_body)
 
 ########################################################################
     #Delete frames from folder
@@ -203,8 +202,8 @@ def results():
     return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, data_r_arm=dataright_arm,data_l_arm=dataleft_arm,label_arm=label_arm,
     dataright_body=dataright_body, dataleft_body=dataleft_body, label_body=label_body, doughnut_data=doughnut_data, name=player_name,
     user_right=User_data_r, user_left=User_data_l, user_left_arm=User_data_l_arm, user_right_arm=User_data_r_arm,
-    User_data_r_body=User_data_r_body, User_data_l_body=User_data_l_body, user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, body=body, 
-    arm_tips=arm_tips, leg_tips=leg_tips, score=score)
+    User_data_r_body=User_data_r_body, User_data_l_body=User_data_l_body, user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, 
+    arm_tips=arm_tips, leg_tips=leg_tips,body_tips=body_tips, score=score)
 
 
 @app.errorhandler(404)

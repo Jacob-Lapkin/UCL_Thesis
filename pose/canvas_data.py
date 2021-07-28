@@ -197,10 +197,10 @@ def legs_tips_load(user, playerright_leg, playerleft_leg):
         score_lost += 10
     elif user.get_min_data('hip2ankle_right')[1] < (playerright_leg.get_min_data()[1] * 0.90) and user.get_min_data('hip2ankle_left')[1] > (playerleft_leg.get_min_data()[1] * 1.10):
         leg_tip_load = 'Your lower body is leaning too far back during you takeback. Try to more equally match the bend in your right and left legs.'
-        score_lost += 7
+        score_lost += 5
     elif user.get_min_data('hip2ankle_right')[1] < (playerright_leg.get_min_data()[1] * 0.95) and user.get_min_data('hip2ankle_left')[1] > (playerleft_leg.get_min_data()[1] * 1.05):
         leg_tip_load = 'Your lower body is leaning slightly too far back during you takeback. Try to more equally match the bend in your right and left legs.'
-        score_lost += 5
+        score_lost += 3
     else:
         leg_tip_load = 'Your legs are well balanced during your takeback, and your legs are loading very well!'
     return [leg_tip_load, score_lost]
@@ -247,10 +247,10 @@ def legs_tips_finish(user, playerleft_leg):
         score_lost += 10
     elif user.get_min_data('hip2ankle_left')[3] > (playerleft_leg.get_min_data()[3] * 1.10):
         leg_tip_finish = 'You are standing too tall during your finish. Try getting lower in the legs to absorb your impact with the ground.'
-        score_lost += 10
+        score_lost += 5
     elif user.get_min_data('hip2ankle_left')[3] > (playerleft_leg.get_min_data()[3] * 1.05):
         leg_tip_finish = 'You are standing slightly too tall during your finish. Try getting a bit lower in the legs to absorb your impact with the ground.'
-        score_lost += 10
+        score_lost += 3
     else:
         leg_tip_finish = 'You are landing in a great position that is optimal for balance and recovery!'
     return [leg_tip_finish, score_lost]
@@ -285,23 +285,23 @@ def arms_tips_start(user, playerright_arm, playerleft_arm):
     score = 0
     # right arm extended out too much
     if user.get_average_data('shoulder2wrist_right')[0] > (playerright_arm.get_average_data()[0] * 1.20):
-        arm_tip_start_right = 'Right arm is extended out significantly too much during the starting position.  Tuck your arm in a large amount to minimize the time it takes to start the takeback.'
+        arm_tip_start_right = 'Dominant arm is extended out significantly too much during the starting position.  Tuck your arm in a large amount to minimize the time it takes to start the takeback.'
         score += 10
     elif user.get_average_data('shoulder2wrist_right')[0] > (playerright_arm.get_average_data()[0] * 1.10):
-        arm_tip_start_right = 'Right arm is extended out too much during the starting position.  Tuck your arm in more to minimize the time it takes to start the takeback.'
+        arm_tip_start_right = 'Dominant arm is extended out too much during the starting position.  Tuck your arm in more to minimize the time it takes to start the takeback.'
         score += 5
     elif user.get_average_data('shoulder2wrist_right')[0] > (playerright_arm.get_average_data()[0] * 1.05):
-        arm_tip_start_right = 'Right arm is extended out slightly too much during the starting position.  Tuck your arm in a bit more to slightly minimize the time it takes to start the takeback.'
+        arm_tip_start_right = 'Dominant arm is extended out slightly too much during the starting position.  Tuck your arm in a bit more to slightly minimize the time it takes to start the takeback.'
         score += 3
     # right arm tucked in too much
     elif user.get_average_data('shoulder2wrist_right')[0] < (playerright_arm.get_average_data()[0] * 0.80):
-        arm_tip_start_right = 'Right arm is tucked in significantly too much during the starting position.  Extend your arm out a large amout to to increase momentum going into the takeback.'
+        arm_tip_start_right = 'Dominant arm is tucked in significantly too much during the starting position.  Extend your arm out a large amout to to increase momentum going into the takeback.'
         score += 10
     elif user.get_average_data('shoulder2wrist_right')[0] < (playerright_arm.get_average_data()[0] * 0.90):
-        arm_tip_start_right = 'Right arm is tucked in too much during the starting position.  Extend your arm out more to to increase momentum going into the takeback.'
+        arm_tip_start_right = 'Dominant arm is tucked in too much during the starting position.  Extend your arm out more to to increase momentum going into the takeback.'
         score += 5
     elif user.get_average_data('shoulder2wrist_right')[0] < (playerright_arm.get_average_data()[0] * 0.95):
-        arm_tip_start_right = 'Right arm is tucked in slightly too much during the starting position.  Extend your arm out a bit more to to increase momentum going into the takeback.'
+        arm_tip_start_right = 'Dominant arm is tucked in slightly too much during the starting position.  Extend your arm out a bit more to to increase momentum going into the takeback.'
         score += 3
     else:
         arm_tip_start_right = 'Great works, your racquet seems to be starting in the right spot based on your right arm position!'
@@ -336,36 +336,36 @@ def arms_tips_load(user, playerright_arm, playerleft_arm):
     score = 0
     # bending arm too much 
     if user.get_min_data('shoulder2wrist_right')[1] < (playerright_arm.get_min_data()[1] * 0.80):
-        arm_tip_load_right = 'You are bending your right arm significantly too much on the loadup.  Extend your arm a lot more for more power.'
+        arm_tip_load_right = 'You are bending your dominant arm significantly too much on the loadup.  Extend your arm a lot more for more power.'
         score += 10
     elif user.get_min_data('shoulder2wrist_right')[1] < (playerright_arm.get_min_data()[1] * 0.90):
-        arm_tip_load_right = 'You are bending your right arm too much on the loadup.  Extend your arm to a comfortable position for more power.'
+        arm_tip_load_right = 'You are bending your dominant arm too much on the loadup.  Extend your arm to a comfortable position for more power.'
         score += 5
     elif user.get_min_data('shoulder2wrist_right')[1] < (playerright_arm.get_min_data()[1] * 0.95):
-        arm_tip_load_right = 'You are bending your right arm slightyl too much on the loadup.  Extend your arm a bit to a comfortable position for more power.'
+        arm_tip_load_right = 'You are bending your dominant arm slightyl too much on the loadup.  Extend your arm a bit to a comfortable position for more power.'
         score += 3
     # not enough arm bend
     elif user.get_min_data('shoulder2wrist_right')[1] > (playerright_arm.get_min_data()[1] * 1.20):
-        arm_tip_load_right = 'You are significantly under retracting your right arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
+        arm_tip_load_right = 'You are significantly under retracting your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
         score += 10
     elif user.get_min_data('shoulder2wrist_right')[1] > (playerright_arm.get_min_data()[1] * 1.10):
-        arm_tip_load_right = 'You are not bending your right arm enough on the loadup.  Bend your arm to a comfortable position for more power.'
+        arm_tip_load_right = 'You are not bending your dominant arm enough on the loadup.  Bend your arm to a comfortable position for more power.'
         score += 5
     elif user.get_min_data('shoulder2wrist_right')[1] > (playerright_arm.get_min_data()[1] * 1.05):
-        arm_tip_load_right = 'You are not bending your right arm slightly enough on the loadup.  Bend your arm a bit to a comfortable position for more power.'
+        arm_tip_load_right = 'You are not bending your dominant arm slightly enough on the loadup.  Bend your arm a bit to a comfortable position for more power.'
         score += 3
     else: 
         arm_tip_load_right = 'great work, your right arm is optimzed for power in the loadup!'
     
     # arm extension during toss
     if user.get_average_data('shoulder2wrist_left')[1] < (playerleft_arm.get_average_data()[1] * 0.80):
-        arm_tip_load_left = 'Left arm extention thoroughout the toss is significantly inconsistent.  Try to keep your left arm a lot straighter on the takeback and load.'
+        arm_tip_load_left = 'Weak arm extention throughout the toss is significantly inconsistent.  Try to keep your left arm a lot straighter on the takeback and load.'
         score += 10
     elif user.get_average_data('shoulder2wrist_left')[1] < (playerleft_arm.get_average_data()[1] * 0.90):
-        arm_tip_load_left = 'Left arm extention thoroughout the toss is inconsistent.  Try to keep your left arm straighter on the takeback and load.'
+        arm_tip_load_left = 'Weak arm extention throughout the toss is inconsistent.  Try to keep your left arm straighter on the takeback and load.'
         score += 5
     elif user.get_average_data('shoulder2wrist_left')[1] < (playerleft_arm.get_average_data()[1] * 0.95):
-        arm_tip_load_left = 'Left arm extention thoroughout the toss is slightly inconsistent.  Try to keep your left arm a bit straighter on the takeback and load.'
+        arm_tip_load_left = 'Weak arm extention throughout the toss is slightly inconsistent.  Try to keep your left arm a bit straighter on the takeback and load.'
         score += 3
     else:
         arm_tip_load_left = 'Your tossing arm looks very fluid and consistent!'
@@ -377,13 +377,13 @@ def arms_tips_extend(user, playerright_arm):
     arm_tip_extend_right = None
     score = 0
     if user.get_max_data('shoulder2wrist_right')[2] < (playerright_arm.get_max_data()[2] * 0.80):
-        arm_tip_extend_right = 'Right arm is significantly not extending enough during contact. Make sure to either toss the ball a lot higher and/or make contact at its apex.'
+        arm_tip_extend_right = 'Dominant arm is significantly not extending enough during contact. Make sure to either toss the ball a lot higher and/or make contact at its apex.'
         score += 10
     elif user.get_max_data('shoulder2wrist_right')[2] < (playerright_arm.get_max_data()[2] * 0.90):
-        arm_tip_extend_right = 'Right arm is not extending enough during contact. Make sure to either toss the ball higher and/or make contact at its apex.'
+        arm_tip_extend_right = 'Dominant arm is not extending enough during contact. Make sure to either toss the ball higher and/or make contact at its apex.'
         score += 5
     elif user.get_max_data('shoulder2wrist_right')[2] < (playerright_arm.get_max_data()[2] * 0.95):
-        arm_tip_extend_right = 'Right arm is slightly not extending enough during contact. Make sure to either toss the ball a bit higher and/or make contact at its apex.'
+        arm_tip_extend_right = 'Dominant arm is slightly not extending enough during contact. Make sure to either toss the ball a bit higher and/or make contact at its apex.'
         score += 3
     else:
         arm_tip_extend_right = 'Good job, your arm is optimally extended on contact!'
@@ -394,13 +394,13 @@ def arms_tips_finish(user, playerleft_arm):
     arm_tip_finish_left = None
     score = 0
     if user.get_min_data('shoulder2wrist_left')[3] > (playerleft_arm.get_min_data()[3] * 1.20):
-        arm_tip_finish_left = 'Your left arm should be significantly closer to your body in preparation for an easier recovery of the racquet.'
+        arm_tip_finish_left = 'Your weak arm should be significantly closer to your body in preparation for an easier recovery of the racquet.'
         score += 10
     elif user.get_min_data('shoulder2wrist_left')[3] > (playerleft_arm.get_min_data()[3] * 1.10):
-        arm_tip_finish_left = 'Your left arm should be closer to your body in preparation for an easier recovery of the racquet.'
+        arm_tip_finish_left = 'Your weak arm should be closer to your body in preparation for an easier recovery of the racquet.'
         score += 5
     elif user.get_min_data('shoulder2wrist_left')[3] > (playerleft_arm.get_min_data()[3] * 1.05):
-        arm_tip_finish_left = 'Your left arm should be slightly closer to your body in preparation for an easier recovery of the racquet.'
+        arm_tip_finish_left = 'Your weak arm should be slightly closer to your body in preparation for an easier recovery of the racquet.'
         score += 3
     else:
         arm_tip_finish_left = 'Nice, your arms seem to be positioned correctly on the finish!  Racquet recovery is much easier with optimal arm placement.'
@@ -433,10 +433,114 @@ def arm_score_quant(user, playerright_arm, playerleft_arm):
         
     return score
 
-def total_score(user, playerright_leg, playerleft_leg, playerright_arm, playerleft_arm):
+# body
+def body_tips_start(user, playerright_body):
+    body_tip_start = None
+    score_lost = 0
+    # less than the pro angles
+    if user.get_min_data('elbow2hip_right')[0] < (playerright_body.get_min_data()[0] * 0.80):
+        body_tip_start = 'Your dominant arm is hanging significantly too low on the starting position.  Try raising your are by a large amount.'
+        score_lost += 10
+    elif user.get_min_data('elbow2hip_right')[0] < (playerright_body.get_min_data()[0] * 0.90):
+        body_tip_start = 'Your dominant arm is hanging too low on the starting position.  Try raising your amount.'
+        score_lost += 5
+    elif user.get_min_data('elbow2hip_right')[0] < (playerright_body.get_min_data()[0] * 0.95):
+        body_tip_start = 'Your dominant arm is hanging slightly too low on the starting position.  Try raising your are by a small amount.'
+        score_lost += 3
+    # grater than the pro angles
+    elif user.get_min_data('elbow2hip_right')[0] > (playerright_body.get_max_data()[0] * 1.20):
+        body_tip_start = 'Your dominant arm is raised significantly too high on the starting position.  Try lowering your are by a large amount.'
+        score_lost += 10
+    elif user.get_min_data('elbow2hip_right')[0] > (playerright_body.get_max_data()[0] * 1.10):
+        body_tip_start = 'Your dominant arm is raised too high on the starting position.  Try lowering your amount.'
+        score_lost += 5
+    elif user.get_min_data('elbow2hip_right')[0] > (playerright_body.get_max_data()[0] * 1.05):
+        body_tip_start = 'Your dominant arm is raised slightly too high on the starting position.  Try lowering your are by a small amount.'
+        score_lost += 3
+    else:
+        body_tip_start = 'Your upper arms are the perfect distance from your body!'
+    return [body_tip_start, score_lost]
+
+def body_tips_load(user, playerleft_body):
+    score_lost = 0
+    body_tip_load_left = None
+    # bending legs too much during load
+    if  user.get_max_data('elbow2hip_left')[1] < (playerleft_body.get_max_data()[1] * 0.80):
+        body_tip_load_left = 'The tossing side of your body is significantly under stretching during the load. Try to reach up with your tossing arm a lot more.'
+        score_lost += 10
+    elif user.get_min_data('elbow2hip_left')[1] < (playerleft_body.get_min_data()[1] * 0.90):
+        body_tip_load_left = 'The tossing side of your body is under stretching during the load. Try to reach up with your tossing arm more.'
+        score_lost += 5
+    elif user.get_min_data('elbow2hip_left')[1] < (playerleft_body.get_min_data()[1] * 0.95):
+        body_tip_load_left = 'The tossing side of your body is slighly under stretching during the load. Try to reach up with your tossing arm a bit more.'
+        score_lost += 3
+    elif  user.get_max_data('elbow2hip_left')[1] > (playerleft_body.get_max_data()[1] * 0.80):
+        body_tip_load_left = 'The tossing side of your body is stretching significantly too much during the load. Try to align your tossing arm with the side of your body a lot more.'
+        score_lost += 10
+    elif user.get_min_data('elbow2hip_left')[1] > (playerleft_body.get_min_data()[1] * 0.90):
+        body_tip_load_left = 'The tossing side of your body is stretching too much during the load. Try to align your tossing arm with the side of your body more.'
+        score_lost += 5
+    elif user.get_min_data('elbow2hip_left')[1] > (playerleft_body.get_min_data()[1] * 0.95):
+        body_tip_load_left = 'The tossing side of your body is stretching slightly too much during the load. Try to align your tossing arm with the side of your body slightly more.'
+        score_lost += 3
+    else:
+        body_tip_load_left = 'Your tossing arm and subsequent extension of your side look perfect on the toss!'
+    return [body_tip_load_left, score_lost]
+
+def body_tips_extend(user, playerright_body):
+    score_lost = 0
+    body_tip_extend = None
+    # not extending enough during contact
+    if user.get_max_data('elbow2hip_right')[2] < (playerright_body.get_max_data()[2] * 0.80):
+        body_tip_extend = 'Your elbow on the dominant arm is significantly too low relative to your shoulder during the extension before contact.  Try strongly adjusting your toss or your body position during extension'
+        score_lost += 10
+    elif user.get_max_data('elbow2hip_right')[2] < (playerright_body.get_max_data()[2] * 0.90):
+        body_tip_extend = 'Your elbow on the dominant arm is too low relative to your shoulder during the extension before contact.  Try adjusting your toss or your body position during extension'
+        score_lost += 5
+    elif user.get_max_data('elbow2hip_right')[2] < (playerright_body.get_max_data()[2] * 0.95):
+        body_tip_extend = 'Your elbow on the dominant arm is slightly too low relative to your shoulder during the extension before contact.  Try partially adjusting your toss or your body position during extension'
+        score_lost += 3
+    elif user.get_max_data('elbow2hip_right')[2] > (playerright_body.get_max_data()[2] * 0.80):
+        body_tip_extend = 'Your elbow on the dominant arm is significantly too high relative to your shoulder during the extension before contact.  Try strongly adjusting your toss or your body position during extension'
+        score_lost += 10
+    elif user.get_max_data('elbow2hip_right')[2] > (playerright_body.get_max_data()[2] * 0.90):
+        body_tip_extend = 'Your elbow on the dominant arm is too high relative to your shoulder during the extension before contact.  Try adjusting your toss or your body position during extension'
+        score_lost += 5
+    elif user.get_max_data('elbow2hip_right')[2] > (playerright_body.get_max_data()[2] * 0.95):
+        body_tip_extend = 'Your elbow on the dominant arm is slightly too high relative to your shoulder during the extension before contact.  Try partially adjusting your toss or your body position during extension'
+        score_lost += 3
+    else:
+        body_tip_extend = 'Good job! the side of your body looks great during the extension into contact.  The toss is maximized for body involvement in the serve.'
+    return [body_tip_extend, score_lost]
+
+
+
+
+def body_score(user, playerright_body, playerleft_body):
+    body_start = body_tips_start(user, playerright_body)
+    body_load = body_tips_load(user, playerleft_body)
+    body_extend = body_tips_extend(user, playerright_body)
+    body_tip_list = [body_start, body_load, body_extend]
+    score = []
+    for i in body_tip_list:
+        score.append(i[0])
+    return score
+
+def body_score_quant(user, playerright_body, playerleft_body):
+    body_start = body_tips_start(user, playerright_body)
+    body_load = body_tips_load(user, playerleft_body)
+    body_extend = body_tips_extend(user, playerright_body)
+    body_tip_list = [body_start, body_load, body_extend]
+    score = []
+    for i in body_tip_list:
+        score.append(i[-1])
+    return score
+
+def total_score(user, playerright_leg, playerleft_leg, playerright_arm, playerleft_arm, playerright_body, playerleft_body):
     legs = sum(leg_score_quant(user, playerright_leg, playerleft_leg))
     arms = sum(arm_score_quant(user, playerright_arm, playerleft_arm))
-    score = 100 - (arms + legs)
+    body = sum(body_score_quant(user, playerright_body, playerleft_body))
+    score = 100 - (arms + legs + body)
     if score < 0:
         score = 0
     return score

@@ -40,4 +40,4 @@ def delete_frames(user):
         except Exception as e:
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
-#delete_frames('1')
+delete_frames('1')
