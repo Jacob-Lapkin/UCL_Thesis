@@ -73,7 +73,7 @@
 </div>
 <div class="row">
 
-    <div class="col-md-2">
+    <div class="col-md-0">
       
         <!-- <div class="container rounded home shadow pt-2">
             <a class="btn btn-primary btn-xl text-uppercase d-flex justify-content-center" href="">Hawkeye</a>
@@ -83,17 +83,17 @@
         </div>
         <br> -->
     </div>
-    <div class="col-md-8">
-        <div class="container rounded home shadow pt-2">
-            <a class="btn btn-primary btn-xl text-uppercase d-flex justify-content-center" href="{{ url_for('stroke') }}">Stroke Analysis</a>
-
+    <div class="col-md-12">
+        <div class="container pt-3 rounded home shadow w-75 text-center">
+            <a class="btn btn-primary btn-xl text-uppercase" href="{{ url_for('stroke') }}">Stroke Analysis</a>
             <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis voluptatem deserunt blanditiis soluta et odio quod eum 
+            <br>
+            <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis voluptatem deserunt blanditiis soluta et odio quod eum 
               inventore ad atque pariatur nam, repellendus fuga ducimus debitis necessitatibus nulla perferendis ipsa.</p>
         </div>
         <br>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-0">
         <!-- <div class="container rounded home shadow pt-2">
           <a class="btn btn-primary btn-xl text-uppercase d-flex justify-content-center" href="{{ url_for('point') }}">Point Analysis</a>
           <br>
@@ -103,6 +103,13 @@
         <br>
     </div>
 </div>
+
+
 </div>
+<hr class="featurette-divider">
+
+<footer class="container text-center">
+  <p>&copy; 2020-2021 Tennis Sense - UCL - Avanade &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+</footer>
 
 {% endblock %}

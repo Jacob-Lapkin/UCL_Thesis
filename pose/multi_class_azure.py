@@ -16,7 +16,7 @@ project = 'Stroke_class'
 project_id = '6faeb988-9af6-4e9a-9b92-4ca37069ec8e'
 
 #iteration name
-iteration = "Iteration1"
+iteration = "Iteration3"
 
 def base_location(base):
     base_image_location = os.path.join (os.path.dirname(__file__), base)
@@ -49,7 +49,7 @@ def StrokeList(name,base, folder):
     result = []
     label = []
     for ind, filename in enumerate(os.listdir(f'pose/User_test/{folder}')):
-        n = 5
+        n = 1
         if ind % n == 0 and ind != 0:
             if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.jpeg'): 
                 with open(os.path.join (base_location(f'User_test/{base}'), (name + f'{ind}.jpg')), "rb") as image_contents:
