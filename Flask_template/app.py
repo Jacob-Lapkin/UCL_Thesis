@@ -146,11 +146,15 @@ def home():
     all_data = []
     min_date = []
     average_score = []
-    recent = None
-    score = None
-    name = None
-    second_highest_score = None
-    difference = None
+    recent = 'none'
+    score = 0
+    name = 'none'
+    second_most_recent = 'none'
+    second_highest_score = 0
+    difference = 'none'
+    arranged_date = 'none'
+    average = 'none'
+    diff_symbol = 'none'
     for i in scores_query:
         adding = [i.score, i.date, i.pro_compare]
         date_data = i.date
@@ -159,23 +163,34 @@ def home():
         min_date.append(date_data)
         average_score.append(scores)
     sort_date = min_date
-    second_most_recent = sort_date[-2]
+    if len(sort_date) > 1:
+        second_most_recent = sort_date[-2]
+
     for i in all_data:
         if i[1] == second_most_recent:
             second_highest_score = i[0]
     for i in all_data:
-        if i[1] == max(min_date):
-            score = i[0]
-            recent = i[1]
-            name = i[2]
-            difference = str(score - second_highest_score)
+        if len(all_data) > 0:
+            if i[1] == max(min_date):
+                score = i[0]
+                recent = i[1]
+                name = i[2]
+                
+                arranged_date = datetime.utcfromtimestamp(recent).strftime('%Y-%m-%d %H:%M')
+                average = int(round(sum(average_score) / len(average_score)))
 
+    difference = score - second_highest_score
+    
+    if difference > 0:
+        diff_symbol = '+'
+    elif difference < 0:
+        diff_symbol = '-'
     # converting date from unix to yy//mm//dd
-    arranged_date = datetime.utcfromtimestamp(recent).strftime('%Y-%m-%d %H:%M')
+    
 
     # finding the average score for a user
-    average = int(round(sum(average_score) / len(average_score)))
-    return render_template('home.html', recent=arranged_date, name=name, score=score, average=average, difference=difference)
+    
+    return render_template('home.html', recent=arranged_date, name=name, score=score, average=average, difference=diff_symbol)
 
 @app.route('/stroke', methods=["GET", "POST"])
 @login_required
