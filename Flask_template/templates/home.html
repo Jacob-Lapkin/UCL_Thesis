@@ -61,8 +61,13 @@
   
       </div>
       <div class="col-md-2">
-        <p>Score: <br><strong>{{score}}</strong></p>
-  
+        <p>Score: <br><strong>{{score}} {% if '-' in difference %}
+          <i style='color:red' class="fa fa-arrow-circle-down" aria-hidden="true"></i> 
+          {% elif expression2 %}
+            <i style='color:green' class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+        {% endif %}
+         </strong></p>
+
       </div>
       <div class="col-md-3">
         

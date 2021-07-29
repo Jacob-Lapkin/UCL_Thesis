@@ -17,7 +17,7 @@ def converter(path, name, user):
     cap.release()
     cv2.destroyAllWindows()
 
-#converter('pose/videos/serve/djok/djokserveside.mp4', 'djok')
+#converter('pose/videos/serve/djok/djokserveside.mp4', 'djok', '1')
 
 # Creating a directory with the name of id to store frame images
 def make_dir(id):
@@ -40,4 +40,4 @@ def delete_frames(user):
         except Exception as e:
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
-delete_frames('1')
+#delete_frames('1')

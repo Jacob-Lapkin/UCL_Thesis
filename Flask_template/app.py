@@ -149,6 +149,8 @@ def home():
     recent = None
     score = None
     name = None
+    second_highest_score = None
+    difference = None
     for i in scores_query:
         adding = [i.score, i.date, i.pro_compare]
         date_data = i.date
@@ -156,18 +158,24 @@ def home():
         all_data.append(adding)
         min_date.append(date_data)
         average_score.append(scores)
+    sort_date = min_date
+    second_most_recent = sort_date[-2]
+    for i in all_data:
+        if i[1] == second_most_recent:
+            second_highest_score = i[0]
     for i in all_data:
         if i[1] == max(min_date):
             score = i[0]
             recent = i[1]
             name = i[2]
+            difference = str(score - second_highest_score)
 
     # converting date from unix to yy//mm//dd
     arranged_date = datetime.utcfromtimestamp(recent).strftime('%Y-%m-%d %H:%M')
 
     # finding the average score for a user
     average = int(round(sum(average_score) / len(average_score)))
-    return render_template('home.html', recent=arranged_date, name=name, score=score, average=average)
+    return render_template('home.html', recent=arranged_date, name=name, score=score, average=average, difference=difference)
 
 @app.route('/stroke', methods=["GET", "POST"])
 @login_required
@@ -211,10 +219,10 @@ def results():
     # getting the body part that is analyzed
 #######################################################################
     # uncommen the below to convert video
-    converter('pose/videos/serve/jacob.mp4', 'Jacob', str(current_user.id))
+    converter('pose/videos/serve/lapkin.mp4', 'Jacob', str(current_user.id))
 
     # CREATING INSTANCE FOR USER 
-    user = User_data('pose/videos/serve/jacob.mp4', 'Jacob', str(current_user.id), str(current_user.id))
+    user = User_data('pose/videos/serve/lapkin.mp4', 'Jacob', str(current_user.id), str(current_user.id))
     # Getting user data for right and left
     User_data_r = list(user.get_data('hip2ankle_right'))
     User_data_l = list(user.get_data('hip2ankle_left'))

@@ -53,7 +53,7 @@ def phase_w_data(data, angle, phase_data):
     new_data = list(data[angle])
     empty=[]
     for ind, i in enumerate(new_data):
-        n = 1
+        n = 5
         if ind % n == 0:
             empty.append(i)
     phase_data = list(phase_data['label'])

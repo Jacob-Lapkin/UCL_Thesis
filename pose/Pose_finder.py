@@ -149,4 +149,4 @@ def user_data(path):
     writer.save()
     return export
 
-print(user_data('pose/videos/serve/djok/djokserveside.mp4'))
+#print(user_data('pose/videos/serve/djok/djokserveside.mp4'))
