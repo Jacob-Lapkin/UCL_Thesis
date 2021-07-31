@@ -29,17 +29,15 @@
 </nav>
   <!-- end of nav-->
 <div class="container">
-<div class="container-fluid" >
-<br>
-<div calss="row">
+
+<div class="container-fluid mt-4">
+<div style='min-height:200px !important;background-color:white;' class='container-fluid home shadow rounded p-2 mb-3 text-center' data-aos="fade-up">
+  <div class="container-fluid mt-4 mb-4" >
     <div class="container text-center">
         <legend class='border-bottom h1'>Welcome {{current_user.first}}</legend>
     </div>
 </div>
-</div>
-<div class="container-fluid">
-<br>
-<div style='min-height:200px !important;background-color:white;' class='container-fluid home shadow rounded p-2 mb-3 text-center' data-aos="fade-up">
+
   {% if recent == 'none' %}
     <h3 class="text-center mt-5">You have not tried the stroke analysis tool yet.<br>  See below to test it out!</h3>
   
