@@ -28,8 +28,8 @@
   </div>
 </nav>
   <!-- end of nav-->
-
-<div class="container-fluid">
+<div class="container">
+<div class="container-fluid" >
 <br>
 <div calss="row">
     <div class="container text-center">
@@ -39,7 +39,7 @@
 </div>
 <div class="container-fluid">
 <br>
-<div style='min-height:200px !important;' class='container-fluid home shadow rounded p-2 mb-3 text-center'>
+<div style='min-height:200px !important;background-color:white;' class='container-fluid home shadow rounded p-2 mb-3 text-center' data-aos="fade-up">
   {% if recent == 'none' %}
     <h3 class="text-center mt-5">You have not tried the stroke analysis tool yet.<br>  See below to test it out!</h3>
   
@@ -54,6 +54,7 @@
   <div class="container text-center">
     <h3>Most Recent:</h3>
     
+    <div class="container">
     <div class="row">
       <div class="col-md-3">
       
@@ -79,50 +80,65 @@
         
       </div>
     </div>
-  
+  </div>
+
   </div>
   {% endif %}
 
 </div>
-<div class="row">
-
-    <div class="col-md-0">
-      
-        <!-- <div class="container rounded home shadow pt-2">
-            <a class="btn btn-primary btn-xl text-uppercase d-flex justify-content-center" href="">Hawkeye</a>
-            <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis voluptatem deserunt blanditiis soluta et odio quod eum 
-              inventore ad atque pariatur nam, repellendus fuga ducimus debitis necessitatibus nulla perferendis ipsa.</p>
-        </div>
-        <br> -->
-    </div>
-    <div class="col-md-12">
-        <div class="container pt-3 rounded home shadow w-75 text-center">
+<div class="container-fluid">
+    <div class="row rounded home shadow" style="background-color:white;" data-aos="fade-up">
+        <div class="col-md-12 pt-3 text-center">
             <a class="btn btn-primary btn-xl text-uppercase" href="{{ url_for('stroke') }}">Stroke Analysis</a>
-            <br>
-            <br>
-            <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis voluptatem deserunt blanditiis soluta et odio quod eum 
-              inventore ad atque pariatur nam, repellendus fuga ducimus debitis necessitatibus nulla perferendis ipsa.</p>
+        </div>
+        <div class="col-md-4 text-center p-3">
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea similique veniam veritatis est beatae dignissimos, non alias ipsum aperiam? Consectetur, consequatur. 
+            Perferendis veritatis, itaque molestias asperiores soluta ratione ducimus quos?</p>
+          <div class='container border'>
+            <img src="../static/assets/img/angles/angles.jpg" class="img-fluid" alt="Responsive image" id='start_phase' style="height: 400px; width:100%">
+        </div>
+        </div>
+        <div class="col-md-4 text-center p-3">
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea similique veniam veritatis est beatae dignissimos, non alias ipsum aperiam? Consectetur, consequatur. 
+            Perferendis veritatis, itaque molestias asperiores soluta ratione ducimus quos?</p>
+          <div class='container border'>
+              <img src="../static/assets/img/phases/load.jpg" class="img-fluid" alt="Responsive image" style="height: 400px; width:100%">
+        </div>
+        </div>
+        <div class="col-md-4 text-center p-3">
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea similique veniam veritatis est beatae dignissimos, non alias ipsum aperiam? Consectetur, consequatur. 
+            Perferendis veritatis, itaque molestias asperiores soluta ratione ducimus quos?</p>
+          <div class='container border'>
+              <img src="../static/assets/img/angles/angles.jpg" class="img-fluid" alt="Responsive image" id='start_phase' style="height: 400px; width:100%">
+        </div>
         </div>
         <br>
     </div>
-    <div class="col-md-0">
-        <!-- <div class="container rounded home shadow pt-2">
-          <a class="btn btn-primary btn-xl text-uppercase d-flex justify-content-center" href="{{ url_for('point') }}">Point Analysis</a>
-          <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis voluptatem deserunt blanditiis soluta et odio quod eum 
-              inventore ad atque pariatur nam, repellendus fuga ducimus debitis necessitatibus nulla perferendis ipsa.</p>
-        </div> -->
-        <br>
+
+</div>
+</div>
+</div> 
+
+<br>
+
+<div class="container-fluid p-4 footer-color">
+  <footer class="container text-center mb-2">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <p>&copy; 2020-2021 Tennis Sense - UCL - Avanade &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </div>
+      <div class="col-md-3">
+        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="/static/assets/img/logos/avanade.svg" alt="..." 
+          style="height:50px; width:45%"/></a>
     </div>
+    <div class="col-md-3">
+        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="/static/assets/img/logos/UCL.svg" alt="..."  
+          style="height:50px; width:55%"/></a>
+    </div>
+  </div>
+  </footer>
 </div>
 
 
-</div>
-<hr class="featurette-divider">
-
-<footer class="container text-center">
-  <p>&copy; 2020-2021 Tennis Sense - UCL - Avanade &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-</footer>
 
 {% endblock %}

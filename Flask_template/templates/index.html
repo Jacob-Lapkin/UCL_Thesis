@@ -14,11 +14,12 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/carousel.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
 
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
 
   </head>
-  <body>
+  <body style='background: linear-gradient(45deg, rgba(211,195,246,1) 0%, rgba(212,253,254,1) 39%, rgba(173,208,240,1) 65%, rgba(246,219,246,1) 100%);'>
 
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -105,7 +106,7 @@
 
         <!-- Three columns of text below the carousel -->
 
-        <div class="row">
+        <div class="row" data-aos="fade-down">
           
           <div class="col-lg-6 text-center">
             <span class="fa-stack fa-4x">
@@ -130,7 +131,7 @@
 
         <hr class="featurette-divider">
 
-        <div class="row featurette">
+        <div class="row featurette" data-aos="fade-right">
           <div class="col-md-7">
             <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
@@ -142,7 +143,7 @@
 
         <hr class="featurette-divider">
 
-        <div class="row featurette">
+        <div class="row featurette" data-aos="fade-left">
           <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
@@ -154,7 +155,7 @@
 
         <hr class="featurette-divider">
 
-        <div class="row featurette">
+        <div class="row featurette" data-aos="fade-right">
           <div class="col-md-7">
             <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
@@ -170,7 +171,7 @@
 
       </div><!-- /.container -->
 
-      <div class="py-5">
+      <div class="py-5" data-aos="fade-up">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 col-sm-6 my-3">
@@ -181,14 +182,16 @@
                 </div>
             </div>
         </div>
-        <hr class="featurette-divider">
 
     </div>
       <!-- FOOTER -->
+    <div class="container-fluid  p-5 footer-color reverse-margin">
       <footer class="container">
         <p class="float-right"><a href="#">Back to top</a></p>
         <p>&copy; 2020-2021 Tennis Sense - UCL - Avanade &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
+    </div>
+      
       
     </main>
 
@@ -199,5 +202,12 @@
           <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
           <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
           <script src="{{url_for('static', filename='js/scripts.js')}}"></script>
+
+          <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+          <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+                <script>
+                  AOS.init();
+                </script>
   </body>
 </html>
