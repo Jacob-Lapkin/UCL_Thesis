@@ -284,9 +284,20 @@ def results():
     User_data_r_body=User_data_r_body, User_data_l_body=User_data_l_body, user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, 
     arm_tips=arm_tips, leg_tips=leg_tips,body_tips=body_tips, score=score)
 
+@app.route('/history', methods=['GET', 'POST'])
+@login_required
+def history():
+    all_score_data = []
+    scores_query = Score.query.filter_by(player_id = current_user.id).all()
+    for i in scores_query:
+        arranged_date = datetime.utcfromtimestamp(i.date).strftime('%Y-%m-%d')
+        all_score_data.append([i.score, arranged_date, i.pro_compare])
+    return render_template('history.html',all_score_data=all_score_data )
+
 
 @app.errorhandler(404)
 def page_not_found(e):
+    
     return render_template('404.html'), 404
 
 

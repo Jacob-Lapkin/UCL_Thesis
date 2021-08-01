@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+
 <nav class="navbar navbar-expand-sm navbar-dark bg-transparent">
     <a class="navbar-brand" href="{{ url_for('home') }}" style="margin-left: 2%;">Tennis Sense</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,10 +12,10 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('home') }}">Home</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="{{url_for('stroke')}}">Analysis</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="{{url_for('history')}}">History</a>
         </li>
         
@@ -37,48 +38,38 @@
 
   <div class="container home shadow rounded p-4 mt-5 mb-5 text-center" data-aos="fade-up" style="background-color: white;">
     <div class="container-fluid mb-4 text-center">
-          <legend class='border-bottom h1'>Stroke Analysis</legend>
+          <legend class='border-bottom h1'>Scoring History</legend>
   </div>
     <div id="content">
     <div class="containter mb-4">
-      <h5>Please upload a video of the desired stroke you wish to analyze</h5>
-      <p>Important Note: Click <a href="">here</a> for instructions on how to crop video before submission.</p>
-   </div>
-        <form method="POST" action='{{url_for("stroke")}}' class="container col-md-8 text-center">
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Professional Player</label>
-            <select name="player" class="form-control" id="exampleFormControlSelect1">
-              <option value="djok">Novak Djokovic</option>
-              <option value="rog">Roger Federer</option>
-              <option value="nadal">Rafael nadal</option>
-              <option value="serena">Serena Williams</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlSelect2">Stroke</label>
-            <select name="stroke" class="form-control" id="exampleFormControlSelect2">
-              <option value="serve">Serve</option>
-              <option value="return">Return</option>
-              <option value="return">Return</option>
-              <option value="volley">Volley</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlFile1">Example file input</label>
-            <input class='form-control' type="file" class="form-control-file" id="exampleFormControlFile1">
-          </div>
-          <button type="submit" class="btn btn-primary" id="stroke_submit" onclick="loading();">Submit</button>
-        </form>
-        <br>
-        <p class='text-center' style="color: red;">*Please do not refresh page when results are generated. Doing so will duplicate your results.<br>
-        </p>
-      </div>
-      <!-- Loading bar -->
-      <div id='process' style="display:none" class="container-fluid text-center mb-1">
-        <p>Processing data</p>
-      </div>
-      <div class='container-fluid text-center' id="loading" style="display:none"></div>
+      <h5>Below are your past scores for videos that have been uploaded to the stroke analysis tool</h5>
+   </div> 
+   <div class="container">
+       <table class="table" style="width:100%">
+        <thead class="thead-light">
+        <tr>
+          <th scope="col">Score</th>
+          <th scope="col">Date</th>
+          <th scope="col">Professional</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for element in all_score_data[::-1] %}
 
+        <tr>
+          <td scope="row">{{element[0]}}</td>
+          <td scope="row">{{element[2]}}</td>
+          <td scope="row">{{element[1]}}</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+      </table>
+
+               
+       
+   </div>      
+    </div>
   </div>
 <br>
 <br>
@@ -104,3 +95,4 @@
 
 
 {% endblock %}
+
