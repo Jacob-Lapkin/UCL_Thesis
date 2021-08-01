@@ -1,3 +1,4 @@
+
 /* Home Screen */
 .home {
     border: solid 1px lightgrey; 
@@ -42,4 +43,10 @@
 }
 
 
+/* Navbar */
+.nav-link:hover{
+  transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  border-bottom: 1px white solid;
+  transition: transform .2s ease-in-out;
+}
 

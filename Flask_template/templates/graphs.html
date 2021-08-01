@@ -11,11 +11,11 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('home') }}">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{url_for('stroke')}}">Link 2</a>
+        <li class="nav-item active">
+          <a class="nav-link" href="{{url_for('stroke')}}">Analysis</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{url_for('point')}}">Link 3</a>
+          <a class="nav-link" href="{{url_for('point')}}">History</a>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
@@ -235,25 +235,25 @@
           </button>
         </div>
         <div class="modal-body">
-        <div class='container mt-4 border'>
+        <div class='container mt-4 border' data-aos="fade-right">
             <label class='mt-2'>1. Starting Position</label>
             <img src="../static/assets/img/phases/start.jpg" class="img-fluid" alt="Responsive image" id='start_phase'>
             <p>the starting position phase is defined in this analytics tool as the time between when the player initially 
                 finishes bouncing the ball and when the player starts the upwards motion of the toss</p>
         </div>
-        <div class='container mt-4 border'>
+        <div class='container mt-4 border' data-aos="fade-left">
             <label class='mt-2'>2. Takeback and Load</label>
             <img src="../static/assets/img/phases/load.jpg" class="img-fluid" alt="Responsive image">
             <p>the takeback and load phase is defined in this analytics tool as the time between when the player has started taking the 
                 racquet back and when the player is at the bottom of their loading position.  </p>
         </div>
-        <div class='container mt-4 border'>
+        <div class='container mt-4 border' data-aos="fade-right">
             <label class='mt-2'>3. Extending</label>
             <img src="../static/assets/img/phases/extend.jpg" class="img-fluid" alt="Responsive image">
             <p>the extend phase is defined in this analytics tool as the time between when the player has started moving updwards towards the ball 
                 and when the player has started to follow through after making contact.  </p>
         </div>
-        <div class='container mt-4 border'>
+        <div class='container mt-4 border' data-aos="fade-left">
             <label class='mt-2'>4. Finish</label>
             <img src="../static/assets/img/phases/finish.jpg" class="img-fluid" alt="Responsive image">
             <p>the finish phase is defined in this analytics tool as the time between when the player has finished following through  
