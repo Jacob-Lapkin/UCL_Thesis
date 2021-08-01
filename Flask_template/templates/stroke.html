@@ -1,8 +1,8 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="#" style="margin-left: 2%;">Tennis Sense</a>
+<nav class="navbar navbar-expand-sm navbar-light">
+    <a class="navbar-brand" href="{{ url_for('home') }}" style="margin-left: 2%;">Tennis Sense</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,15 +11,13 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('home') }}">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link 2</a>
+        <li class="nav-item active">
+          <a class="nav-link" href="{{url_for('stroke')}}">Analysis</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{url_for('point')}}">Link 3</a>
+          <a class="nav-link" href="">History</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{{url_for('stroke')}}">Link 4</a>
-          </li>
+        
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">

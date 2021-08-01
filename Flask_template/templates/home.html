@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
   <a class="navbar-brand" href="#" style="margin-left: 2%;">Tennis Sense</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -12,10 +12,10 @@
         <a class="nav-link" href="{{ url_for('home') }}">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link 2</a>
+        <a class="nav-link" href="{{ url_for('stroke') }}">Analysis</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link 3</a>
+        <a class="nav-link" href="#">History</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
@@ -87,7 +87,9 @@
 <div class="container-fluid">
     <div class="row rounded home shadow" style="background-color:white;" data-aos="fade-up">
         <div class="col-md-12 pt-3 text-center">
+          <div class="container border-bottom p-3 ml-4 mr-4">
             <a class="btn btn-primary btn-xl text-uppercase" href="{{ url_for('stroke') }}">Stroke Analysis</a>
+          </div>
         </div>
         <div class="col-md-4 text-center p-3">
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea similique veniam veritatis est beatae dignissimos, non alias ipsum aperiam? Consectetur, consequatur. 
