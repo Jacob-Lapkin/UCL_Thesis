@@ -294,6 +294,10 @@ def history():
         all_score_data.append([i.score, arranged_date, i.pro_compare])
     return render_template('history.html',all_score_data=all_score_data )
 
+@app.route('/gallery', methods=['GET', 'POST'])
+@login_required
+def gallery():
+    return render_template('gallery.html')
 
 @app.errorhandler(404)
 def page_not_found(e):
