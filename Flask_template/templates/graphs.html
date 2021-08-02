@@ -15,7 +15,7 @@
           <a class="nav-link" href="{{url_for('stroke')}}">Analysis</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{url_for('point')}}">History</a>
+          <a class="nav-link" href="{{url_for('history')}}">History</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{url_for('gallery')}}">Gallery</a>
@@ -620,6 +620,11 @@ var myChart = new Chart(ctx, {
 });
 </script>
 
+<script type="text/javascript">
+    window.onbeforeunload = function () {
+     return 'Though your score will be saved, leaving this page will delete your results';
+    }
+   </script>
 
 
 
