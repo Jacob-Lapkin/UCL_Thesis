@@ -6,8 +6,8 @@ import numpy as np
 from scipy import stats
 from matplotlib import pyplot as plt
 import scipy.signal as signal
-from pose_finder import angle_from_video
-from multi_class_azure import StrokeList
+from pose.pose_finder import angle_from_video
+from pose.multi_class_azure import StrokeList
 
 ######################################################################
 ########### FUNCTIONS TO USE AND MANIPILATE PRO PLAYER DATA###########

@@ -48,7 +48,7 @@ def StrokeClassifier(name, folder):
 def StrokeList(name,base, folder):
     result = []
     label = []
-    for ind, filename in enumerate(os.listdir(f'pose/User_test/{folder}')):
+    for ind, filename in enumerate(os.listdir(f'Flask_template/pose/User_test/{folder}')):
         n = 5
         if ind % n == 0 and ind != 0:
             if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.jpeg'): 

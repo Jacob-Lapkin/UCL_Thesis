@@ -19,12 +19,12 @@ from datetime import datetime
 
 from forms import point, Stroke
 
+import os
+
 # importing data FIX THIS PATH
-import sys
-sys.path.append('/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose')
-from canvas_data import (Player_data, User_data, legs_tips_start, legs_tips_load, legs_tips_extend, legs_tips_finish,
+from pose.canvas_data import (Player_data, User_data, legs_tips_start, legs_tips_load, legs_tips_extend, legs_tips_finish,
                             arm_tip_summary, leg_score, body_score, total_score)
-from converting import converter, make_dir, delete_frames
+from pose.converting import converter, make_frame_dir, delete_frames, make_video_dir, delete_user_video, is_empty
 
 ###########################
 ######### LOGIN/REGISTER FORMS #############
@@ -139,7 +139,8 @@ def register():
 @app.route('/home')
 @login_required
 def home(): 
-    make_dir(current_user.id)  
+    make_frame_dir(current_user.id)
+    make_video_dir(current_user.id)
     
     # finding the most recent and getting data from the scores
     scores_query = Score.query.filter_by(player_id = current_user.id).all()
@@ -196,88 +197,99 @@ def home():
 @login_required
 def stroke():
     if request.method == 'POST':
+        video_upload = request.files["user_video"]
+        filename = video_upload.filename
+        path = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/Flask_template/pose/user_serves/{current_user.id}'
+        session['File_name'] = filename
         session['Stroke'] = request.form['stroke']
         session['Professional'] = request.form['player']
-        return redirect(url_for('results'))
+        video_upload.save(os.path.join(path, filename))
+
+        return redirect(url_for('results', filename=filename))
     return render_template('stroke.html')
 
 @app.route('/results',  methods=["GET", "POST"])
 @login_required
 def results():
 
-    professional = session.get('Professional')
-    stroke = session.get('Stroke')
-#######################################################################         
-    # CREATING INSTANCE FOR PROFESSIONAL PLAYER
-    playerright_leg = Player_data(f'pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_right', f'{professional}')
-    playerleft_leg = Player_data(f'pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_left', f'{professional}')
-    playerright_arm = Player_data(f'pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_right', f'{professional}')
-    playerleft_arm = Player_data(f'pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_left', f'{professional}')
-    playerright_body = Player_data(f'pose/data/{stroke}_data/{professional}servebody.csv', 'elbow2hip_right', f'{professional}')
-    playerleft_body = Player_data(f'pose/data/{stroke}_data/{professional}servebody.csv', 'elbow2hip_left', f'{professional}')
-    # getting data from that player
-    dataright = playerright_leg.get_data()
-    dataleft = playerleft_leg.get_data()
-    dataright_arm = playerright_arm.get_data()
-    dataleft_arm = playerleft_arm.get_data()
-    dataright_body = playerright_body.get_data()
-    dataleft_body = playerleft_body.get_data()
+    if is_empty(current_user.id) != True:
 
-    # getting labels from that player
-    label = playerright_leg.labels()
-    label_arm = playerright_arm.labels()
-    label_body = playerright_body.labels()
-    # getting shot breakdown
-    doughnut_data = playerright_leg.doughnut()
-    # getting name of player
-    player_name = playerright_leg.name
-    # getting the body part that is analyzed
-#######################################################################
-    # uncommen the below to convert video
-    converter('pose/videos/serve/lapkin.mp4', 'Jacob', str(current_user.id))
+        professional = session.get('Professional')
+        stroke = session.get('Stroke')
+    #######################################################################         
+        # CREATING INSTANCE FOR PROFESSIONAL PLAYER
+        playerright_leg = Player_data(f'Flask_template/pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_right', f'{professional}')
+        playerleft_leg = Player_data(f'Flask_template/pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_left', f'{professional}')
+        playerright_arm = Player_data(f'Flask_template/pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_right', f'{professional}')
+        playerleft_arm = Player_data(f'Flask_template/pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_left', f'{professional}')
+        playerright_body = Player_data(f'Flask_template/pose/data/{stroke}_data/{professional}servebody.csv', 'elbow2hip_right', f'{professional}')
+        playerleft_body = Player_data(f'Flask_template/pose/data/{stroke}_data/{professional}servebody.csv', 'elbow2hip_left', f'{professional}')
+        # getting data from that player
+        dataright = playerright_leg.get_data()
+        dataleft = playerleft_leg.get_data()
+        dataright_arm = playerright_arm.get_data()
+        dataleft_arm = playerleft_arm.get_data()
+        dataright_body = playerright_body.get_data()
+        dataleft_body = playerleft_body.get_data()
 
-    # CREATING INSTANCE FOR USER 
-    user = User_data('pose/videos/serve/lapkin.mp4', 'Jacob', str(current_user.id), str(current_user.id))
-    # Getting user data for right and left
-    User_data_r = list(user.get_data('hip2ankle_right'))
-    User_data_l = list(user.get_data('hip2ankle_left'))
-    User_data_r_arm = list(user.get_data('shoulder2wrist_right'))
-    User_data_l_arm = list(user.get_data('shoulder2wrist_left'))
-    User_data_r_body = list(user.get_data('elbow2hip_right'))
-    User_data_l_body = list(user.get_data('elbow2hip_left'))
+        # getting labels from that player
+        label = playerright_leg.labels()
+        label_arm = playerright_arm.labels()
+        label_body = playerright_body.labels()
+        # getting shot breakdown
+        doughnut_data = playerright_leg.doughnut()
+        # getting name of player
+        player_name = playerright_leg.name
+        # getting the body part that is analyzed
+    #######################################################################
+        # uncommen the below to convert video
+        converter(f'Flask_template/pose/user_serves/{current_user.id}/{session.get("File_name")}', 'Jacob', str(current_user.id))
 
-    # Getting user labels 
-    User_label = user.labels()
-    # Getting user's name
-    User_name = user.name
+        # CREATING INSTANCE FOR USER 
+        user = User_data(f'Flask_template/pose/user_serves/{current_user.id}/{session.get("File_name")}', 'Jacob', str(current_user.id), str(current_user.id))
+        # Getting user data for right and left
+        User_data_r = list(user.get_data('hip2ankle_right'))
+        User_data_l = list(user.get_data('hip2ankle_left'))
+        User_data_r_arm = list(user.get_data('shoulder2wrist_right'))
+        User_data_l_arm = list(user.get_data('shoulder2wrist_left'))
+        User_data_r_body = list(user.get_data('elbow2hip_right'))
+        User_data_l_body = list(user.get_data('elbow2hip_left'))
 
-    User_doughnut = user.doughnut()
-#######################################################################
-    # SHOWING RECOMMENDATIONS
-    leg_tips = leg_score(user, playerright_arm, playerleft_arm)
-    arm_tips = arm_tip_summary(user, playerright_arm, playerleft_arm)
-    body_tips = body_score(user, playerright_body, playerleft_body)
-    score = total_score(user, playerright_leg, playerleft_leg, playerright_arm, playerleft_arm, playerright_body, playerleft_body)
+        # Getting user labels 
+        User_label = user.labels()
+        # Getting user's name
+        User_name = user.name
 
-########################################################################
-    #Delete frames from folder
-    delete_frames(str(current_user.id))
+        User_doughnut = user.doughnut()
+    #######################################################################
+        # SHOWING RECOMMENDATIONS
+        leg_tips = leg_score(user, playerright_arm, playerleft_arm)
+        arm_tips = arm_tip_summary(user, playerright_arm, playerleft_arm)
+        body_tips = body_score(user, playerright_body, playerleft_body)
+        score = total_score(user, playerright_leg, playerleft_leg, playerright_arm, playerleft_arm, playerright_body, playerleft_body)
 
-    # getting current unix timestamp
-    current_time = time.time()
+    ########################################################################
+        #Delete frames from folder
+        delete_frames(str(current_user.id))
+        delete_user_video(str(current_user.id))
 
-    # assigning pro name
-    name = None
-    if player_name == 'djok':
-        name = 'Djokovic'
-    # adding the score to the database
-    insert_score = Score(score = score,
-                         player_id= current_user.id,
-                         pro_compare = name,
-                         date = current_time)
-    db.session.add(insert_score)
-    db.session.commit()
-    
+        # getting current unix timestamp
+        current_time = time.time()
+
+        # assigning pro name
+        name = None
+        if player_name == 'djok':
+            name = 'Djokovic'
+        # adding the score to the database
+        insert_score = Score(score = score,
+                            player_id= current_user.id,
+                            pro_compare = name,
+                            date = current_time)
+        db.session.add(insert_score)
+        db.session.commit()
+    else:
+        return redirect(url_for('home'))
+
     return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, data_r_arm=dataright_arm,data_l_arm=dataleft_arm,label_arm=label_arm,
     dataright_body=dataright_body, dataleft_body=dataleft_body, label_body=label_body, doughnut_data=doughnut_data, name=player_name,
     user_right=User_data_r, user_left=User_data_l, user_left_arm=User_data_l_arm, user_right_arm=User_data_r_arm,

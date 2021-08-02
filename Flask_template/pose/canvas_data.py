@@ -1,8 +1,8 @@
 from numpy.lib.shape_base import split
-from pro_angle_data import smoothed_df, phase_divider, grab_label, split_data, split_label, display_df
-from user_angle_data import smoothed_user_df, grab_user_label, display_user_df, phase_user_divider
-from multi_class_azure import StrokeList
-from recommendations_data import *
+from pose.pro_angle_data import smoothed_df, phase_divider, grab_label, split_data, split_label, display_df
+from pose.user_angle_data import smoothed_user_df, grab_user_label, display_user_df, phase_user_divider
+from pose.multi_class_azure import StrokeList
+from pose.recommendations_data import *
 import matplotlib.pyplot as plt
 
 #############################################################################

@@ -1,6 +1,6 @@
 from scipy.signal.ltisys import dfreqresp
-from pro_angle_data import smoothed_df, make_df
-from user_angle_data import make_user_df, grab_user_phase, smoothed_user_df
+from pose.pro_angle_data import smoothed_df, make_df
+from pose.user_angle_data import make_user_df, grab_user_phase, smoothed_user_df
 import numpy as np
 import pandas as pd
 
