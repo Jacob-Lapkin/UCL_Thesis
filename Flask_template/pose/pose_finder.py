@@ -128,7 +128,7 @@ def angle_from_video(path):
                                     mp_drawing.DrawingSpec(color=(245,66,230), thickness=2, circle_radius=2) 
                                     )                   
 
-            cv2.imshow('Mediapipe Feed', image)
+            #cv2.imshow('Mediapipe Feed', image)
             if cv2.waitKey(10) & 0xFF == ord('q') or bad_frame == False:
                 d = {'frame':frame_count,'hip2ankle_left':empty_left_leg, 'hip2ankle_right':empty_right_leg,
                  'shoulder2wrist_left':empty_left_arm, 'shoulder2wrist_right':empty_right_arm, 'elbow2hip_left': empty_left_body, 'elbow2hip_right': empty_right_body}
@@ -140,7 +140,7 @@ def angle_from_video(path):
         cv2.destroyAllWindows()
 
 
-print(angle_from_video('Flask_template/pose/videos/serve/djok/djokserveside.mp4'))
+#print(angle_from_video('Flask_template/pose/videos/serve/djok/djokserveside.mp4'))
 
 def user_data(path):
     df = angle_from_video(path)

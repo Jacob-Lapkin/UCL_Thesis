@@ -27,6 +27,13 @@ def delete_frames(user):
         except Exception as e:
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
+def is_empty(user):
+    path = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/Flask_template/pose/user_serves/{user}'
+    if len(os.listdir(path)) == 0:
+        return True
+    else:    
+        False
+
 # Opens the Video file
 def converter(path, name, user):
     cap= cv2.VideoCapture(path)
@@ -65,16 +72,8 @@ def make_video_dir(id):
 
 #make_dir(10)
 
-def is_empty(user):
-    path = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/Flask_template/pose/user_serves/{user}'
-    if len(os.listdir(path)) == 0:
-        return True
-    else:    
-        False
 
-if is_empty(1) != True:
-    print('This folder is empty')
-else:
-    print("This folder is not empty")
+
+
 
 
