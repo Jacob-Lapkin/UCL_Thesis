@@ -4,7 +4,7 @@
 
 <div class="container col-md-6 home shadow rounded p-4 mt-4" data-aos="fade-up" style="background-color:white;">
     <div class="container text-center">
-        <legend class='border-bottom mb-4 h1'>Register</legend>
+        <legend class='mb-4 h1 header-main bottom-bord'>Register</legend>
     </div>
     <form method="POST" action='{{url_for("register")}}'>
       {{form.hidden_tag()}}
@@ -52,7 +52,7 @@
         </div>
         <br>
         <div class="container d-flex justify-content-center">
-            {{form.submit(class="btn btn-primary btn-l rounded")}}
+            {{form.submit(class="btn btn-primary btn-xl rounded button-main")}}
         </div>
       </form>
       <br>

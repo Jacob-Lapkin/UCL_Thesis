@@ -31,13 +31,11 @@
   </div>
 </nav>
   <!-- end of nav-->
-<div class="container">
-
-<div class="container-fluid mt-4">
+<div class="container mt-3">
 <div style='min-height:200px !important;background-color:white;' class='container-fluid home shadow rounded p-2 mb-3 text-center' data-aos="fade-up">
   <div class="container-fluid mt-4 mb-4" >
     <div class="container text-center">
-        <legend class='border-bottom h1'>Welcome {{current_user.first}}</legend>
+        <legend class='h1 header-main bottom-bord'>Welcome {{current_user.first}}</legend>
     </div>
 </div>
 
@@ -49,7 +47,6 @@
   <div class="container text-center">
     <h3>Average Score: <strong>{{average}}</strong></h3>
   </div>
-  <br>
   <br>
 
   <div class="container text-center">
@@ -89,36 +86,33 @@
 </div>
 <div class="container-fluid">
     <div class="row rounded home shadow" style="background-color:white;" data-aos="fade-up">
-        <div class="col-md-12 pt-3 text-center">
-          <div class="container border-bottom p-3 ml-4 mr-4">
-            <a class="btn btn-primary btn-xl text-uppercase" href="{{ url_for('stroke') }}">Stroke Analysis</a>
+          <div class="container p-3 ml-4 mr-4 text-center bottom-bord">
+            <a class="btn btn-primary btn-xl text-uppercase button-main" href="{{ url_for('stroke') }}">Stroke Analysis</a>
           </div>
-        </div>
         <div class="col-md-4 text-center p-3">
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea similique veniam veritatis est beatae dignissimos, non alias ipsum aperiam? Consectetur, consequatur. 
             Perferendis veritatis, itaque molestias asperiores soluta ratione ducimus quos?</p>
-          <div class='container border'>
+          <div class='container whole-bord'>
             <img src="../static/assets/img/angles/angles.jpg" class="img-fluid" alt="Responsive image" id='start_phase' style="height: 400px; width:100%">
         </div>
         </div>
         <div class="col-md-4 text-center p-3">
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea similique veniam veritatis est beatae dignissimos, non alias ipsum aperiam? Consectetur, consequatur. 
             Perferendis veritatis, itaque molestias asperiores soluta ratione ducimus quos?</p>
-          <div class='container border'>
+          <div class='container whole-bord'>
               <img src="../static/assets/img/phases/load.jpg" class="img-fluid" alt="Responsive image" style="height: 400px; width:100%">
         </div>
         </div>
         <div class="col-md-4 text-center p-3">
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea similique veniam veritatis est beatae dignissimos, non alias ipsum aperiam? Consectetur, consequatur. 
             Perferendis veritatis, itaque molestias asperiores soluta ratione ducimus quos?</p>
-          <div class='container border'>
+          <div class='container whole-bord'>
               <img src="../static/assets/img/angles/angles.jpg" class="img-fluid" alt="Responsive image" id='start_phase' style="height: 400px; width:100%">
         </div>
         </div>
         <br>
     </div>
 
-</div>
 </div>
 </div> 
 

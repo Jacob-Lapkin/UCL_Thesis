@@ -36,7 +36,7 @@
 <div class="container home shadow rounded p-3 mt-4 text-center footer-color" data-aos="fade-up">
     <div class="container-fluid">
         <div class="container-fluid text-center">
-            <legend class='border-bottom h1'>Statistics</legend>
+            <legend class='h1 header-main bottom-bord'>Statistics</legend>
         </div>
     </div>
 
@@ -114,19 +114,27 @@
 <div class="container home shadow rounded p-3 mt-4 mb-4 footer-color" data-aos="fade-up" id='content'>
     <div class="container-fluid">
         <div class="container-fluid text-center">
-            <legend class='border-bottom h1'>Results and Recommendations</legend>
+            <legend class='h1 header-main bottom-bord'>Score</legend>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12 pr-5 pl-5">
+            <div class='container-fluid text-center mt-3 rounded'>
+                <h1>{{score}}/100</h1>
+            </div>
             <div class="container-fluid text-center p-2">
                 <button type="submit" class="btn btn-secondary btn-sm rounded" id="scoring_criteria" data-toggle="modal" data-target="#exampleModal3" >Scoring Criteria</button>
             </div>
-            <div class='container-fluid text-center mt-3 border rounded'>
-                <h1>{{score}}/100</h1>
-                <p>Score</p>
-            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container home shadow rounded p-3 mt-4 mb-4 footer-color" data-aos="fade-up" id='content'>
+    <div class="container-fluid">
+        <div class="container-fluid text-center">
+            <legend class='h1 header-main bottom-bord'>Recommendations</legend>
         </div>
     </div>
     <div class="row">
@@ -137,9 +145,9 @@
                     <ul>
                         {% for tip in leg_tips %}
                         {% if '!' in tip  %}
-                        <li class=mt-2 style="color: green;"><i class="fas fa-check-circle"></i> {{tip}}</li>
+                        <li class=mt-2><i style="color: green;" class="fas fa-check-circle"></i> {{tip}}</li>
                         {% elif '!' not in tip  %}
-                        <li class=mt-2 style="color: red;"><i class="fas fa-times-circle"></i> {{tip}}</li>
+                        <li class=mt-2><i style="color: red;" class="fas fa-times-circle"></i> {{tip}}</li>
                         {% endif %}
                         {% endfor %}
                     </ul>
@@ -149,9 +157,9 @@
                     <ul>
                         {% for tip in arm_tips %}
                         {% if '!' in tip  %}
-                        <li class=mt-2 style="color: green;"><i class="fas fa-check-circle"></i> {{tip}}</li>
+                        <li class=mt-2><i style="color: green;" class="fas fa-check-circle"></i> {{tip}}</li>
                         {% elif '!' not in tip  %}
-                        <li class=mt-2 style="color: red;"><i class="fas fa-times-circle"></i> {{tip}}</li>
+                        <li class=mt-2><i style="color: red;" class="fas fa-times-circle"></i> {{tip}}</li>
                         {% endif %}
                         {% endfor %}
                     </ul>
@@ -161,9 +169,9 @@
                     <ul>
                         {% for tip in body_tips %}
                         {% if '!' in tip  %}
-                        <li class=mt-2 style="color: green;"><i class="fas fa-check-circle"></i> {{tip}}</li>
+                        <li class=mt-2><i class="fas fa-check-circle" style="color: green;"></i> {{tip}}</li>
                         {% elif '!' not in tip  %}
-                        <li class=mt-2 style="color: red;"><i class="fas fa-times-circle"></i> {{tip}}</li>
+                        <li class=mt-2><i style="color: red;" class="fas fa-times-circle"></i> {{tip}}</li>
                         {% endif %}
                         {% endfor %}
                     </ul>
@@ -217,7 +225,7 @@
             <p><span style="color: blue;">Blue</span><span> = Legs (angle from the hip to the knee to the ankle)</span></p>
             <p><span style="color: green;">Green</span><span> = Body (angle from the elbow to the shoulder to the hip)</span></p>
         </div>
-        <div class='container mt-4 border'>
+        <div class='container mt-4 whole-bord'>
             <img src="../static/assets/img/angles/angles.jpg" class="img-fluid" alt="Responsive image" id='start_phase'>
         </div>
         </div>
@@ -236,25 +244,25 @@
           </button>
         </div>
         <div class="modal-body">
-        <div class='container mt-4 border' data-aos="fade-right">
+        <div class='container mt-4 whole-bord' data-aos="fade-right">
             <label class='mt-2'>1. Starting Position</label>
             <img src="../static/assets/img/phases/start.jpg" class="img-fluid" alt="Responsive image" id='start_phase'>
             <p>the starting position phase is defined in this analytics tool as the time between when the player initially 
                 finishes bouncing the ball and when the player starts the upwards motion of the toss</p>
         </div>
-        <div class='container mt-4 border' data-aos="fade-left">
+        <div class='container mt-4 whole-bord' data-aos="fade-left">
             <label class='mt-2'>2. Takeback and Load</label>
             <img src="../static/assets/img/phases/load.jpg" class="img-fluid" alt="Responsive image">
             <p>the takeback and load phase is defined in this analytics tool as the time between when the player has started taking the 
                 racquet back and when the player is at the bottom of their loading position.  </p>
         </div>
-        <div class='container mt-4 border' data-aos="fade-right">
+        <div class='container mt-4 whole-bord' data-aos="fade-right">
             <label class='mt-2'>3. Extending</label>
             <img src="../static/assets/img/phases/extend.jpg" class="img-fluid" alt="Responsive image">
             <p>the extend phase is defined in this analytics tool as the time between when the player has started moving updwards towards the ball 
                 and when the player has started to follow through after making contact.  </p>
         </div>
-        <div class='container mt-4 border' data-aos="fade-left">
+        <div class='container mt-4 whole-bord' data-aos="fade-left">
             <label class='mt-2'>4. Finish</label>
             <img src="../static/assets/img/phases/finish.jpg" class="img-fluid" alt="Responsive image">
             <p>the finish phase is defined in this analytics tool as the time between when the player has finished following through  

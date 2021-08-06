@@ -21,7 +21,7 @@
 
   #loading {
     border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
+    border-top: 16px solid #1d41f4; /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -51,3 +51,35 @@
   transition: transform .2s ease-in-out;
 }
 
+/* font colors */
+.header-main {
+  color: #1d41f4
+}
+
+/* button */
+.button-main {
+  background: rgb(29,65,244);
+background: linear-gradient(45deg, rgba(29,65,244,1) 0%, rgba(250,24,178,1) 99%);
+  border: rgb(29,65,244) !important;
+  color: white !important;
+}
+
+.button-main:hover{
+  background: rgb(100,0,244);
+background: linear-gradient(45deg, rgba(100,0,244,1) 0%, rgba(250,0,150,1) 99%);
+  border: rgb(100,0,244) !important;
+}
+
+.button-radius {
+  border-radius: 20px !important;
+}
+
+
+/* border */
+.bottom-bord {
+  border-bottom: rgba(225,185,230,1) 2px solid !important;
+}
+
+.whole-bord {
+  border: rgba(225,185,230,1) 1px solid !important;
+}
