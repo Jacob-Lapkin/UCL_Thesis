@@ -98,20 +98,6 @@ $(document).ready(function(){
       });
   });
 
-  /* $(document).ready(function(){
-    $("#Arms_user").click(function(){
-      $("#content_legs_user").hide();
-    });
-    $("#Arms_user").click(function(){
-      $("#content_arms_user").show();
-    });
-    $("#Legs_user").click(function(){
-        $("#content_arms_user").hide();
-      });
-      $("#Legs_user").click(function(){
-        $("#content_legs_user").show();
-      });
-  }); */
 
   // hiding graph content and displaying other graph
 $(document).ready(function(){
@@ -143,6 +129,9 @@ $(document).ready(function(){
       $("#content_body_user").show();
     });
 });
+
+
+
 
   
 
