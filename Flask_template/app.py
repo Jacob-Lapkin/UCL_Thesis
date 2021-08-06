@@ -55,8 +55,12 @@ app = Flask(__name__)
 db = SQLAlchemy((app))
 
 bcrypt = Bcrypt(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+#old sqlite database
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'mykey'
+
+#new sql db
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Lizzy1641@localhost/tennis'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
