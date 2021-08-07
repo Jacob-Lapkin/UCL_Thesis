@@ -32,12 +32,12 @@
 </nav>
   <!-- end of nav-->
 <div class="container mt-3">
-<div style='min-height:200px !important;background-color:white;' class='container-fluid home shadow rounded p-2 mb-3 text-center' data-aos="fade-up">
   <div class="container-fluid mt-4 mb-4" >
     <div class="container text-center">
         <legend class='h1 header-main bottom-bord'>Welcome {{current_user.first}}</legend>
     </div>
 </div>
+<div style='min-height:200px !important;background-color:white;' class='container-fluid home shadow rounded p-2 mb-3 text-center' data-aos="fade-up">
 
   {% if recent == 'none' %}
     <h3 class="text-center mt-5">You have not tried the stroke analysis tool yet.<br>  See below to test it out!</h3>
@@ -47,7 +47,7 @@
   <div class="row">
 
   
-  <div class="container">
+  <div class="container mb-3">
     <h3>Average Score: <br><strong style="font-size: 250%;">{{average}}</strong></h3>
   </div>
 
@@ -88,25 +88,22 @@
 <div class="container-fluid">
     <div class="row rounded home shadow" style="background-color:white;" data-aos="fade-up">
           <div class="container p-3 ml-4 mr-4 text-center bottom-bord">
-            <a class="btn btn-primary btn-xl text-uppercase button-main" href="{{ url_for('stroke') }}">Stroke Analysis</a>
+            <a class="btn btn-primary btn-xl text-uppercase button-main p-3" href="{{ url_for('stroke') }}">Stroke Analysis</a>
           </div>
         <div class="col-md-4 text-center p-3">
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea similique veniam veritatis est beatae dignissimos, non alias ipsum aperiam? Consectetur, consequatur. 
-            Perferendis veritatis, itaque molestias asperiores soluta ratione ducimus quos?</p>
+          <p>Video tape your serve from the side of your dominant arm or your racquet holding arm. You may need a coach/participant to help with the recording.</p>
           <div class='container whole-bord'>
             <img src="../static/assets/img/angles/angles.jpg" class="img-fluid" alt="Responsive image" id='start_phase' style="height: 400px; width:100%">
         </div>
         </div>
         <div class="col-md-4 text-center p-3">
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea similique veniam veritatis est beatae dignissimos, non alias ipsum aperiam? Consectetur, consequatur. 
-            Perferendis veritatis, itaque molestias asperiores soluta ratione ducimus quos?</p>
+          <p>Trim your serve clip to start when the racquet is about to begin its takeback and finish when the non-dominant leg has landed and absorbed the impact.</p>
           <div class='container whole-bord'>
               <img src="../static/assets/img/phases/load.jpg" class="img-fluid" alt="Responsive image" style="height: 400px; width:100%">
         </div>
         </div>
         <div class="col-md-4 text-center p-3">
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea similique veniam veritatis est beatae dignissimos, non alias ipsum aperiam? Consectetur, consequatur. 
-            Perferendis veritatis, itaque molestias asperiores soluta ratione ducimus quos?</p>
+          <p>Select the professional player that you most want to mirror to recieve relevant comparison feedback. Analysis will compare your serves and reccommend further steps.</p>
           <div class='container whole-bord'>
               <img src="../static/assets/img/angles/angles.jpg" class="img-fluid" alt="Responsive image" id='start_phase' style="height: 400px; width:100%">
         </div>

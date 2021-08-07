@@ -64,14 +64,14 @@
 
 /* button */
 .button-main {
-  background: rgb(247,163,75);
-background: linear-gradient(90deg, rgba(247,163,75,1) 0%, rgba(3,91,245,1) 100%);
+  background: rgb(235,135,31);
+background: linear-gradient(90deg, rgba(235,135,31,1) 0%, rgba(20,89,209,1) 100%);
   border: rgb(247,163,75) !important;
   color: white !important;
 }
 
 .button-main:hover{
-  background: rgb(204,105,2);
+  background: rgb(235,135,31);
 background: linear-gradient(90deg, rgba(204,105,2,1) 0%, rgba(2,62,167,1) 100%);
   border: rgb(204,105,2) !important;
 }
@@ -83,7 +83,7 @@ background: linear-gradient(90deg, rgba(204,105,2,1) 0%, rgba(2,62,167,1) 100%);
 
 /* border */
 .bottom-bord {
-  border-bottom: #EC8107 2px solid !important;
+  border-bottom: #EC8107 1px solid !important;
 }
 
 .whole-bord {

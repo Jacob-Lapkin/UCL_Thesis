@@ -8,7 +8,7 @@
     </div>
     <form method="POST" action='{{url_for("login")}}'>
       {{form.hidden_tag()}}
-        <div class="form-group text-center mb-4">
+        <div class="form-group text-left mb-3">
           <div>
             {{form.email.label}}
           </div>
@@ -16,7 +16,7 @@
             {{form.email(class="form-control")}}
           </div>
         </div>
-        <div class="form-group text-center mb-4">
+        <div class="form-group text-left mb-3">
           <div>
             {{form.password.label}}
           </div>
@@ -24,7 +24,6 @@
             {{form.password(class="form-control")}}
           </div>
         </div>
-        <br>
         <div class="container d-flex justify-content-center">
             {{form.submit(class="btn btn-xl text-uppercase rounded button-main")}}
         </div>
