@@ -43,13 +43,13 @@
 <div style='min-height:100px !important;background-color:white;' class='container-fluid home shadow rounded p-2 mb-3 text-center' data-aos="fade-up">
 
   {% if recent == 'none' %}
-    <h3 class="text-center mt-5">You have not tried the stroke analysis tool yet.<br>  See below to test it out!</h3>
+    <h3 class="text-center mt-5 header-third">You have not tried the stroke analysis tool yet.<br>  See below to test it out!</h3>
   
   {% else %}
   
   <div class="row">
   <div class="container mb-2">
-    <h3>Average Score: <br><strong style="font-size: 200%;">{{average}}</strong></h3>
+    <h3 class="header-third">Average Score: <br><h1 class="header-secondary" style="font-size: 300%;">{{average}}</h1></h3>
   </div>
 </div>
 
@@ -61,22 +61,22 @@
 {% else %}
 <!-- most recent starts here -->
 <div style='min-height:150px !important;background-color:white;' class='container-fluid home shadow rounded mb-3 p-2 text-center' data-aos="fade-up">
-  <h3>Most Recent:</h3>
+  <h3 class="header-third">Most Recent:</h3>
   
   <div class="row">
     <div class="col-md-3">
     
     </div>
     <div class="col-md-2">
-      <p class="increase-font">Date: <br><strong>{{recent}}</strong></p>
+      <p class="increase-font header-secondary">Date: <br><strong>{{recent}}</strong></p>
 
     </div>
     <div class="col-md-2">
-      <p class='increase-font'>Professional: <br><strong>{{name}}</strong></p>
+      <p class='increase-font header-secondary'>Professional: <br><strong>{{name}}</strong></p>
 
     </div>
     <div class="col-md-2">
-      <p class="increase-font">Score: <br><strong>{{score}} {% if '-' in difference %}
+      <p class="increase-font header-secondary">Score: <br><strong>{{score}} {% if '-' in difference %}
         <i style='color:red' class="fa fa-arrow-circle-down" aria-hidden="true"></i> 
         {% elif '+' in difference %}
           <i style='color:green' class="fa fa-arrow-circle-up" aria-hidden="true"></i>
@@ -102,25 +102,25 @@
         <div class="col-lg-4 text-center p-3">
           <div class="container whole-bord rounded" style="min-height: 220px; max-height: 220px">
             <div class='container'>
-              <h1 class="text-center">1</h1>
+              <h1 class="text-center header-third">1</h1>
           </div>
-            <p>Video tape your serve from the side of your dominant arm or your racquet holding arm. You may need a coach/participant to help with the recording.</p>
-          </div>
-        </div>
-        <div class="col-lg-4 text-center p-3">
-          <div class="container whole-bord rounded" style="min-height: 220px; max-height: 220px">
-            <div class='container'>
-              <h1 class="text-center">2</h1>
-          </div>
-            <p>Trim your serve clip to start when the racquet is about to begin its takeback and finish when the non-dominant leg has landed and absorbed the impact.</p>
+            <p class="header-secondary ">Video tape your serve from the side of your dominant arm or your racquet holding arm. You may need a coach/participant to help with the recording.</p>
           </div>
         </div>
         <div class="col-lg-4 text-center p-3">
           <div class="container whole-bord rounded" style="min-height: 220px; max-height: 220px">
             <div class='container'>
-              <h1 class="text-center">3</h1>
+              <h1 class="text-center header-third">2</h1>
           </div>
-            <p>Select the professional player that you most want to mirror to recieve relevant comparison feedback. Analysis will compare your serves and reccommend further steps.</p>
+            <p class="header-secondary ">Trim your serve clip to start when the racquet is about to begin its takeback and finish when the non-dominant leg has landed and absorbed the impact.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 text-center p-3">
+          <div class="container whole-bord rounded" style="min-height: 220px; max-height: 220px">
+            <div class='container'>
+              <h1 class="text-center header-third">3</h1>
+          </div>
+            <p class="header-secondary ">Select the professional player that you most want to mirror to recieve relevant comparison feedback. Analysis will compare your serves and reccommend further steps.</p>
           </div>
         </div>
         <br>

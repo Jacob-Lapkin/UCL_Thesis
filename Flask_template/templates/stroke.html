@@ -43,12 +43,12 @@
   </div>
     <div id="content">
     <div class="containter mb-4">
-      <h5>Please upload a video of the desired stroke you wish to analyze</h5>
-      <p>Important Note: Click <a href="">here</a> for instructions on how to crop video before submission.</p>
+      <h5 class="header-third">Please upload a video of the desired stroke you wish to analyze</h5>
+      <p class="header-secondary ">Important Note: Click <a href="">here</a> for instructions on how to crop video before submission.</p>
    </div>
         <form method="POST" action='{{url_for("stroke")}}' class="container col-md-8" enctype="multipart/form-data">
           <div class="form-group text-left">
-            <label for="exampleFormControlSelect1">Professional Player</label>
+            <label for="exampleFormControlSelect1" class="header-third">Professional Player</label>
             <select name="player" class="form-control" id="exampleFormControlSelect1">
               <option value="djok">Novak Djokovic</option>
               <option value="rog">Roger Federer</option>
@@ -57,7 +57,7 @@
             </select>
           </div>
           <div class="form-group text-left">
-            <label for="exampleFormControlSelect2">Stroke</label>
+            <label for="exampleFormControlSelect2" class="header-third">Stroke</label>
             <select name="stroke" class="form-control" id="exampleFormControlSelect2">
               <option value="serve">Serve</option>
               <option value="return">Return</option>
@@ -66,7 +66,7 @@
             </select>
           </div>
           <div class="form-group text-left">
-            <label for="exampleFormControlFile1">Example file input</label>
+            <label for="exampleFormControlFile1" class="header-third">Example file input</label>
             <input class='form-control' type="file" name="user_video" class="form-control-file" id="exampleFormControlFile1" required>
           </div>
           <button type="submit" class="btn btn-primary btn-rounded pl-4 pr-4 button-main" id="stroke_submit" onclick="loading();">Submit</button>
@@ -77,7 +77,7 @@
       </div>
       <!-- Loading bar -->
       <div id='process' style="display:none" class="container-fluid text-center mb-1">
-        <p>Processing data</p>
+        <p class="header-secondary ">Processing data</p>
       </div>
       <div class='container-fluid text-center' id="loading" style="display:none"></div>
 

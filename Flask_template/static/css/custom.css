@@ -59,9 +59,16 @@
 }
 /* fonts */
 .header-main {
-  color: #163ada;
+  color: #00699e;
 }
 
+.header-secondary {
+  color:#5a5a5a
+}
+
+.header-third {
+  color: #014466;
+}
 .increase-font {
   font-size: 125%;
 }
@@ -70,18 +77,19 @@
   font-size: 75%;
 }
 
+
 /* button */
 .button-main {
   background: rgb(235,135,31);
-background: linear-gradient(90deg, rgba(235,135,31,1) 0%, rgba(20,89,209,1) 100%);
-  border: rgb(247,163,75) !important;
+background: linear-gradient(90deg, rgba(235,135,31,1) 0%, rgba(0,105,158,1) 100%);
+  border: rgb(235,135,31) !important;
   color: white !important;
 }
 
 .button-main:hover{
-  background: rgb(235,135,31);
-background: linear-gradient(90deg, rgba(204,105,2,1) 0%, rgba(2,62,167,1) 100%);
-  border: rgb(204,105,2) !important;
+  background: rgb(224,119,9);
+background: linear-gradient(90deg, rgba(224,119,9,1) 0%, rgba(1,66,98,1) 100%);
+  border: rgb(224,119,9) !important;
 }
 
 .button-radius {

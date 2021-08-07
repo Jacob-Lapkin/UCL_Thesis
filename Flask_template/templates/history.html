@@ -43,24 +43,24 @@
   </div>
     <div id="content">
     <div class="containter mb-4">
-      <h5>Below are your past scores for videos that have been uploaded to the stroke analysis tool</h5>
+      <h5 class="header-third">Below are your past scores for videos that have been uploaded to the stroke analysis tool</h5>
    </div> 
    <div class="container">
        <table class="table" style="width:100%">
         <thead class="thead-light">
         <tr>
-          <th scope="col">Score</th>
-          <th scope="col">Professional</th>
-          <th scope="col">Date</th>
+          <th class='header-third' scope="col">Score</th>
+          <th class='header-third' scope="col">Professional</th>
+          <th class='header-third' scope="col">Date</th>
         </tr>
         </thead>
         <tbody>
         {% for element in all_score_data[::-1] %}
 
         <tr>
-          <td scope="row">{{element[0]}}</td>
-          <td scope="row">{{element[2]}}</td>
-          <td scope="row">{{element[1]}}</td>
+          <td class="header-secondary" scope="row">{{element[0]}}</td>
+          <td class="header-secondary" scope="row">{{element[2]}}</td>
+          <td class="header-secondary" scope="row">{{element[1]}}</td>
         </tr>
         {% endfor %}
 

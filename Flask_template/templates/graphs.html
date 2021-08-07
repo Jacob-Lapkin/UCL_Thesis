@@ -56,7 +56,7 @@
                     <button class="btn btn-outline-primary btn-sm" id="Body" onclick="content_body();">Body</button>
                 </div>
             </div>
-            <legend class='border-bottom h6'>{{name}}'s right and left arm throughout the stroke</legend>
+            <legend class='border-bottom h6 header-secondary '>{{name}}'s right and left arm throughout the stroke</legend>
             <div class="container" id="content_legs">
                 <canvas id="myChart" max-width="300" max-height="300"></canvas>
             </div>
@@ -79,7 +79,7 @@
                     <button class="btn btn-outline-primary btn-sm" id="Body_user" onclick="content_body_user();">Body</button>
                 </div>
             </div>
-            <legend class='border-bottom h6'>Your right and left angles throughout the stroke</legend>
+            <legend class='border-bottom h6 header-secondary'>Your right and left angles throughout the stroke</legend>
             <div class="container" id="content_legs_user">
                 <canvas id="myChart4" max-width="300" max-height="300"></canvas>
             </div>
@@ -99,11 +99,11 @@
             <button type="submit" class="btn btn-secondary btn-sm rounded" id="phase_skteches" data-toggle="modal" data-target="#exampleModal">Phase Diagrams</button>
         </div>
         <div class="col-md-6">
-            <legend class='border-bottom h6'>{{name}} shot breakdown (%)</legend>
+            <legend class='border-bottom h6 header-secondary'>{{name}} shot breakdown (%)</legend>
             <canvas id="myChart7" max-width="300" max-height="300"></canvas>
         </div>
         <div class="col-md-6">
-            <legend class='border-bottom h6'>Your shot breakdown (%)</legend>
+            <legend class='border-bottom h6 header-secondary'>Your shot breakdown (%)</legend>
             <canvas id="myChart8" max-width="300" max-height="300"></canvas>
         </div>
     </div>
@@ -120,7 +120,7 @@
     <div class="row">
         <div class="col-md-12 pr-5 pl-5">
             <div class='container-fluid text-center mt-3 rounded'>
-                <h1>{{score}}/100</h1>
+                <h1 class="header-secondary ">{{score}}/100</h1>
             </div>
             <div class="container-fluid text-center p-2">
                 <button type="submit" class="btn btn-secondary btn-sm rounded" id="scoring_criteria" data-toggle="modal" data-target="#exampleModal3" >Scoring Criteria</button>
@@ -144,9 +144,9 @@
                     <ul>
                         {% for tip in leg_tips %}
                         {% if '!' in tip  %}
-                        <li class=mt-2><i style="color: green;" class="fas fa-check-circle"></i> {{tip}}</li>
+                        <li class='mt-2 header-secondary'><i style="color: green;" class="fas fa-check-circle"></i> {{tip}}</li>
                         {% elif '!' not in tip  %}
-                        <li class=mt-2><i style="color: red;" class="fas fa-times-circle"></i> {{tip}}</li>
+                        <li class='mt-2 header-secondary'><i style="color: red;" class="fas fa-times-circle"></i> {{tip}}</li>
                         {% endif %}
                         {% endfor %}
                     </ul>
@@ -156,9 +156,9 @@
                     <ul>
                         {% for tip in arm_tips %}
                         {% if '!' in tip  %}
-                        <li class=mt-2><i style="color: green;" class="fas fa-check-circle"></i> {{tip}}</li>
+                        <li class='mt-2 header-secondary'><i style="color: green;" class="fas fa-check-circle"></i> {{tip}}</li>
                         {% elif '!' not in tip  %}
-                        <li class=mt-2><i style="color: red;" class="fas fa-times-circle"></i> {{tip}}</li>
+                        <li class='mt-2 header-secondary'><i style="color: red;" class="fas fa-times-circle"></i> {{tip}}</li>
                         {% endif %}
                         {% endfor %}
                     </ul>
@@ -168,9 +168,9 @@
                     <ul>
                         {% for tip in body_tips %}
                         {% if '!' in tip  %}
-                        <li class=mt-2><i class="fas fa-check-circle" style="color: green;"></i> {{tip}}</li>
+                        <li class='mt-2 header-secondary'><i class="fas fa-check-circle" style="color: green;"></i> {{tip}}</li>
                         {% elif '!' not in tip  %}
-                        <li class=mt-2><i style="color: red;" class="fas fa-times-circle"></i> {{tip}}</li>
+                        <li class='mt-2 header-secondary'><i style="color: red;" class="fas fa-times-circle"></i> {{tip}}</li>
                         {% endif %}
                         {% endfor %}
                     </ul>
@@ -182,8 +182,8 @@
 
 <div class="row">
     <div class='container text-center'>
-        <p><i class="fas fa-check-circle" style="color: green;"></i> = Looks good</p>
-        <p><i class="fas fa-times-circle" style="color: red;"></i> = Needs improvement</p>
+        <p class="header-secondary"><i class="fas fa-check-circle" style="color: green;"></i> = Looks good</p>
+        <p class="header-secondary"><i class="fas fa-times-circle" style="color: red;"></i> = Needs improvement</p>
     </div>
 </div>
 

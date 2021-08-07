@@ -9,7 +9,7 @@
     <form method="POST" action='{{url_for("register")}}'>
       {{form.hidden_tag()}}
 
-        <div class="form-group text-left mt-3">
+        <div class="form-group text-left mt-3 header-third">
           <div>
             {{form.first.label}}
           </div>
@@ -17,7 +17,7 @@
             {{form.first(class="form-control")}}
           </div>
         </div>
-        <div class="form-group text-left mb-3">
+        <div class="form-group text-left mb-3 header-third">
           <div>
             {{form.last.label}}
           </div>
@@ -25,7 +25,7 @@
             {{form.last(class="form-control")}}
           </div>
         </div>
-        <div class="form-group text-left mb-3">
+        <div class="form-group text-left mb-3 header-third">
           <div>
             {{form.email.label}}
           </div>
@@ -33,7 +33,7 @@
             {{form.email(class="form-control")}}
           </div>
         </div>
-        <div class="form-group text-left mb-3">
+        <div class="form-group text-left mb-3 header-third">
           <div>
             {{form.password.label}}
           </div>
@@ -41,7 +41,7 @@
             {{form.password(class="form-control")}}
           </div>
         </div>
-        <div class="form-group text-left mb-3">
+        <div class="form-group text-left mb-3 header-third">
           <div>
             {{form.passconfirm.label}}
           </div>
