@@ -98,3 +98,9 @@ background: linear-gradient(90deg, rgba(204,105,2,1) 0%, rgba(2,62,167,1) 100%);
   border: #EC8107 2px solid !important;
 }
 
+/* background */
+
+.modal-back {
+  background-color: #EC8107;
+  color: white;
+}

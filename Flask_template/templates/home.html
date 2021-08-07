@@ -31,10 +31,13 @@
   </div>
 </nav>
   <!-- end of nav-->
+ <div class="container-fluid" style="min-height: 700px;">
+
+
 <div class="container mt-3">
   <div class="container-fluid mt-4 mb-4" >
     <div class="container text-center">
-        <legend class='h1 header-main bottom-bord'>Welcome {{current_user.first}}</legend>
+        <legend class='h1 header-main'>Welcome {{current_user.first}}</legend>
     </div>
 </div>
 <div style='min-height:100px !important;background-color:white;' class='container-fluid home shadow rounded p-2 mb-3 text-center' data-aos="fade-up">
@@ -93,39 +96,39 @@
 <!-- stroke analysis desciption starts here -->
 <div class="container-fluid">
     <div class="row rounded home shadow" style="background-color:white;" data-aos="fade-up">
-          <div class="container p-3 ml-4 mr-4 text-center bottom-bord">
+          <div class="container p-3 ml-4 mr-4 text-center">
             <a class="btn btn-primary btn-xl text-uppercase button-main p-3" href="{{ url_for('stroke') }}">Stroke Analysis</a>
           </div>
         <div class="col-lg-4 text-center p-3">
-          <div class="container" style="min-height: 150px; max-height: 150px">
+          <div class="container whole-bord rounded" style="min-height: 200px; max-height: 200px">
+            <div class='container'>
+              <h1 class="text-center">1</h1>
+          </div>
             <p>Video tape your serve from the side of your dominant arm or your racquet holding arm. You may need a coach/participant to help with the recording.</p>
           </div>
-          <div class='container whole-bord'>
-            <img src="../static/assets/img/angles/angles.jpg" class="img-fluid" alt="Responsive image" id='start_phase' style="height: 400px; width:100%">
-        </div>
         </div>
         <div class="col-lg-4 text-center p-3">
-          <div class="container" style="min-height: 150px; max-height: 150px">
+          <div class="container whole-bord rounded" style="min-height: 200px; max-height: 200px">
+            <div class='container'>
+              <h1 class="text-center">2</h1>
+          </div>
             <p>Trim your serve clip to start when the racquet is about to begin its takeback and finish when the non-dominant leg has landed and absorbed the impact.</p>
           </div>
-          <div class='container whole-bord'>
-              <img src="../static/assets/img/phases/load.jpg" class="img-fluid" alt="Responsive image" style="height: 400px; width:100%">
-        </div>
         </div>
         <div class="col-lg-4 text-center p-3">
-          <div class="container" style="min-height: 150px; max-height: 150px">
+          <div class="container whole-bord rounded" style="min-height: 200px; max-height: 200px">
+            <div class='container'>
+              <h1 class="text-center">3</h1>
+          </div>
             <p>Select the professional player that you most want to mirror to recieve relevant comparison feedback. Analysis will compare your serves and reccommend further steps.</p>
           </div>
-          <div class='container whole-bord'>
-              <img src="../static/assets/img/angles/angles.jpg" class="img-fluid" alt="Responsive image" id='start_phase' style="height: 400px; width:100%">
-        </div>
         </div>
         <br>
     </div>
 
 </div>
 </div> 
-
+</div> 
 <br>
 <!-- Footer -->
 <div class="container-fluid p-4 footer-color">
