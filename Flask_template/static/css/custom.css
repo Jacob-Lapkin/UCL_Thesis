@@ -55,7 +55,7 @@
 }
 
 .nav-color-active {
-  color: #E94F01 !important
+  color: #E94F01 !important;
 }
 /* font colors */
 .header-main {
@@ -64,16 +64,16 @@
 
 /* button */
 .button-main {
-  background: rgb(75,204,247);
-background: linear-gradient(163deg, rgba(75,204,247,1) 34%, rgba(95,78,247,1) 100%);
-  border: rgb(75,204,247) !important;
+  background: rgb(247,163,75);
+background: linear-gradient(90deg, rgba(247,163,75,1) 0%, rgba(3,91,245,1) 100%);
+  border: rgb(247,163,75) !important;
   color: white !important;
 }
 
 .button-main:hover{
-  background: rgb(75,151,247);
-background: linear-gradient(163deg, rgba(75,151,247,1) 34%, rgba(20,2,102,1) 100%);
-  border: rgb(75,151,247) !important;
+  background: rgb(204,105,2);
+background: linear-gradient(90deg, rgba(204,105,2,1) 0%, rgba(2,62,167,1) 100%);
+  border: rgb(204,105,2) !important;
 }
 
 .button-radius {
