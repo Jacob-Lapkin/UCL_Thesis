@@ -37,7 +37,7 @@
         <legend class='h1 header-main bottom-bord'>Welcome {{current_user.first}}</legend>
     </div>
 </div>
-<div style='min-height:150px !important;background-color:white;' class='container-fluid home shadow rounded p-2 mb-3 text-center' data-aos="fade-up">
+<div style='min-height:100px !important;background-color:white;' class='container-fluid home shadow rounded p-2 mb-3 text-center' data-aos="fade-up">
 
   {% if recent == 'none' %}
     <h3 class="text-center mt-5">You have not tried the stroke analysis tool yet.<br>  See below to test it out!</h3>
@@ -45,10 +45,9 @@
   {% else %}
   
   <div class="row">
-  <div class="container mb-3">
-    <h3>Average Score: <br><strong style="font-size: 250%;">{{average}}</strong></h3>
+  <div class="container mb-2">
+    <h3>Average Score: <br><strong style="font-size: 200%;">{{average}}</strong></h3>
   </div>
-
 </div>
 
   {% endif %}

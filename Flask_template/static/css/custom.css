@@ -66,6 +66,10 @@
   font-size: 125%;
 }
 
+.decrease-font {
+  font-size: 75%;
+}
+
 /* button */
 .button-main {
   background: rgb(235,135,31);
@@ -91,6 +95,6 @@ background: linear-gradient(90deg, rgba(204,105,2,1) 0%, rgba(2,62,167,1) 100%);
 }
 
 .whole-bord {
-  border: #EC8107 1px solid !important;
+  border: #EC8107 2px solid !important;
 }
 
