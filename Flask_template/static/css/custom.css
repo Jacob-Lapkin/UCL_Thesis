@@ -57,9 +57,13 @@
 .nav-color-active {
   color: #E94F01 !important;
 }
-/* font colors */
+/* fonts */
 .header-main {
-  color: #1d41f4
+  color: #163ada;
+}
+
+.increase-font {
+  font-size: 125%;
 }
 
 /* button */

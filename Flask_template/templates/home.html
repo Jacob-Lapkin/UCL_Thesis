@@ -37,7 +37,7 @@
         <legend class='h1 header-main bottom-bord'>Welcome {{current_user.first}}</legend>
     </div>
 </div>
-<div style='min-height:200px !important;background-color:white;' class='container-fluid home shadow rounded p-2 mb-3 text-center' data-aos="fade-up">
+<div style='min-height:150px !important;background-color:white;' class='container-fluid home shadow rounded p-2 mb-3 text-center' data-aos="fade-up">
 
   {% if recent == 'none' %}
     <h3 class="text-center mt-5">You have not tried the stroke analysis tool yet.<br>  See below to test it out!</h3>
@@ -45,46 +45,53 @@
   {% else %}
   
   <div class="row">
-
-  
   <div class="container mb-3">
     <h3>Average Score: <br><strong style="font-size: 250%;">{{average}}</strong></h3>
   </div>
 
-  <div class="container text-center">
-    <h3>Most Recent:</h3>
+</div>
+
+  {% endif %}
+</div>
+
+{% if recent == 'none' %}
+    <div></div>
+{% else %}
+<!-- most recent starts here -->
+<div style='min-height:150px !important;background-color:white;' class='container-fluid home shadow rounded mb-3 p-2 text-center' data-aos="fade-up">
+  <h3>Most Recent:</h3>
+  
+  <div class="row">
+    <div class="col-md-3">
     
-    <div class="row">
-      <div class="col-md-3">
-      
-      </div>
-      <div class="col-md-2">
-        <p>Date: <br><strong>{{recent}}</strong></p>
-  
-      </div>
-      <div class="col-md-2">
-        <p>Professional: <br><strong>{{name}}</strong></p>
-  
-      </div>
-      <div class="col-md-2">
-        <p>Score: <br><strong>{{score}} {% if '-' in difference %}
-          <i style='color:red' class="fa fa-arrow-circle-down" aria-hidden="true"></i> 
-          {% elif '+' in difference %}
-            <i style='color:green' class="fa fa-arrow-circle-up" aria-hidden="true"></i>
-        {% endif %}
-         </strong></p>
-
-      </div>
-      <div class="col-md-3">
-        
-      </div>
     </div>
+    <div class="col-md-2">
+      <p class="increase-font">Date: <br><strong>{{recent}}</strong></p>
 
+    </div>
+    <div class="col-md-2">
+      <p class='increase-font'>Professional: <br><strong>{{name}}</strong></p>
+
+    </div>
+    <div class="col-md-2">
+      <p class="increase-font">Score: <br><strong>{{score}} {% if '-' in difference %}
+        <i style='color:red' class="fa fa-arrow-circle-down" aria-hidden="true"></i> 
+        {% elif '+' in difference %}
+          <i style='color:green' class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+      {% endif %}
+       </strong></p>
+
+    </div>
+    <div class="col-md-3">
+      
+    </div>
   </div>
 </div>
-  {% endif %}
+{% endif %}
 
-</div>
+
+
+<!-- stroke analysis desciption starts here -->
 <div class="container-fluid">
     <div class="row rounded home shadow" style="background-color:white;" data-aos="fade-up">
           <div class="container p-3 ml-4 mr-4 text-center bottom-bord">
