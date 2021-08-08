@@ -3,6 +3,7 @@ import time
 from datetime import datetime
 #from flask import app, db, bcrypt
 from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask.scaffold import F
 #from myproject.models import User
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import func
@@ -314,6 +315,29 @@ def history():
 @login_required
 def gallery():
     return render_template('gallery.html')
+
+@app.route('/account', methods=['GET', 'POST'])
+@login_required
+def account():
+    if request.method == 'POST':
+        account_info = User.query.get(current_user.id)
+        first = request.form['first']
+        last = request.form['last']
+        email = request.form['email']
+        first_clean = first.replace(' ', '')
+        last_clean = last.replace(' ', '')
+        email_clean = email.replace(' ', '')
+        if len(first_clean) > 0:
+            account_info.first = first_clean
+            db.session.commit()
+        if len(last_clean) > 0:
+            account_info.last = last_clean
+            db.session.commit()
+        if len(email_clean) > 0:
+            account_info.email = email_clean
+            db.session.commit()
+
+    return render_template('account.html')
 
 @app.errorhandler(404)
 def page_not_found(e):
