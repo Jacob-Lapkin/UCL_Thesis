@@ -255,7 +255,8 @@ def results():
         doughnut_data = playerright_leg.doughnut()
         # getting name of player
         player_name = playerright_leg.name
-        #getting the body part that is analyzed
+
+        #copying to create lists for vertical lines
         vertical_start_before = dataright.copy()
         vertical_load_before = dataright.copy()
         vertical_extend_before = dataright.copy()
@@ -265,25 +266,39 @@ def results():
         vertical_start = [0 for i in vertical_start_before]
         for ind, value in enumerate(dataright):
             if ind == round(doughnut_data[0] / (100/len(dataright))):
-                vertical_start[ind] = 180
+                vertical_start[1:(ind-1)] = [200 for i in range(1,(ind-1))]
         
         # vertical loading line
         vertical_load = [0 for i in vertical_load_before]
+        first = 0
+        second = 0
+        first_extend = 0
+        second_extend = 0
+        first_finish = 0
         for ind, value in enumerate(dataright):
+            if ind == round(doughnut_data[0] / (100/len(dataright))):
+                first = ind
             if ind == round((doughnut_data[0] /(100/len(dataright))) +  (doughnut_data[1] / (100/len(dataright)))):
-                vertical_load[ind] = 180
-        
+                second = (ind - 1)
+            vertical_load[first:second] = [200 for i in range(first,second)]
+
         # vertical extend line
         vertical_extend = [0 for i in vertical_extend_before]
         for ind, value in enumerate(dataright):
+            if ind == round((doughnut_data[0] /(100/len(dataright))) +  (doughnut_data[1] / (100/len(dataright)))):
+                first_extend = ind
             if ind == round((doughnut_data[0] /(100/len(dataright))) +  (doughnut_data[1] / (100/len(dataright))) + (doughnut_data[2] / (100/len(dataright)))):
-                vertical_extend[ind] = 180
-        
+                second_extend = (ind -1)
+            vertical_extend[first_extend:second_extend] = [200 for i in range(first_extend,second_extend)]
 
         # vertical finish line
         vertical_finish = [0 for i in vertical_finish_before]
-        vertical_finish[-1] = 180
-        
+        for ind, value in enumerate(dataright):
+            if ind == round((doughnut_data[0] /(100/len(dataright))) +  (doughnut_data[1] / (100/len(dataright))) + (doughnut_data[2] / (100/len(dataright)))):
+                first_finish = ind
+            vertical_finish[first_finish:-1] = [200 for i in range(first_finish,len(dataright))]
+        # zero  line
+        zero_line = [0 for i in range(len(dataright))]
                 
     #######################################################################
         # uncommen the below to convert video
@@ -305,6 +320,51 @@ def results():
         User_name = user.name
 
         User_doughnut = user.doughnut()
+
+        #copying to create lists for vertical lines for user
+        vertical_start_before_user = User_data_r.copy()
+        vertical_load_before_user = User_data_r.copy()
+        vertical_extend_before_user = User_data_r.copy()
+        vertical_finish_before_user = User_data_r.copy()
+
+        # vertical starting line for user
+        vertical_start_user = [0 for i in vertical_start_before_user]
+        for ind, value in enumerate(User_data_r):
+            if ind == round(User_doughnut[0] / (100/len(User_data_r))):
+                vertical_start_user[1:(ind-1)] = [200 for i in range(1,(ind-1))]
+        
+        # vertical loading line
+        vertical_load_user = [0 for i in vertical_load_before_user]
+        first_user = 0
+        second_user = 0
+        first_extend_user = 0
+        second_extend_user = 0
+        first_finish_user = 0
+        for ind, value in enumerate(User_data_r):
+            if ind == round(User_doughnut[0] / (100/len(User_data_r))):
+                first_user = ind
+            if ind == round((User_doughnut[0] /(100/len(User_data_r))) +  (User_doughnut[1] / (100/len(User_data_r)))):
+                second_user = (ind - 1)
+            vertical_load_user[first_user:second_user] = [200 for i in range(first_user,second_user)]
+
+        # vertical extend line
+        vertical_extend_user = [0 for i in vertical_extend_before_user]
+        for ind, value in enumerate(dataright):
+            if ind == round((User_doughnut[0] /(100/len(User_data_r))) +  (User_doughnut[1] / (100/len(User_data_r)))):
+                first_extend_user = ind
+            if ind == round((User_doughnut[0] /(100/len(User_data_r))) +  (User_doughnut[1] / (100/len(User_data_r))) + (User_doughnut[2] / (100/len(User_data_r)))):
+                second_extend_user = (ind -1)
+            vertical_extend_user[first_extend_user:second_extend_user] = [200 for i in range(first_extend_user,second_extend_user)]
+
+        # vertical finish line
+        vertical_finish_user = [0 for i in vertical_finish_before_user]
+        for ind, value in enumerate(User_data_r):
+            if ind == round((User_doughnut[0] /(100/len(User_data_r))) +  (User_doughnut[1] / (100/len(User_data_r))) + (User_doughnut[2] / (100/len(User_data_r)))):
+                first_finish_user = ind
+            vertical_finish_user[first_finish_user:-1] = [200 for i in range(first_finish_user,len(User_data_r))]
+        # zero  line
+        zero_line_user = [0 for i in range(len(User_data_r))]
+                
     #######################################################################
         # SHOWING RECOMMENDATIONS
         if current_user.dominant == 'right' and (player_name == 'djok' or player_name == 'federer' or player_name == 'serena'):
@@ -346,7 +406,8 @@ def results():
     user_right=User_data_r, user_left=User_data_l, user_left_arm=User_data_l_arm, user_right_arm=User_data_r_arm,
     User_data_r_body=User_data_r_body, User_data_l_body=User_data_l_body, user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, 
     arm_tips=arm_tips, leg_tips=leg_tips,body_tips=body_tips, score=score, vertical_start=vertical_start, vertical_load=vertical_load, vertical_extend=vertical_extend
-    ,vertical_finish=vertical_finish)
+    ,vertical_finish=vertical_finish, zero_line=zero_line, vertical_start_user=vertical_start_user, vertical_load_user=vertical_load_user, vertical_extend_user=vertical_extend_user,
+     vertical_finish_user=vertical_finish_user, zero_line_user=zero_line_user)
 
 @app.route('/history', methods=['GET', 'POST'])
 @login_required

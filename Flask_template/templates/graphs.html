@@ -85,14 +85,14 @@
                 </div>
             </div>
             <legend class='border-bottom h6 header-third'>{{name}}</legend>
-            <div class="container" id="content_legs">
-                <canvas id="myChart" max-width="300" max-height="300"></canvas>
+            <div class="container" id="content_legs" style="height:300px !important;">
+                <canvas id="myChart" ></canvas>
             </div>
-            <div class="container" id="content_arms" style="display:none">
-                <canvas id="myChart2" max-width="300" max-height="300"></canvas>
+            <div class="container" id="content_arms" style="display:none;height:300px !important;">
+                <canvas id="myChart2"></canvas>
             </div>
-            <div class="container" id="content_body" style="display:none">
-                <canvas id="myChart3" max-width="300" max-height="300"></canvas>
+            <div class="container" id="content_body" style="display:none;height:300px !important;">
+                <canvas id="myChart3"></canvas>
             </div>
         </div>
         <div class="col-md-6">
@@ -108,14 +108,14 @@
                 </div>
             </div>
             <legend class='border-bottom h6 header-third'>{{current_user.first}}</legend>
-            <div class="container" id="content_legs_user">
-                <canvas id="myChart4" max-width="300" max-height="300"></canvas>
+            <div class="container" id="content_legs_user" style="height:300px !important;">
+                <canvas id="myChart4"></canvas>
             </div>
-            <div class="container" id="content_arms_user" style="display:none">
-                <canvas id="myChart5" max-width="300" max-height="300"></canvas>
+            <div class="container" id="content_arms_user" style="display:none;height:300px !important;">
+                <canvas id="myChart5"></canvas>
             </div>
-            <div class="container" id="content_body_user" style="display:none">
-                <canvas id="myChart6" max-width="300" max-height="300"></canvas>
+            <div class="container" id="content_body_user" style="display:none;height:300px !important;">
+                <canvas id="myChart6"></canvas>
             </div>
         </div>
     </div>
@@ -311,19 +311,36 @@ var myChart = new Chart(ctx, {
     data: {
                 
         labels: {{label|tojson}},
-        datasets: [{
+        datasets: [
+        {
+            label: 'zero',
+            data: {{zero_line|tojson}},
+            borderColor: [
+                'rgba(255, 255, 255, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        },
+        {
+            
             label: 'Right knee',
             data: {{data|tojson}},
+            backgroundColor: [
+                'rgba(2, 29, 235, 0.2)',
+            ],
             borderColor: [
-                'rgba(245, 192, 69, 1)',
+                'rgba(2, 29, 235, 1)',
             ],
             borderWidth: 1, 
             fill: false,
         }, {
             label: 'Left knee',
             data: {{datatwo|tojson}},
+            backgroundColor: [
+                'rgba(235, 2, 6, 0.2)',
+            ],
             borderColor: [
-                'rgba(49, 186, 245, 1)',
+                'rgba(235, 2, 6, 1)',
             ],
             borderWidth: 1, 
             fill: false,
@@ -331,42 +348,56 @@ var myChart = new Chart(ctx, {
         {
             label: 'start',
             data: {{vertical_start|tojson}},
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
+            backgroundColor: [
+                'rgba(255, 99, 132, .2)',
             ],
-            borderWidth: 1, 
+            borderColor: [
+                'rgba(0, 0, 0, 0)',
+            ],
+            borderWidth: 0, 
             fill: true,
         },
         {
-            label: 'Load',
+            label: 'load',
             data: {{vertical_load|tojson}},
-            borderColor: [
-                'rgba(54, 162, 235, 1)',
+            backgroundColor: [
+                'rgba(54, 162, 235, .2)',
             ],
-            borderWidth: 1, 
+            borderColor: [
+                'rgba(0, 0, 0, 0)',
+            ],
+            borderWidth: 0, 
             fill: true,
         },
         {
-            label: 'Extend',
+            label: 'extend',
             data: {{vertical_extend|tojson}},
-            borderColor: [
-                'rgba(255, 206, 86, 1)',
+            backgroundColor: [
+                'rgba(255, 206, 86, .2)',
             ],
-            borderWidth: 1, 
+            borderColor: [
+                'rgba(0, 0, 0, 0)',
+            ],
+            borderWidth: 0, 
             fill: true,
         },
         {
-            label: 'Finish',
+            label: 'finish',
             data: {{vertical_finish|tojson}},
-            borderColor: [
-                'rgba(75, 192, 192, 1)',
+            backgroundColor: [
+                'rgba(75, 192, 192, .2)',
             ],
-            borderWidth: 1, 
+            borderColor: [
+                'rgba(0, 0, 0, 0)',
+            ],
+            borderWidth: 0, 
             fill: true,
         }
         ]
     },
     options: {
+        responsive:true,
+        maintainAspectRatio: false,
         scales: {
             y: {
                 beginAtZero: true
@@ -382,7 +413,17 @@ var myChart = new Chart(ctx, {
     data: {
                 
         labels: {{label_arm|tojson}},
-        datasets: [{
+        datasets: [
+        {
+            label: 'zero',
+            data: {{zero_line|tojson}},
+            borderColor: [
+                'rgba(255, 255, 255, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        },
+        {
             label: 'Right elbow',
             data: {{data_r_arm|tojson}},
             backgroundColor: [
@@ -408,38 +449,62 @@ var myChart = new Chart(ctx, {
         {
             label: 'start',
             data: {{vertical_start|tojson}},
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
+            backgroundColor: [
+                'rgba(255, 99, 132, .2)',
             ],
-            borderWidth: 1, 
+            borderColor: [
+                'rgba(0, 0, 0, 0)',
+            ],
+            borderWidth: 0, 
             fill: true,
         },
         {
-            label: 'Load',
+            label: 'load',
             data: {{vertical_load|tojson}},
-            borderColor: [
-                'rgba(54, 162, 235, 1)',
+            backgroundColor: [
+                'rgba(54, 162, 235, .2)',
             ],
-            borderWidth: 1, 
+            borderColor: [
+                'rgba(0, 0, 0, 0)',
+            ],
+            borderWidth: 0, 
             fill: true,
         },
         {
-            label: 'Extend',
+            label: 'extend',
             data: {{vertical_extend|tojson}},
-            borderColor: [
-                'rgba(255, 206, 86, 1)',
+            backgroundColor: [
+                'rgba(255, 206, 86, .2)',
             ],
-            borderWidth: 1, 
+            borderColor: [
+                'rgba(0, 0, 0, 0)',
+            ],
+            borderWidth: 0, 
+            fill: true,
+        },
+        {
+            label: 'finish',
+            data: {{vertical_finish|tojson}},
+            backgroundColor: [
+                'rgba(75, 192, 192, .2)',
+            ],
+            borderColor: [
+                'rgba(0, 0, 0, 0)',
+            ],
+            borderWidth: 0, 
             fill: true,
         }
         ]
     },
     options: {
+        responsive:true,
+        maintainAspectRatio: false,
         scales: {
             y: {
                 beginAtZero: true
             }
         }
+
     }
 });
 </script>
@@ -452,14 +517,24 @@ var myChart = new Chart(ctx, {
     data: {
                 
         labels: {{label_body|tojson}},
-        datasets: [{
+        datasets: [
+        {
+            label: 'zero',
+            data: {{zero_line|tojson}},
+            borderColor: [
+                'rgba(255, 255, 255, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        },
+        {
             label: 'Right shoulder',
             data: {{dataright_body|tojson}},
             backgroundColor: [
-                'rgba(3, 244, 252, .2)',
+                'rgba(44, 3, 166, .2)',
             ],
             borderColor: [
-                'rgba(3, 244, 252, 1)',
+                'rgba(44, 3, 166, 1)',
             ],
             borderWidth: 1, 
             fill: false,
@@ -467,10 +542,10 @@ var myChart = new Chart(ctx, {
             label: 'Left shoulder',
             data: {{dataleft_body|tojson}},
             backgroundColor: [
-                'rgba(220, 227, 18, .2)',
+                'rgba(163, 2, 34, .2)',
             ],
             borderColor: [
-                'rgba(220, 227, 18, 1)',
+                'rgba(163, 2, 34, 1)',
             ],
             borderWidth: 1, 
             fill: false,
@@ -478,33 +553,56 @@ var myChart = new Chart(ctx, {
         {
             label: 'start',
             data: {{vertical_start|tojson}},
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
+            backgroundColor: [
+                'rgba(255, 99, 132, .2)',
             ],
-            borderWidth: 1, 
+            borderColor: [
+                'rgba(0, 0, 0, 0)',
+            ],
+            borderWidth: 0, 
             fill: true,
         },
         {
-            label: 'Load',
+            label: 'load',
             data: {{vertical_load|tojson}},
-            borderColor: [
-                'rgba(54, 162, 235, 1)',
+            backgroundColor: [
+                'rgba(54, 162, 235, .2)',
             ],
-            borderWidth: 1, 
+            borderColor: [
+                'rgba(0, 0, 0, 0)',
+            ],
+            borderWidth: 0, 
             fill: true,
         },
         {
-            label: 'Extend',
+            label: 'extend',
             data: {{vertical_extend|tojson}},
-            borderColor: [
-                'rgba(255, 206, 86, 1)',
+            backgroundColor: [
+                'rgba(255, 206, 86, .2)',
             ],
-            borderWidth: 1, 
+            borderColor: [
+                'rgba(0, 0, 0, 0)',
+            ],
+            borderWidth: 0, 
+            fill: true,
+        },
+        {
+            label: 'finish',
+            data: {{vertical_finish|tojson}},
+            backgroundColor: [
+                'rgba(75, 192, 192, .2)',
+            ],
+            borderColor: [
+                'rgba(0, 0, 0, 0)',
+            ],
+            borderWidth: 0, 
             fill: true,
         }
         ]
     },
     options: {
+        responsive:true,
+        maintainAspectRatio: false,
         scales: {
             y: {
                 beginAtZero: true
@@ -515,123 +613,314 @@ var myChart = new Chart(ctx, {
 </script>
 
 <script>
-// Plotting graphs User legs
-var ctx = document.getElementById('myChart4').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-                
-        labels: {{user_label|tojson}},
-        datasets: [{
-            label: 'Right knee',
-            data: {{user_right|tojson}},
-            borderColor: [
-            'rgba(176, 52, 247, 1)',
-            ],
-            borderWidth: 1, 
-            fill: false,
-        }, {
-            label: 'Left knee',
-            data: {{user_left|tojson}},
-            borderColor: [
-            'rgba(245, 192, 69, 1)',
-            ],
-            borderWidth: 1, 
-            fill: false,
-        }
-        ]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
 
-// Plotting graphs User arms
-var ctx = document.getElementById('myChart5').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
+    // Plotting graphs Professional legs
+    var ctx = document.getElementById('myChart4').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+                    
+            labels: {{user_label|tojson}},
+            datasets: [
+            {
+                label: 'zero',
+                data: {{zero_line_user|tojson}},
+                borderColor: [
+                    'rgba(255, 255, 255, 1)',
+                ],
+                borderWidth: 1, 
+                fill: true,
+            },
+            {
                 
-        labels: {{user_label|tojson}},
-        datasets: [{
-            label: 'Right elbow',
-            data: {{user_right_arm|tojson}},
-            backgroundColor: [
-                'rgba(255, 99, 0, 0.2)',
-            ],
-            borderColor: [
-                'rgba(255, 99, 0, 1)',
-            ],
-            borderWidth: 1, 
-            fill: true,
-        }, {
-            label: 'Left elbow',
-            data: {{user_left_arm|tojson}},
-            backgroundColor: [
-                'rgba(0, 200, 0, 0.2)',
-            ],
-            borderColor: [
-                'rgba(0, 200, 0, 1)',
-            ],
-            borderWidth: 1, 
-            fill: true,
-        }
-        ]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
+                label: 'Right knee',
+                data: {{user_right|tojson}},
+                backgroundColor: [
+                    'rgba(2, 29, 235, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(2, 29, 235, 1)',
+                ],
+                borderWidth: 1, 
+                fill: false,
+            }, {
+                label: 'Left knee',
+                data: {{user_left|tojson}},
+                backgroundColor: [
+                    'rgba(235, 2, 6, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(235, 2, 6, 1)',
+                ],
+                borderWidth: 1, 
+                fill: false,
+            },
+            {
+                label: 'start',
+                data: {{vertical_start_user|tojson}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, .2)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 0)',
+                ],
+                borderWidth: 0, 
+                fill: true,
+            },
+            {
+                label: 'load',
+                data: {{vertical_load_user|tojson}},
+                backgroundColor: [
+                    'rgba(54, 162, 235, .2)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 0)',
+                ],
+                borderWidth: 0, 
+                fill: true,
+            },
+            {
+                label: 'extend',
+                data: {{vertical_extend_user|tojson}},
+                backgroundColor: [
+                    'rgba(255, 206, 86, .2)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 0)',
+                ],
+                borderWidth: 0, 
+                fill: true,
+            },
+            {
+                label: 'finish',
+                data: {{vertical_finish_user|tojson}},
+                backgroundColor: [
+                    'rgba(75, 192, 192, .2)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 0)',
+                ],
+                borderWidth: 0, 
+                fill: true,
+            }
+            ]
+        },
+        options: {
+            responsive:true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
             }
         }
-    }
-});
-
-// Plotting graphs User body
-var ctx = document.getElementById('myChart6').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-                
-        labels: {{user_label|tojson}},
-        datasets: [{
-            label: 'Right shoulder',
-            data: {{User_data_r_body|tojson}},
-            backgroundColor: [
-                'rgba(3, 244, 252, .2)',
-            ],
-            borderColor: [
-                'rgba(3, 244, 252, 1)',
-            ],
-            borderWidth: 1, 
-            fill: true,
-        }, {
-            label: 'Left shoulder',
-            data: {{User_data_l_body|tojson}},
-            backgroundColor: [
-                'rgba(220, 227, 18, .2)',
-            ],
-            borderColor: [
-                'rgba(220, 227, 18, 1)',
-            ],
-            borderWidth: 1, 
-            fill: true,
+    });
+    
+    // Plotting graphs Professional arms
+    var ctx = document.getElementById('myChart5').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+                    
+            labels: {{user_label|tojson}},
+            datasets: [
+            {
+                label: 'zero',
+                data: {{zero_line_user|tojson}},
+                borderColor: [
+                    'rgba(255, 255, 255, 1)',
+                ],
+                borderWidth: 1, 
+                fill: true,
+            },
+            {
+                label: 'Right elbow',
+                data: {{user_right_arm|tojson}},
+                backgroundColor: [
+                    'rgba(255, 99, 0, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 0, 1)',
+                ],
+                borderWidth: 1, 
+                fill: false,
+            }, {
+                label: 'Left elbow',
+                data: {{user_left_arm|tojson}},
+                backgroundColor: [
+                    'rgba(0, 200, 0, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(0, 200, 0, 1)',
+                ],
+                borderWidth: 1, 
+                fill: false,
+            }, 
+            {
+                label: 'start',
+                data: {{vertical_start_user|tojson}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, .2)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 0)',
+                ],
+                borderWidth: 0, 
+                fill: true,
+            },
+            {
+                label: 'load',
+                data: {{vertical_load_user|tojson}},
+                backgroundColor: [
+                    'rgba(54, 162, 235, .2)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 0)',
+                ],
+                borderWidth: 0, 
+                fill: true,
+            },
+            {
+                label: 'extend',
+                data: {{vertical_extend_user|tojson}},
+                backgroundColor: [
+                    'rgba(255, 206, 86, .2)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 0)',
+                ],
+                borderWidth: 0, 
+                fill: true,
+            },
+            {
+                label: 'finish',
+                data: {{vertical_finish_user|tojson}},
+                backgroundColor: [
+                    'rgba(75, 192, 192, .2)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 0)',
+                ],
+                borderWidth: 0, 
+                fill: true,
+            }
+            ]
+        },
+        options: {
+            responsive:true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+    
         }
-        ]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
+    });
+    </script>
+    
+    <script>
+    // Plotting graphs Professional body
+    var ctx = document.getElementById('myChart6').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+                    
+            labels: {{user_label|tojson}},
+            datasets: [
+            {
+                label: 'zero',
+                data: {{zero_line_user|tojson}},
+                borderColor: [
+                    'rgba(255, 255, 255, 1)',
+                ],
+                borderWidth: 1, 
+                fill: true,
+            },
+            {
+                label: 'Right shoulder',
+                data: {{User_data_r_body|tojson}},
+                backgroundColor: [
+                    'rgba(44, 3, 166, .2)',
+                ],
+                borderColor: [
+                    'rgba(44, 3, 166, 1)',
+                ],
+                borderWidth: 1, 
+                fill: false,
+            }, {
+                label: 'Left shoulder',
+                data: {{User_data_l_body|tojson}},
+                backgroundColor: [
+                    'rgba(163, 2, 34, .2)',
+                ],
+                borderColor: [
+                    'rgba(163, 2, 34, 1)',
+                ],
+                borderWidth: 1, 
+                fill: false,
+            }, 
+            {
+                label: 'start',
+                data: {{vertical_start_user|tojson}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, .2)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 0)',
+                ],
+                borderWidth: 0, 
+                fill: true,
+            },
+            {
+                label: 'load',
+                data: {{vertical_load_user|tojson}},
+                backgroundColor: [
+                    'rgba(54, 162, 235, .2)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 0)',
+                ],
+                borderWidth: 0, 
+                fill: true,
+            },
+            {
+                label: 'extend',
+                data: {{vertical_extend_user|tojson}},
+                backgroundColor: [
+                    'rgba(255, 206, 86, .2)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 0)',
+                ],
+                borderWidth: 0, 
+                fill: true,
+            },
+            {
+                label: 'finish',
+                data: {{vertical_finish_user|tojson}},
+                backgroundColor: [
+                    'rgba(75, 192, 192, .2)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 0)',
+                ],
+                borderWidth: 0, 
+                fill: true,
+            }
+            ]
+        },
+        options: {
+            responsive:true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
             }
         }
-    }
-});
-</script>
+    });
+    </script>
 
 <script>
 // PLOTTING GRAPH pro doughnut
@@ -664,6 +953,7 @@ var myChart = new Chart(ctx, {
     },
     options: {
         responsive: false,
+        maintainAspectRatio: false,
 
         scales: {
             y: {
@@ -704,6 +994,7 @@ var myChart = new Chart(ctx, {
     },
     options: {
         responsive: false,
+        maintainAspectRatio: false,
 
         scales: {
             y: {
