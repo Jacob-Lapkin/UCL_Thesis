@@ -16,7 +16,6 @@ from wtforms import (Form, StringField, TextField, SubmitField, PasswordField,
 from wtforms.validators import DataRequired, Length, Email, EqualTo 
 from wtforms import ValidationError
 
-from datetime import datetime
 
 from forms import point, Stroke
 
@@ -38,6 +37,7 @@ class Login(FlaskForm):
 class newform(FlaskForm):
     first = StringField("First Name", validators = [DataRequired()])
     last = StringField("Last Name", validators = [DataRequired()])
+    dominant = RadioField('Dominant Arm', choices=[('right','right'),('left','left')])
     email = StringField("Email Address", validators = [DataRequired(), Email()])
     password = PasswordField("Password", validators = [DataRequired()])
     passconfirm = PasswordField('Confirm Password', validators = [DataRequired(), EqualTo('password', message='Passwords must match')])
@@ -80,6 +80,7 @@ class User(db.Model, UserMixin):
     first = db.Column(db.String(20), nullable=False)
     last = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(), nullable=False)
+    dominant = db.Column(db.String(), nullable=False)
     password = db.Column(db.String(80), nullable=False)
     scores = db.relationship('Score', backref='player')
 
@@ -113,7 +114,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
-            flash('Log in success')
+            flash('Log in success', 'info')
             return redirect(url_for('home'))
 
     return render_template('login.html', form=form)
@@ -122,7 +123,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('You logged out')
+    #flash('You logged out')
     return redirect(url_for('login'))
 
 
@@ -134,6 +135,7 @@ def register():
         user = User(email=form.email.data,
                     first=form.first.data,
                     last=form.last.data,
+                    dominant=form.dominant.data,
                     password=hashed_password)
         db.session.add(user)
         db.session.commit()
@@ -268,10 +270,11 @@ def results():
         User_doughnut = user.doughnut()
     #######################################################################
         # SHOWING RECOMMENDATIONS
-        leg_tips = leg_score(user, playerright_arm, playerleft_arm)
-        arm_tips = arm_tip_summary(user, playerright_arm, playerleft_arm)
-        body_tips = body_score(user, playerright_body, playerleft_body)
-        score = total_score(user, playerright_leg, playerleft_leg, playerright_arm, playerleft_arm, playerright_body, playerleft_body)
+        if current_user.dominant == 'right' and (player_name == 'djok' or player_name == 'federer' or player_name == 'serena'):
+            leg_tips = leg_score(user, playerright_arm, playerleft_arm)
+            arm_tips = arm_tip_summary(user, playerright_arm, playerleft_arm)
+            body_tips = body_score(user, playerright_body, playerleft_body)
+            score = total_score(user, playerright_leg, playerleft_leg, playerright_arm, playerleft_arm, playerright_body, playerleft_body)
 
     ########################################################################
         #Delete frames from folder
@@ -285,6 +288,12 @@ def results():
         name = None
         if player_name == 'djok':
             name = 'Djokovic'
+        elif player_name == 'rog':
+            name = 'Federer'
+        elif player_name == 'nadal':
+            name = 'Nadal'
+        elif player_name == 'serena':
+            name = "Serena"
         # adding the score to the database
         insert_score = Score(score = score,
                             player_id= current_user.id,
@@ -296,7 +305,7 @@ def results():
         return redirect(url_for('home'))
 
     return render_template('graphs.html', data=dataright, datatwo=dataleft, label=label, data_r_arm=dataright_arm,data_l_arm=dataleft_arm,label_arm=label_arm,
-    dataright_body=dataright_body, dataleft_body=dataleft_body, label_body=label_body, doughnut_data=doughnut_data, name=player_name,
+    dataright_body=dataright_body, dataleft_body=dataleft_body, label_body=label_body, doughnut_data=doughnut_data, name=name,
     user_right=User_data_r, user_left=User_data_l, user_left_arm=User_data_l_arm, user_right_arm=User_data_r_arm,
     User_data_r_body=User_data_r_body, User_data_l_body=User_data_l_body, user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, 
     arm_tips=arm_tips, leg_tips=leg_tips,body_tips=body_tips, score=score)
@@ -319,14 +328,18 @@ def gallery():
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
+    dominant_hand = current_user.dominant
     if request.method == 'POST':
         account_info = User.query.get(current_user.id)
         first = request.form['first']
         last = request.form['last']
         email = request.form['email']
+        dominant = request.form['dominant']
         first_clean = first.replace(' ', '')
         last_clean = last.replace(' ', '')
         email_clean = email.replace(' ', '')
+        dominant_clean = dominant.replace(' ', '')
+        print(dominant_clean)
         if len(first_clean) > 0:
             account_info.first = first_clean
             db.session.commit()
@@ -336,8 +349,13 @@ def account():
         if len(email_clean) > 0:
             account_info.email = email_clean
             db.session.commit()
+        if len(dominant_clean) > 0:
+            account_info.dominant = dominant_clean
+            db.session.commit()
+        if len(first_clean) > 0 or len(last_clean) > 0 or len(email_clean) > 0 or len(dominant_clean) > 0:
+            flash('Changed Details Successfully')
 
-    return render_template('account.html')
+    return render_template('account.html', dominant_hand=dominant_hand)
 
 @app.errorhandler(404)
 def page_not_found(e):

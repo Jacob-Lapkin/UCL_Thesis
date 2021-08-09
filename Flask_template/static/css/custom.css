@@ -102,13 +102,27 @@ background: linear-gradient(90deg, rgba(224,119,9,1) 0%, rgba(1,66,98,1) 100%);
   border-bottom: #EC8107 1px solid !important;
 }
 
+.top-bord {
+  border-top: #EC8107 1px solid !important;
+}
+
 .whole-bord {
   border: #EC8107 2px solid !important;
 }
 
 /* background */
-
 .modal-back {
   background-color: #EC8107;
   color: white;
+}
+
+/* div manipulation */
+.inner {
+  position: absolute;
+  background-color: rgba(0,105,158);
+}
+
+.outer {
+  transform: rotate(50deg);
+  background-color: rgba(235,135,31);
 }

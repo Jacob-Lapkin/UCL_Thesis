@@ -1,6 +1,18 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+<!-- flash messages -->
+<div style="position:fixed; left:25%; top:2%;z-index:9999;" class="container w-50 text-center">{% with messages = get_flashed_messages()%}
+  {% if messages %}
+      {% for msg in messages %}
+      
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{msg}}
+      </div>
+      {% endfor %}
+  {% endif %}
+{% endwith%}</div>
 <nav class="navbar navbar-expand-sm navbar-light bg-transparent">
   <a class="navbar-brand nav-color" href="#" style="margin-left: 2%;">Tennis Sense</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,9 +46,7 @@
   </div>
 </nav>
   <!-- end of nav-->
- <div class="container-fluid mb-5" style="min-height: 700px;">
-
-
+ <div class="container-fluid mb-5" style="min-height: 725px;">
 <div class="container mt-3">
   <div class="container-fluid mt-4 mb-4" >
     <div class="container text-center">

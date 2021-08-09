@@ -1,6 +1,17 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+<!-- flash messages -->
+<div style="position:fixed; left:25%; top:2%;z-index:9999;" class="container w-50 text-center">{% with messages = get_flashed_messages()%}
+    {% if messages %}
+        {% for msg in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{msg}}
+        </div>
+        {% endfor %}
+    {% endif %}
+  {% endwith%}</div>
 
 <nav class="navbar navbar-expand-sm navbar-light bg-transparent">
     <a class="navbar-brand nav-color" href="{{ url_for('home') }}" style="margin-left: 2%;">Tennis Sense</a>
@@ -40,7 +51,7 @@
   <!-- start of content that hides on click -->
 
 <!-- Pose estimation gallery -->
-<div class="container-fluid" style="min-height: 700px;">
+<div class="container-fluid" style="min-height: 725px;">
   <div class="container home shadow rounded p-4 mt-5 mb-5 text-center" data-aos="fade-up" style="background-color: white;">
     <div class="container-fluid mb-4 text-center">
           <legend class='h1 header-main bottom-bord'>My Account</legend>
@@ -81,7 +92,7 @@
     <div class="col-md-4">
         <div class="form-group mb-4">
             <label for="dominance" class="header-third">Dominant Hand</label>
-            <h5 class="header-secondary">Right</h5>
+            <h5 class="header-secondary">{{current_user.dominant.capitalize()}}</h5>
         </div>
  </div>
  <div class="col-md-2">
@@ -145,14 +156,26 @@
                 <div class="form-group text-left mb-3">
                     <label for="password" class="header-third">Dominant Hand</label>
                     <br>
+                    {% if dominant_hand=='right' %}
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="right" id="right" value="right">
+                        <input class="form-check-input" type="radio" name="dominant" id="right" value="right" checked="checked">
                         <label class="form-check-label" for="right">Right</label>
                       </div>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="left" id="left" value="left">
+                        <input class="form-check-input" type="radio" name="dominant" id="left" value="left">
                         <label class="form-check-label" for="left">Left</label>
                       </div>
+                    {% elif dominant_hand=='left' %}
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="dominant" id="right" value="right">
+                        <label class="form-check-label" for="right">Right</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="dominant" id="left" value="left" checked="checked">
+                        <label class="form-check-label" for="left">Left</label>
+                      </div>
+                    {% endif %}
+                    
                 <div class="container text-center mt-3">
                     <button class="btn btn-primary btn-rounded pl-4 pr-4 button-main" id="account_submit" data-toggle="modal" data-target="#exampleModal1">Update</button>
                 </div>
