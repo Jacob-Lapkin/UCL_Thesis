@@ -70,6 +70,14 @@ def phase_user_divider(data):
     take_load_count = counting_phases.count(1)
     extend_count = counting_phases.count(2)
     finish_count = counting_phases.count(3)
+    if finish_count == 0:
+        finish_count = 10
+    if start_count == 0:
+        start_count = 10
+    if take_load_count == 0:
+        take_load_count = 10
+    if finish_count == 0:
+        finish_count = 10
     total_count = start_count + take_load_count + extend_count + finish_count 
     percent_start = round(start_count / total_count * 100)
     percent_take_load = round(take_load_count / total_count * 100)
