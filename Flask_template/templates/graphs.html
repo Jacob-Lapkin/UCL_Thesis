@@ -314,22 +314,52 @@ var myChart = new Chart(ctx, {
         datasets: [{
             label: 'Right knee',
             data: {{data|tojson}},
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
+            borderColor: [
+                'rgba(245, 192, 69, 1)',
             ],
+            borderWidth: 1, 
+            fill: false,
+        }, {
+            label: 'Left knee',
+            data: {{datatwo|tojson}},
+            borderColor: [
+                'rgba(49, 186, 245, 1)',
+            ],
+            borderWidth: 1, 
+            fill: false,
+        },
+        {
+            label: 'start',
+            data: {{vertical_start|tojson}},
             borderColor: [
                 'rgba(255, 99, 132, 1)',
             ],
             borderWidth: 1, 
             fill: true,
-        }, {
-            label: 'Left knee',
-            data: {{datatwo|tojson}},
-            backgroundColor: [
-                'rgba(0, 99, 132, 0.2)',
-            ],
+        },
+        {
+            label: 'Load',
+            data: {{vertical_load|tojson}},
             borderColor: [
-                'rgba(0, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        },
+        {
+            label: 'Extend',
+            data: {{vertical_extend|tojson}},
+            borderColor: [
+                'rgba(255, 206, 86, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        },
+        {
+            label: 'Finish',
+            data: {{vertical_finish|tojson}},
+            borderColor: [
+                'rgba(75, 192, 192, 1)',
             ],
             borderWidth: 1, 
             fill: true,
@@ -362,7 +392,7 @@ var myChart = new Chart(ctx, {
                 'rgba(255, 99, 0, 1)',
             ],
             borderWidth: 1, 
-            fill: true,
+            fill: false,
         }, {
             label: 'Left elbow',
             data: {{data_l_arm|tojson}},
@@ -371,6 +401,33 @@ var myChart = new Chart(ctx, {
             ],
             borderColor: [
                 'rgba(0, 200, 0, 1)',
+            ],
+            borderWidth: 1, 
+            fill: false,
+        }, 
+        {
+            label: 'start',
+            data: {{vertical_start|tojson}},
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        },
+        {
+            label: 'Load',
+            data: {{vertical_load|tojson}},
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        },
+        {
+            label: 'Extend',
+            data: {{vertical_extend|tojson}},
+            borderColor: [
+                'rgba(255, 206, 86, 1)',
             ],
             borderWidth: 1, 
             fill: true,
@@ -405,7 +462,7 @@ var myChart = new Chart(ctx, {
                 'rgba(3, 244, 252, 1)',
             ],
             borderWidth: 1, 
-            fill: true,
+            fill: false,
         }, {
             label: 'Left shoulder',
             data: {{dataleft_body|tojson}},
@@ -414,6 +471,33 @@ var myChart = new Chart(ctx, {
             ],
             borderColor: [
                 'rgba(220, 227, 18, 1)',
+            ],
+            borderWidth: 1, 
+            fill: false,
+        }, 
+        {
+            label: 'start',
+            data: {{vertical_start|tojson}},
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        },
+        {
+            label: 'Load',
+            data: {{vertical_load|tojson}},
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 1, 
+            fill: true,
+        },
+        {
+            label: 'Extend',
+            data: {{vertical_extend|tojson}},
+            borderColor: [
+                'rgba(255, 206, 86, 1)',
             ],
             borderWidth: 1, 
             fill: true,
@@ -441,25 +525,19 @@ var myChart = new Chart(ctx, {
         datasets: [{
             label: 'Right knee',
             data: {{user_right|tojson}},
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-            ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
+            'rgba(176, 52, 247, 1)',
             ],
             borderWidth: 1, 
-            fill: true,
+            fill: false,
         }, {
             label: 'Left knee',
             data: {{user_left|tojson}},
-            backgroundColor: [
-                'rgba(0, 99, 132, 0.2)',
-            ],
             borderColor: [
-                'rgba(0, 99, 132, 1)',
+            'rgba(245, 192, 69, 1)',
             ],
             borderWidth: 1, 
-            fill: true,
+            fill: false,
         }
         ]
     },

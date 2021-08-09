@@ -255,7 +255,36 @@ def results():
         doughnut_data = playerright_leg.doughnut()
         # getting name of player
         player_name = playerright_leg.name
-        # getting the body part that is analyzed
+        #getting the body part that is analyzed
+        vertical_start_before = dataright.copy()
+        vertical_load_before = dataright.copy()
+        vertical_extend_before = dataright.copy()
+        vertical_finish_before = dataright.copy()
+
+        # vertical starting line
+        vertical_start = [0 for i in vertical_start_before]
+        for ind, value in enumerate(dataright):
+            if ind == round(doughnut_data[0] / (100/len(dataright))):
+                vertical_start[ind] = 180
+        
+        # vertical loading line
+        vertical_load = [0 for i in vertical_load_before]
+        for ind, value in enumerate(dataright):
+            if ind == round((doughnut_data[0] /(100/len(dataright))) +  (doughnut_data[1] / (100/len(dataright)))):
+                vertical_load[ind] = 180
+        
+        # vertical extend line
+        vertical_extend = [0 for i in vertical_extend_before]
+        for ind, value in enumerate(dataright):
+            if ind == round((doughnut_data[0] /(100/len(dataright))) +  (doughnut_data[1] / (100/len(dataright))) + (doughnut_data[2] / (100/len(dataright)))):
+                vertical_extend[ind] = 180
+        
+
+        # vertical finish line
+        vertical_finish = [0 for i in vertical_finish_before]
+        vertical_finish[-1] = 180
+        
+                
     #######################################################################
         # uncommen the below to convert video
         converter(f'Flask_template/pose/user_serves/{current_user.id}/{session.get("File_name")}', 'Jacob', str(current_user.id))
@@ -316,7 +345,8 @@ def results():
     dataright_body=dataright_body, dataleft_body=dataleft_body, label_body=label_body, doughnut_data=doughnut_data, name=name,
     user_right=User_data_r, user_left=User_data_l, user_left_arm=User_data_l_arm, user_right_arm=User_data_r_arm,
     User_data_r_body=User_data_r_body, User_data_l_body=User_data_l_body, user_label = User_label, user_name =User_name, user_doughnut = User_doughnut, 
-    arm_tips=arm_tips, leg_tips=leg_tips,body_tips=body_tips, score=score)
+    arm_tips=arm_tips, leg_tips=leg_tips,body_tips=body_tips, score=score, vertical_start=vertical_start, vertical_load=vertical_load, vertical_extend=vertical_extend
+    ,vertical_finish=vertical_finish)
 
 @app.route('/history', methods=['GET', 'POST'])
 @login_required
