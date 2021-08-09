@@ -1,6 +1,8 @@
 
 import time
 from datetime import datetime
+import random
+import string
 #from flask import app, db, bcrypt
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from flask.scaffold import F
@@ -46,6 +48,7 @@ class newform(FlaskForm):
     def validate_email(self, email):
         exisitng_user_email = User.query.filter_by(email=email.data).first()
         if exisitng_user_email:
+            flash('Email already registered', 'danger')
             raise ValidationError('Email already registered')
 
 #####################
@@ -114,8 +117,11 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
-            flash('Log in success', 'info')
+            flash('Log in success', 'success')
             return redirect(url_for('home'))
+        else:
+            flash('email or password is incorrect', 'danger')
+            return redirect(url_for('login'))
 
     return render_template('login.html', form=form)
 
@@ -123,7 +129,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    #flash('You logged out')
+    flash('You logged out', 'success')
     return redirect(url_for('login'))
 
 
@@ -139,6 +145,8 @@ def register():
                     password=hashed_password)
         db.session.add(user)
         db.session.commit()
+        flash('Register successful', 'success')
+
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
@@ -329,33 +337,62 @@ def gallery():
 @login_required
 def account():
     dominant_hand = current_user.dominant
+    delete_string = None
+    delete_w_email = current_user.email
     if request.method == 'POST':
         account_info = User.query.get(current_user.id)
-        first = request.form['first']
-        last = request.form['last']
-        email = request.form['email']
-        dominant = request.form['dominant']
-        first_clean = first.replace(' ', '')
-        last_clean = last.replace(' ', '')
-        email_clean = email.replace(' ', '')
-        dominant_clean = dominant.replace(' ', '')
-        print(dominant_clean)
-        if len(first_clean) > 0:
-            account_info.first = first_clean
-            db.session.commit()
-        if len(last_clean) > 0:
-            account_info.last = last_clean
-            db.session.commit()
-        if len(email_clean) > 0:
-            account_info.email = email_clean
-            db.session.commit()
-        if len(dominant_clean) > 0:
-            account_info.dominant = dominant_clean
-            db.session.commit()
-        if len(first_clean) > 0 or len(last_clean) > 0 or len(email_clean) > 0 or len(dominant_clean) > 0:
-            flash('Changed Details Successfully')
+        if 'first' in request.form:
+            first = request.form['first']
+            first_clean = first.replace(' ', '')
+            if len(first_clean) > 0:
+                account_info.first = first_clean
+                db.session.commit()
+        if 'last' in request.form:
+            last = request.form['last']
+            last_clean = last.replace(' ', '')
+            if len(last_clean) > 0:
+                account_info.last = last_clean
+                db.session.commit()
+        if 'email' in request.form:
+            email = request.form['email']
+            email_clean = email.replace(' ', '')
+            if len(email_clean) > 0:
+                account_info.email = email_clean
+                db.session.commit()
+        if 'dominant' in request.form:
+            dominant = request.form['dominant']
+            dominant_clean = dominant.replace(' ', '')
+            if len(dominant_clean) > 0:
+                account_info.dominant = dominant_clean
+                db.session.commit()
+        if 'first' in request.form and 'last' in request.form and 'email' in request.form and 'dominant' in request.form:
+            first = request.form['first']
+            first_clean = first.replace(' ', '')
+            last = request.form['last']
+            last_clean = last.replace(' ', '')
+            email = request.form['email']
+            email_clean = email.replace(' ', '')
+            dominant = request.form['dominant']
+            dominant_clean = dominant.replace(' ', '')
+            if len(first_clean) > 0 or len(last_clean) > 0 or len(email_clean) > 0 or len(dominant_clean) > 0:
+                flash('Changed details successfully', 'success')
+   
+        if 'text' in request.form:
+            delete_string = request.form['text']
+            if delete_string == delete_w_email:
+                Score.query.filter_by(player_id = current_user.id).delete()
+                User.query.filter_by(id=current_user.id).delete()
+                db.session.commit()
+                logout_user()
+                flash('You have successfully deleted your account', 'success')
+                return redirect(url_for('login'))
+            else:
+                flash('Text did not match', 'danger')
 
-    return render_template('account.html', dominant_hand=dominant_hand)
+
+        
+
+    return render_template('account.html', dominant_hand=dominant_hand, delete_w_email=delete_w_email)
 
 @app.errorhandler(404)
 def page_not_found(e):
