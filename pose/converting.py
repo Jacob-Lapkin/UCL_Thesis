@@ -3,7 +3,7 @@ import os, time, uuid, shutil
 
 
 def delete_user_video(user):
-    folder = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/Flask_template/pose/user_serves/{user}'
+    folder = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/user_serves/{user}'
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)
         try:
@@ -16,7 +16,7 @@ def delete_user_video(user):
 
 
 def delete_frames(user):
-    folder = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/Flask_template/pose/User_test/{user}'
+    folder = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/User_test/{user}'
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)
         try:
@@ -28,7 +28,7 @@ def delete_frames(user):
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 def is_empty(user):
-    path = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/Flask_template/pose/user_serves/{user}'
+    path = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/user_serves/{user}'
     if len(os.listdir(path)) == 0:
         return True
     else:    
@@ -42,7 +42,7 @@ def converter(path, name, user):
         ret, frame = cap.read()
         if ret == False:
             break
-        path = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/Flask_template/pose/User_test/{user}'
+        path = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/User_test/{user}'
         cv2.imwrite(os.path.join(path, name +str(i)+'.jpg'),frame)
         #cv2.imwrite(name+str(i)+'.jpg',frame) 
         i+=1
@@ -54,19 +54,19 @@ def converter(path, name, user):
 
 # Creating a directory with the name of id to store frame images
 def make_frame_dir(id):
-    path = '/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/Flask_template/pose/User_test'
+    path = '/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/User_test'
     dir = os.path.join(path, str(id))
     if not os.path.exists(dir):
         os.mkdir(dir)
 
 def make_video_dir(id):
-    path = '/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/Flask_template/pose/user_serves'
+    path = '/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/user_serves'
     dir = os.path.join(path, str(id))
     if not os.path.exists(dir):
         os.mkdir(dir)
 
 # def is_empty(id):
-#     path = '/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/Flask_template/pose/user_serves'
+#     path = '/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/user_serves'
 #     dir = os.path.join(path, str(id))
 #     if not os.path.exists(dir):
 

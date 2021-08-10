@@ -219,7 +219,7 @@ def stroke():
     if request.method == 'POST':
         video_upload = request.files["user_video"]
         filename = video_upload.filename
-        path = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/Flask_template/pose/user_serves/{current_user.id}'
+        path = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/user_serves/{current_user.id}'
         session['File_name'] = filename
         session['Stroke'] = request.form['stroke']
         session['Professional'] = request.form['player']
@@ -238,12 +238,12 @@ def results():
         stroke = session.get('Stroke')
     #######################################################################         
         # CREATING INSTANCE FOR PROFESSIONAL PLAYER
-        playerright_leg = Player_data(f'Flask_template/pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_right', f'{professional}')
-        playerleft_leg = Player_data(f'Flask_template/pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_left', f'{professional}')
-        playerright_arm = Player_data(f'Flask_template/pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_right', f'{professional}')
-        playerleft_arm = Player_data(f'Flask_template/pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_left', f'{professional}')
-        playerright_body = Player_data(f'Flask_template/pose/data/{stroke}_data/{professional}servebody.csv', 'elbow2hip_right', f'{professional}')
-        playerleft_body = Player_data(f'Flask_template/pose/data/{stroke}_data/{professional}servebody.csv', 'elbow2hip_left', f'{professional}')
+        playerright_leg = Player_data(f'pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_right', f'{professional}')
+        playerleft_leg = Player_data(f'pose/data/{stroke}_data/{professional}servelegs.csv', 'hip2ankle_left', f'{professional}')
+        playerright_arm = Player_data(f'pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_right', f'{professional}')
+        playerleft_arm = Player_data(f'pose/data/{stroke}_data/{professional}servearm.csv', 'shoulder2wrist_left', f'{professional}')
+        playerright_body = Player_data(f'pose/data/{stroke}_data/{professional}servebody.csv', 'elbow2hip_right', f'{professional}')
+        playerleft_body = Player_data(f'pose/data/{stroke}_data/{professional}servebody.csv', 'elbow2hip_left', f'{professional}')
         # getting data from that player
         dataright = playerright_leg.get_data()
         dataleft = playerleft_leg.get_data()
@@ -307,10 +307,10 @@ def results():
                 
     #######################################################################
         # uncommen the below to convert video
-        converter(f'Flask_template/pose/user_serves/{current_user.id}/{session.get("File_name")}', 'Jacob', str(current_user.id))
+        converter(f'pose/user_serves/{current_user.id}/{session.get("File_name")}', 'Jacob', str(current_user.id))
 
         # CREATING INSTANCE FOR USER 
-        user = User_data(f'Flask_template/pose/user_serves/{current_user.id}/{session.get("File_name")}', 'Jacob', str(current_user.id), str(current_user.id))
+        user = User_data(f'pose/user_serves/{current_user.id}/{session.get("File_name")}', 'Jacob', str(current_user.id), str(current_user.id))
         # Getting user data for right and left
         User_data_r = list(user.get_data('hip2ankle_right'))
         User_data_l = list(user.get_data('hip2ankle_left'))
