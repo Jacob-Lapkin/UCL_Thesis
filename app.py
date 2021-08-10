@@ -24,7 +24,7 @@ from forms import point, Stroke
 import os
 
 # importing data FIX THIS PATH
-from app.pose.canvas_data import (Player_data, User_data, legs_tips_start, legs_tips_load, legs_tips_extend, legs_tips_finish,
+from pose.canvas_data import (Player_data, User_data, legs_tips_start, legs_tips_load, legs_tips_extend, legs_tips_finish,
                             arm_tip_summary, leg_score, body_score, total_score, leg_score_left_handers, body_score_left_handers, total_score_left_handers, arm_tip_summary_left_handers)
 from pose.converting import converter, make_frame_dir, delete_frames, make_video_dir, delete_user_video, is_empty
 
@@ -502,5 +502,5 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
     
