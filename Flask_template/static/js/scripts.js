@@ -54,20 +54,28 @@ window.addEventListener('DOMContentLoaded', event => {
 });
 
 // hiding stroke content and displaying loading bar
-    $(document).ready(function(){
-      $("#stroke_submit").click(function(){
-        $("#content").hide();
-      });
-      $("#stroke_submit").click(function(){
-        $("#process").show();
-      });
-      $("#stroke_submit").click(function(){
-        $("#loading").show();
-      });
-    });
+    
+    var file = document.getElementById("stroke_submit");
+    var content = document.getElementById("content_main");
+    var process = document.getElementById("process");
+    var loading = document.getElementById("loading");
+
+   
+    file.onclick = function(){
+      if( document.getElementById("file_upload").files.length == 0 ){
+        console.log("no files selected");
+    }
+    else {
+      content.style.display = 'none';
+      process.style.display = 'block';
+      loading.style.display = 'block';
+    }
+    };
+  
 
 
 // hiding graph content and displaying other graph
+
 $(document).ready(function(){
     $("#Arms").click(function(){
       $("#content_legs").hide();

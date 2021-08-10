@@ -432,16 +432,16 @@ def arms_tips_load(user, playerright_arm, playerleft_arm):
     # not enough arm bend
     elif user.get_min_data('shoulder2wrist_right')[1] > (playerright_arm.get_min_data()[1] * 1.20):
         arm_tip_load_right_first = 'You are significantly under retracting your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
-        arm_tip_load_right_second= 'You are is extended significantly too much on your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
+        arm_tip_load_right_second= 'You are extended significantly too much on your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
         score += 7
     elif user.get_min_data('shoulder2wrist_right')[1] > (playerright_arm.get_min_data()[1] * 1.10):
         arm_tip_load_right_first = 'You are not bending your dominant arm enough on the loadup.  Bend your arm to a comfortable position for more power.'
-        arm_tip_load_right_second= 'You are is extended too much on your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
+        arm_tip_load_right_second= 'You are extended too much on your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
 
         score += 4
     elif user.get_min_data('shoulder2wrist_right')[1] > (playerright_arm.get_min_data()[1] * 1.05):
         arm_tip_load_right_first = 'You are not bending your dominant arm slightly enough on the loadup.  Bend your arm a bit to a comfortable position for more power.'
-        arm_tip_load_right_second= 'You are is extended slightly too much on your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
+        arm_tip_load_right_second= 'You are extended slightly too much on your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
         score += 2
     else: 
         arm_tip_load_right_first = 'Great work, your dominant arm is optimzed for power in the loadup!'
@@ -993,16 +993,16 @@ def arms_tips_load_left_handers(user, playerright_arm, playerleft_arm):
     # not enough arm bend
     elif user.get_min_data('shoulder2wrist_left')[1] > (playerright_arm.get_min_data()[1] * 1.20):
         arm_tip_load_right_first = 'You are significantly under retracting your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
-        arm_tip_load_right_second= 'You are is extended significantly too much on your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
+        arm_tip_load_right_second= 'You are extended significantly too much on your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
         score += 7
     elif user.get_min_data('shoulder2wrist_left')[1] > (playerright_arm.get_min_data()[1] * 1.10):
         arm_tip_load_right_first = 'You are not bending your dominant arm enough on the loadup.  Bend your arm to a comfortable position for more power.'
-        arm_tip_load_right_second= 'You are is extended too much on your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
+        arm_tip_load_right_second= 'You are extended too much on your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
 
         score += 4
     elif user.get_min_data('shoulder2wrist_left')[1] > (playerright_arm.get_min_data()[1] * 1.05):
         arm_tip_load_right_first = 'You are not bending your dominant arm slightly enough on the loadup.  Bend your arm a bit to a comfortable position for more power.'
-        arm_tip_load_right_second= 'You are is extended slightly too much on your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
+        arm_tip_load_right_second= 'You are extended slightly too much on your dominant arm in the loadup.  Bend your arm a lot more to a comfortable position for more power.'
         score += 2
     else: 
         arm_tip_load_right_first = 'Great work, your dominant arm is optimzed for power in the loadup!'
