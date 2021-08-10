@@ -39,8 +39,8 @@ class Login(FlaskForm):
 class newform(FlaskForm):
     first = StringField("First Name", validators = [DataRequired()])
     last = StringField("Last Name", validators = [DataRequired()])
-    dominant = RadioField('Dominant Arm', choices=[('right','right'),('left','left')])
-    email = StringField("Email Address", validators = [DataRequired(), Email()])
+    dominant = RadioField('Dominant Arm', validators = [DataRequired()], choices=[('right','right'),('left','left')])
+    email = StringField("Email Address", validators = [DataRequired(), Email(message='Email must include @ and/or .com', allow_empty_local=False)])
     password = PasswordField("Password", validators = [DataRequired()])
     passconfirm = PasswordField('Confirm Password', validators = [DataRequired(), EqualTo('password', message='Passwords must match')])
     submit = SubmitField('Register')
@@ -115,6 +115,10 @@ def login():
     form = Login()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
+        all_users = list(User.query.filter_by(email=form.email.data).all())
+        if user not in all_users:
+            flash('email does not exist', 'danger')
+            return redirect(url_for('login'))
         if bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             flash('Log in success', 'success')
@@ -122,6 +126,7 @@ def login():
         else:
             flash('email or password is incorrect', 'danger')
             return redirect(url_for('login'))
+
 
     return render_template('login.html', form=form)
 
