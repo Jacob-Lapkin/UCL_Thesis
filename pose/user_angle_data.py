@@ -1,7 +1,6 @@
 from numpy.core.fromnumeric import take
 import pandas as pd
 import numpy as np
-import seaborn as sns
 import numpy as np
 from scipy import stats
 from matplotlib import pyplot as plt
