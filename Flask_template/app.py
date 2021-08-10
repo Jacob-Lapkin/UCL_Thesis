@@ -25,7 +25,7 @@ import os
 
 # importing data FIX THIS PATH
 from pose.canvas_data import (Player_data, User_data, legs_tips_start, legs_tips_load, legs_tips_extend, legs_tips_finish,
-                            arm_tip_summary, leg_score, body_score, total_score)
+                            arm_tip_summary, leg_score, body_score, total_score, leg_score_left_handers, body_score_left_handers, total_score_left_handers, arm_tip_summary_left_handers)
 from pose.converting import converter, make_frame_dir, delete_frames, make_video_dir, delete_user_video, is_empty
 
 ###########################
@@ -373,6 +373,11 @@ def results():
             body_tips = body_score(user, playerright_body, playerleft_body)
             score = total_score(user, playerright_leg, playerleft_leg, playerright_arm, playerleft_arm, playerright_body, playerleft_body)
 
+        if current_user.dominant == 'left' and (player_name == 'djok' or player_name == 'federer' or player_name == 'serena'):
+            leg_tips = leg_score_left_handers(user, playerright_arm, playerleft_arm)
+            arm_tips = arm_tip_summary_left_handers(user, playerright_arm, playerleft_arm)
+            body_tips = body_score_left_handers(user, playerright_body, playerleft_body)
+            score = total_score_left_handers(user, playerright_leg, playerleft_leg, playerright_arm, playerleft_arm, playerright_body, playerleft_body)
     ########################################################################
         #Delete frames from folder
         delete_frames(str(current_user.id))
