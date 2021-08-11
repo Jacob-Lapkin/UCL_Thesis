@@ -5,7 +5,6 @@ import random
 import string
 #from flask import app, db, bcrypt
 from flask import Flask, render_template, request, session, redirect, url_for, flash
-from flask.scaffold import F
 #from myproject.models import User
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import func
