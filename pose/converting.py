@@ -52,13 +52,13 @@ def converter(path, name, user):
 
 # Creating a directory with the name of id to store frame images
 def make_frame_dir(id):
-    path = '/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/User_test'
+    path = 'pose/User_test'
     dir = os.path.join(path, str(id))
     if not os.path.exists(dir):
         os.mkdir(dir)
 
 def make_video_dir(id):
-    path = '/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/user_serves'
+    path = 'pose/user_serves'
     dir = os.path.join(path, str(id))
     if not os.path.exists(dir):
         os.mkdir(dir)
