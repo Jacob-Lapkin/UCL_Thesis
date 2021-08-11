@@ -28,11 +28,10 @@ def delete_frames(user):
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 def is_empty(user):
-    path = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/user_serves/{user}'
-    if len(os.listdir(path)) == 0:
+    if len(os.listdir(f'pose/user_serves/{user}')) == 0:
         return True
     else:    
-        False
+        return False
 
 # Opens the Video file
 def converter(path, name, user):
