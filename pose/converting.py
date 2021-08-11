@@ -3,7 +3,7 @@ import os, time, uuid, shutil
 
 
 def delete_user_video(user):
-    folder = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/user_serves/{user}'
+    folder = f'pose/user_serves/{user}'
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)
         try:
@@ -16,7 +16,7 @@ def delete_user_video(user):
 
 
 def delete_frames(user):
-    folder = f'/Users/jacoblapkin/Documents/GitHub/UCL_Thesis/pose/User_test/{user}'
+    folder = f'pose/User_test/{user}'
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)
         try:
