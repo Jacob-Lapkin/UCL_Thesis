@@ -59,4 +59,4 @@ jobs:
         with:
           app-name: 'ucltennis'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_6c4104450cb14a51827791bfeeb2f412 }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_69d0fa1b00ed4ab1ad82b6f337f02760 }}
