@@ -46,16 +46,16 @@
     <div id="content_main" style="display:block;">
     <div class="containter mb-4">
       <h5 class="header-third">Please upload a video of the desired stroke you wish to analyze</h5>
-      <p class="header-secondary ">Important Note: Click <a href="">here</a> for instructions on how to crop video before submission.</p>
+      <p class="header-secondary ">Important Note: Click <a data-toggle="modal" data-target="#exampleModal1" href="#exampleModal1">here</a> for instructions on how to crop video before submission.</p>
    </div>
         <form method="POST" action='{{url_for("stroke")}}' class="container col-md-8" enctype="multipart/form-data">
           <div class="form-group text-left">
             <label for="exampleFormControlSelect1" class="header-third">Professional Player</label>
             <select name="player" class="form-control" id="exampleFormControlSelect1" required>
               <option value="djok">Novak Djokovic</option>
-              <option value="rog">Roger Federer</option>
+              <option disabled='disabled'nvalue="rog">Roger Federer (coming soon)</option>
               <option disabled='disabled' value="nadal">Rafael nadal (coming soon)</option>
-              <option value="serena">Serena Williams</option>
+              <option disabled='disabled' value="serena">Serena Williams (coming soon)</option>
             </select>
           </div>
           <div class="form-group text-left">
@@ -87,6 +87,32 @@
   
 <br>
 <br>
+
+  <!-- Modal for djok video -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bottom-bord modal-back">
+          <h5 class="modal-title" id="exampleModalLabel">Cropping instructions</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class='container mt-4 whole-bord' data-aos="fade-right">
+            <label class='mt-2'>1. Starting Position</label>
+            <img src="../static/assets/img/crop_instructions/start.png" class="img-fluid" alt="Responsive image" id='start_phase'>
+            <p>Starts right before the player's racquet is taken back</p>
+        </div>
+        <div class='container mt-4 whole-bord' data-aos="fade-left">
+            <label class='mt-2'>2. Takeback and Load</label>
+            <img src="../static/assets/img/crop_instructions/finish.png" class="img-fluid" alt="Responsive image">
+            <p>Ends the instance the player absorbs the serve on the finishing positions</p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!-- Footer -->
   <div class="container-fluid p-4 footer-color">
