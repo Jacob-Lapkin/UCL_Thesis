@@ -125,8 +125,8 @@ class User_data():
 ####################### for right handed players ##############################
 # Legs
 def legs_tips_start(user, playerright_leg, playerleft_leg):
-    leg_tip_start_first = None
-    leg_tip_start_second = None
+    leg_tip_start_first = 'None'
+    leg_tip_start_second = 'None'
 
     score_lost = 0
 
@@ -179,8 +179,8 @@ def legs_tips_start(user, playerright_leg, playerleft_leg):
 
 def legs_tips_load(user, playerright_leg, playerleft_leg):
     score_lost = 0
-    leg_tip_load_first = None
-    leg_tip_load_second = None
+    leg_tip_load_first = 'None'
+    leg_tip_load_second = 'None'
     # bending legs too much during load
     if user.get_min_data('hip2ankle_right')[1] < (playerright_leg.get_min_data()[1] * 0.80) and user.get_min_data('hip2ankle_left')[1] < (playerleft_leg.get_min_data()[1] * 0.80):
         leg_tip_load_first = 'You are loading your back leg too extremely. try standing much taller during your take back.'
@@ -242,8 +242,8 @@ def legs_tips_load(user, playerright_leg, playerleft_leg):
 
 def legs_tips_extend(user, playerright_leg, playerleft_leg):
     score_lost = 0
-    leg_tip_extend_first = None
-    leg_tip_extend_second = None
+    leg_tip_extend_first = 'None'
+    leg_tip_extend_second = 'None'
 
     # not extending enough during contact
     if user.get_max_data('hip2ankle_right')[2] < (playerright_leg.get_max_data()[2] * 0.80) and user.get_max_data('hip2ankle_left')[2] < (playerleft_leg.get_max_data()[2] * 0.80):
@@ -278,8 +278,8 @@ def legs_tips_extend(user, playerright_leg, playerleft_leg):
 
 def legs_tips_finish(user, playerleft_leg):
     score_lost = 0
-    leg_tip_finish_first = None
-    leg_tip_finish_second = None
+    leg_tip_finish_first = 'None'
+    leg_tip_finish_second = 'None'
 
     if user.get_min_data('hip2ankle_left')[3] < (playerleft_leg.get_min_data()[3] * 0.80):
         leg_tip_finish_start = 'You are dipping your front leg significantly too much during the finish. Try landing a lot taller in the legs to optimize your recovery.'
@@ -337,10 +337,10 @@ def leg_score_quant(user, playerright_leg, playerleft_leg):
 
 # Arms
 def arms_tips_start(user, playerright_arm, playerleft_arm):
-    arm_tip_start_right_first = None
-    arm_tip_start_right_first = None
-    arm_tip_start_both_first = None
-    arm_tip_start_both_second = None
+    arm_tip_start_right_first = 'None'
+    arm_tip_start_right_first = 'None'
+    arm_tip_start_both_first = 'None'
+    arm_tip_start_both_second = 'None'
 
     score = 0
     # right arm extended out too much
@@ -411,10 +411,10 @@ def arms_tips_start(user, playerright_arm, playerleft_arm):
     return arm_tips_start
 
 def arms_tips_load(user, playerright_arm, playerleft_arm):
-    arm_tip_load_right_first = None
-    arm_tip_load_right_second = None
-    arm_tip_load_left_first = None
-    arm_tip_load_left_second = None
+    arm_tip_load_right_first = 'None'
+    arm_tip_load_right_second = 'None'
+    arm_tip_load_left_first = 'None'
+    arm_tip_load_left_second = 'None'
     score = 0
     # bending arm too much 
     if user.get_min_data('shoulder2wrist_right')[1] < (playerright_arm.get_min_data()[1] * 0.80):
@@ -472,8 +472,8 @@ def arms_tips_load(user, playerright_arm, playerleft_arm):
 
 
 def arms_tips_extend(user, playerright_arm):
-    arm_tip_extend_right_first = None
-    arm_tip_extend_right_second = None
+    arm_tip_extend_right_first = 'None'
+    arm_tip_extend_right_second = 'None'
 
     score = 0
     if user.get_max_data('shoulder2wrist_right')[2] < (playerright_arm.get_max_data()[2] * 0.80):
@@ -498,8 +498,8 @@ def arms_tips_extend(user, playerright_arm):
     return arm_tips_extend
 
 def arms_tips_finish(user, playerleft_arm):
-    arm_tip_finish_left_first = None
-    arm_tip_finish_left_second = None
+    arm_tip_finish_left_first = 'None'
+    arm_tip_finish_left_second = 'None'
     score = 0
     if user.get_min_data('shoulder2wrist_left')[3] > (playerleft_arm.get_min_data()[3] * 1.20):
         arm_tip_finish_left_first = 'Your non-dominant arm should be significantly closer to your body in preparation for an easier recovery of the racquet.'
@@ -550,8 +550,8 @@ def arm_score_quant(user, playerright_arm, playerleft_arm):
 
 # body
 def body_tips_start(user, playerright_body):
-    body_tip_start_first = None
-    body_tip_start_second = None
+    body_tip_start_first = 'None'
+    body_tip_start_second = 'None'
 
     score_lost = 0
     # less than the pro angles
@@ -589,8 +589,8 @@ def body_tips_start(user, playerright_body):
 
 def body_tips_load(user, playerleft_body):
     score_lost = 0
-    body_tip_load_left_first = None
-    body_tip_load_left_second = None
+    body_tip_load_left_first = 'None'
+    body_tip_load_left_second = 'None'
 
     if  user.get_max_data('elbow2hip_left')[1] < (playerleft_body.get_max_data()[1] * 0.80):
         body_tip_load_left_first = 'The tossing side of your body is significantly under stretching during the load. Try to reach up with your tossing arm a lot more.'
@@ -626,7 +626,7 @@ def body_tips_load(user, playerleft_body):
 
 def body_tips_extend(user, playerright_body):
     score_lost = 0
-    body_tip_extend = None
+    body_tip_extend = 'None'
     # not extending enough during contact
     if user.get_max_data('elbow2hip_right')[2] < (playerright_body.get_max_data()[2] * 0.60):
         body_tip_extend = 'Your elbow on the dominant arm is significantly too low relative to your shoulder during the extension before contact.  Try strongly adjusting your toss or your body position during extension'
@@ -686,8 +686,8 @@ def total_score(user, playerright_leg, playerleft_leg, playerright_arm, playerle
 ####################### for left handed players ##############################
 # Legs
 def legs_tips_start_left_handers(user, playerright_leg, playerleft_leg):
-    leg_tip_start_first = None
-    leg_tip_start_second = None
+    leg_tip_start_first = 'None'
+    leg_tip_start_second = 'None'
 
     score_lost = 0
 
@@ -740,8 +740,8 @@ def legs_tips_start_left_handers(user, playerright_leg, playerleft_leg):
 
 def legs_tips_load_left_handers(user, playerright_leg, playerleft_leg):
     score_lost = 0
-    leg_tip_load_first = None
-    leg_tip_load_second = None
+    leg_tip_load_first = 'None'
+    leg_tip_load_second = 'None'
     # bending legs too much during load
     if user.get_min_data('hip2ankle_left')[1] < (playerright_leg.get_min_data()[1] * 0.80) and user.get_min_data('hip2ankle_right')[1] < (playerleft_leg.get_min_data()[1] * 0.80):
         leg_tip_load_first = 'You are loading your back leg too extremely. try standing much taller during your take back.'
@@ -803,8 +803,8 @@ def legs_tips_load_left_handers(user, playerright_leg, playerleft_leg):
 
 def legs_tips_extend_left_handers(user, playerright_leg, playerleft_leg):
     score_lost = 0
-    leg_tip_extend_first = None
-    leg_tip_extend_second = None
+    leg_tip_extend_first = 'None'
+    leg_tip_extend_second = 'None'
 
     # not extending enough during contact
     if user.get_max_data('hip2ankle_left')[2] < (playerright_leg.get_max_data()[2] * 0.80) and user.get_max_data('hip2ankle_right')[2] < (playerleft_leg.get_max_data()[2] * 0.80):
@@ -839,8 +839,8 @@ def legs_tips_extend_left_handers(user, playerright_leg, playerleft_leg):
 
 def legs_tips_finish_left_handers(user, playerleft_leg):
     score_lost = 0
-    leg_tip_finish_first = None
-    leg_tip_finish_second = None
+    leg_tip_finish_first = 'None'
+    leg_tip_finish_second = 'None'
 
     if user.get_min_data('hip2ankle_right')[3] < (playerleft_leg.get_min_data()[3] * 0.80):
         leg_tip_finish_start = 'You are dipping your front leg significantly too much during the finish. Try landing a lot taller in the legs to optimize your recovery.'
@@ -898,10 +898,10 @@ def leg_score_quant_left_handers(user, playerright_leg, playerleft_leg):
 
 # Arms
 def arms_tips_start_left_handers(user, playerright_arm, playerleft_arm):
-    arm_tip_start_right_first = None
-    arm_tip_start_right_first = None
-    arm_tip_start_both_first = None
-    arm_tip_start_both_second = None
+    arm_tip_start_right_first = 'None'
+    arm_tip_start_right_first = 'None'
+    arm_tip_start_both_first = 'None'
+    arm_tip_start_both_second = 'None'
 
     score = 0
     # right arm extended out too much
@@ -972,10 +972,10 @@ def arms_tips_start_left_handers(user, playerright_arm, playerleft_arm):
     return arm_tips_start
 
 def arms_tips_load_left_handers(user, playerright_arm, playerleft_arm):
-    arm_tip_load_right_first = None
-    arm_tip_load_right_second = None
-    arm_tip_load_left_first = None
-    arm_tip_load_left_second = None
+    arm_tip_load_right_first = 'None'
+    arm_tip_load_right_second = 'None'
+    arm_tip_load_left_first = 'None'
+    arm_tip_load_left_second = 'None'
     score = 0
     # bending arm too much 
     if user.get_min_data('shoulder2wrist_left')[1] < (playerright_arm.get_min_data()[1] * 0.80):
@@ -1033,8 +1033,8 @@ def arms_tips_load_left_handers(user, playerright_arm, playerleft_arm):
 
 
 def arms_tips_extend_left_handers(user, playerright_arm):
-    arm_tip_extend_right_first = None
-    arm_tip_extend_right_second = None
+    arm_tip_extend_right_first = 'None'
+    arm_tip_extend_right_second = 'None'
 
     score = 0
     if user.get_max_data('shoulder2wrist_left')[2] < (playerright_arm.get_max_data()[2] * 0.80):
@@ -1059,8 +1059,8 @@ def arms_tips_extend_left_handers(user, playerright_arm):
     return arm_tips_extend
 
 def arms_tips_finish_left_handers(user, playerleft_arm):
-    arm_tip_finish_left_first = None
-    arm_tip_finish_left_second = None
+    arm_tip_finish_left_first = 'None'
+    arm_tip_finish_left_second = 'None'
     score = 0
     if user.get_min_data('shoulder2wrist_right')[3] > (playerleft_arm.get_min_data()[3] * 1.20):
         arm_tip_finish_left_first = 'Your non-dominant arm should be significantly closer to your body in preparation for an easier recovery of the racquet.'
@@ -1111,8 +1111,8 @@ def arm_score_quant_left_handers(user, playerright_arm, playerleft_arm):
 
 # body
 def body_tips_start_left_handers(user, playerright_body):
-    body_tip_start_first = None
-    body_tip_start_second = None
+    body_tip_start_first = 'None'
+    body_tip_start_second = 'None'
 
     score_lost = 0
     # less than the pro angles
@@ -1150,8 +1150,8 @@ def body_tips_start_left_handers(user, playerright_body):
 
 def body_tips_load_left_handers(user, playerleft_body):
     score_lost = 0
-    body_tip_load_left_first = None
-    body_tip_load_left_second = None
+    body_tip_load_left_first = 'None'
+    body_tip_load_left_second = 'None'
 
     if  user.get_max_data('elbow2hip_right')[1] < (playerleft_body.get_max_data()[1] * 0.80):
         body_tip_load_left_first = 'The tossing side of your body is significantly under stretching during the load. Try to reach up with your tossing arm a lot more.'
@@ -1187,7 +1187,7 @@ def body_tips_load_left_handers(user, playerleft_body):
 
 def body_tips_extend_left_handers(user, playerright_body):
     score_lost = 0
-    body_tip_extend = None
+    body_tip_extend = 'None'
     # not extending enough during contact
     if user.get_max_data('elbow2hip_left')[2] < (playerright_body.get_max_data()[2] * 0.60):
         body_tip_extend = 'Your elbow on the dominant arm is significantly too low relative to your shoulder during the extension before contact.  Try strongly adjusting your toss or your body position during extension'

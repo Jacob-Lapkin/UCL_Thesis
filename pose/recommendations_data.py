@@ -75,7 +75,10 @@ def grab_user_min(data, angle, phase_data):
     empty=[]
     for i in range(4):
         split_d = df[(df['phase'] == i)]
-        value = min(split_d['angle'])
+        if len(split_d['angle']) == 0:
+            value = 10
+        else:
+            value = min(split_d['angle'])
         empty.append(value)
     return empty
 
@@ -84,7 +87,10 @@ def grab_user_max(data, angle, phase_data):
     empty=[]
     for i in range(4):
         split_d = df[(df['phase'] == i)]
-        value = max(split_d['angle'])
+        if len(split_d['angle']) == 0:
+            value = 10
+        else:
+            value = max(split_d['angle'])
         empty.append(value)
     return empty
 
@@ -93,7 +99,10 @@ def grab_user_range(data, angle, phase_data):
     empty=[]
     for i in range(4):
         split_d = df[(df['phase'] == i)]
-        value = max(split_d['angle']) - min(split_d['angle'])
+        if len(split_d['angle']) == 0:
+            value = 10
+        else:
+            value = max(split_d['angle']) - min(split_d['angle'])
         empty.append(value)
     return empty
 
@@ -102,7 +111,10 @@ def grab_user_average(data, angle, phase_data):
     empty=[]
     for i in range(4):
         split_d = df[(df['phase'] == i)]
-        value = sum(split_d['angle']) / len(split_d['angle'])
+        if len(split_d['angle']) == 0:
+            value = 10
+        else:
+            value = sum(split_d['angle']) / len(split_d['angle'])
         empty.append(value)
     return empty
 
