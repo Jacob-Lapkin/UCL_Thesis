@@ -1,0 +1,22 @@
+Create database 'tennis'; 
+
+CREATE TABLE `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `first` varchar(20) NOT NULL,
+  `last` varchar(20) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` varchar(80) NOT NULL,
+  `dominant` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `score` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `score` int DEFAULT NULL,
+  `player_id` int DEFAULT NULL,
+  `pro_compare` varchar(45) NOT NULL,
+  `date` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `player_id` (`player_id`),
+  CONSTRAINT `score_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
